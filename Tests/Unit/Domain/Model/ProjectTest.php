@@ -228,34 +228,6 @@ class ProjectTest extends UnitTestCase
     /**
      * @test
      */
-    public function getResearchAreaReturnsInitialValueForMixed(): void
-    {
-    }
-
-    /**
-     * @test
-     */
-    public function setResearchAreaForMixedSetsResearchArea(): void
-    {
-    }
-
-    /**
-     * @test
-     */
-    public function getFunderReturnsInitialValueForMixed(): void
-    {
-    }
-
-    /**
-     * @test
-     */
-    public function setFunderForMixedSetsFunder(): void
-    {
-    }
-
-    /**
-     * @test
-     */
     public function getFundingStartReturnsInitialValueForDateTime(): void
     {
         self::assertEquals(
@@ -321,15 +293,22 @@ class ProjectTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFundingFormatReturnsInitialValueForMixed(): void
+    public function getFundingFormatReturnsInitialValueForString(): void
     {
+        self::assertSame(
+            '',
+            $this->subject->getFundingFormat()
+        );
     }
 
     /**
      * @test
      */
-    public function setFundingFormatForMixedSetsFundingFormat(): void
+    public function setFundingFormatForStringSetsFundingFormat(): void
     {
+        $this->subject->setFundingFormat('Conceived at T3CON10');
+
+        self::assertEquals('Conceived at T3CON10', $this->subject->_get('fundingFormat'));
     }
 
     /**
@@ -394,60 +373,318 @@ class ProjectTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPersonsReturnsInitialValueForPerson(): void
+    public function getRelatedProjectLeadsReturnsInitialValueForPerson(): void
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         self::assertEquals(
             $newObjectStorage,
-            $this->subject->getPersons()
+            $this->subject->getRelatedProjectLeads()
         );
     }
 
     /**
      * @test
      */
-    public function setPersonsForObjectStorageContainingPersonSetsPersons(): void
+    public function setRelatedProjectLeadsForObjectStorageContainingPersonSetsRelatedProjectLeads(): void
     {
-        $person = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
-        $objectStorageHoldingExactlyOnePersons = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $objectStorageHoldingExactlyOnePersons->attach($person);
-        $this->subject->setPersons($objectStorageHoldingExactlyOnePersons);
+        $relatedProjectLead = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
+        $objectStorageHoldingExactlyOneRelatedProjectLeads = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneRelatedProjectLeads->attach($relatedProjectLead);
+        $this->subject->setRelatedProjectLeads($objectStorageHoldingExactlyOneRelatedProjectLeads);
 
-        self::assertEquals($objectStorageHoldingExactlyOnePersons, $this->subject->_get('persons'));
+        self::assertEquals($objectStorageHoldingExactlyOneRelatedProjectLeads, $this->subject->_get('relatedProjectLeads'));
     }
 
     /**
      * @test
      */
-    public function addPersonToObjectStorageHoldingPersons(): void
+    public function addRelatedProjectLeadToObjectStorageHoldingRelatedProjectLeads(): void
     {
-        $person = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
-        $personsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+        $relatedProjectLead = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
+        $relatedProjectLeadsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
             ->onlyMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $personsObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($person));
-        $this->subject->_set('persons', $personsObjectStorageMock);
+        $relatedProjectLeadsObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($relatedProjectLead));
+        $this->subject->_set('relatedProjectLeads', $relatedProjectLeadsObjectStorageMock);
 
-        $this->subject->addPerson($person);
+        $this->subject->addRelatedProjectLead($relatedProjectLead);
     }
 
     /**
      * @test
      */
-    public function removePersonFromObjectStorageHoldingPersons(): void
+    public function removeRelatedProjectLeadFromObjectStorageHoldingRelatedProjectLeads(): void
     {
-        $person = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
-        $personsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+        $relatedProjectLead = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
+        $relatedProjectLeadsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
             ->onlyMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $personsObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($person));
-        $this->subject->_set('persons', $personsObjectStorageMock);
+        $relatedProjectLeadsObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($relatedProjectLead));
+        $this->subject->_set('relatedProjectLeads', $relatedProjectLeadsObjectStorageMock);
 
-        $this->subject->removePerson($person);
+        $this->subject->removeRelatedProjectLead($relatedProjectLead);
+    }
+
+    /**
+     * @test
+     */
+    public function getRelatedProjectMembersReturnsInitialValueForPerson(): void
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getRelatedProjectMembers()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setRelatedProjectMembersForObjectStorageContainingPersonSetsRelatedProjectMembers(): void
+    {
+        $relatedProjectMember = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
+        $objectStorageHoldingExactlyOneRelatedProjectMembers = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneRelatedProjectMembers->attach($relatedProjectMember);
+        $this->subject->setRelatedProjectMembers($objectStorageHoldingExactlyOneRelatedProjectMembers);
+
+        self::assertEquals($objectStorageHoldingExactlyOneRelatedProjectMembers, $this->subject->_get('relatedProjectMembers'));
+    }
+
+    /**
+     * @test
+     */
+    public function addRelatedProjectMemberToObjectStorageHoldingRelatedProjectMembers(): void
+    {
+        $relatedProjectMember = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
+        $relatedProjectMembersObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $relatedProjectMembersObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($relatedProjectMember));
+        $this->subject->_set('relatedProjectMembers', $relatedProjectMembersObjectStorageMock);
+
+        $this->subject->addRelatedProjectMember($relatedProjectMember);
+    }
+
+    /**
+     * @test
+     */
+    public function removeRelatedProjectMemberFromObjectStorageHoldingRelatedProjectMembers(): void
+    {
+        $relatedProjectMember = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Person();
+        $relatedProjectMembersObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $relatedProjectMembersObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($relatedProjectMember));
+        $this->subject->_set('relatedProjectMembers', $relatedProjectMembersObjectStorageMock);
+
+        $this->subject->removeRelatedProjectMember($relatedProjectMember);
+    }
+
+    /**
+     * @test
+     */
+    public function getResearchAreaReturnsInitialValueForResearchArea(): void
+    {
+        self::assertEquals(
+            null,
+            $this->subject->getResearchArea()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setResearchAreaForResearchAreaSetsResearchArea(): void
+    {
+        $researchAreaFixture = new \ReCentGlobe\Rcgprojectdb\Domain\Model\ResearchArea();
+        $this->subject->setResearchArea($researchAreaFixture);
+
+        self::assertEquals($researchAreaFixture, $this->subject->_get('researchArea'));
+    }
+
+    /**
+     * @test
+     */
+    public function getInstitutionsReturnsInitialValueForOrganization(): void
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getInstitutions()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setInstitutionsForObjectStorageContainingOrganizationSetsInstitutions(): void
+    {
+        $institution = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $objectStorageHoldingExactlyOneInstitutions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneInstitutions->attach($institution);
+        $this->subject->setInstitutions($objectStorageHoldingExactlyOneInstitutions);
+
+        self::assertEquals($objectStorageHoldingExactlyOneInstitutions, $this->subject->_get('institutions'));
+    }
+
+    /**
+     * @test
+     */
+    public function addInstitutionToObjectStorageHoldingInstitutions(): void
+    {
+        $institution = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $institutionsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $institutionsObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($institution));
+        $this->subject->_set('institutions', $institutionsObjectStorageMock);
+
+        $this->subject->addInstitution($institution);
+    }
+
+    /**
+     * @test
+     */
+    public function removeInstitutionFromObjectStorageHoldingInstitutions(): void
+    {
+        $institution = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $institutionsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $institutionsObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($institution));
+        $this->subject->_set('institutions', $institutionsObjectStorageMock);
+
+        $this->subject->removeInstitution($institution);
+    }
+
+    /**
+     * @test
+     */
+    public function getFunderReturnsInitialValueForOrganization(): void
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getFunder()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setFunderForObjectStorageContainingOrganizationSetsFunder(): void
+    {
+        $funder = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $objectStorageHoldingExactlyOneFunder = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneFunder->attach($funder);
+        $this->subject->setFunder($objectStorageHoldingExactlyOneFunder);
+
+        self::assertEquals($objectStorageHoldingExactlyOneFunder, $this->subject->_get('funder'));
+    }
+
+    /**
+     * @test
+     */
+    public function addFunderToObjectStorageHoldingFunder(): void
+    {
+        $funder = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $funderObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $funderObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($funder));
+        $this->subject->_set('funder', $funderObjectStorageMock);
+
+        $this->subject->addFunder($funder);
+    }
+
+    /**
+     * @test
+     */
+    public function removeFunderFromObjectStorageHoldingFunder(): void
+    {
+        $funder = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $funderObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $funderObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($funder));
+        $this->subject->_set('funder', $funderObjectStorageMock);
+
+        $this->subject->removeFunder($funder);
+    }
+
+    /**
+     * @test
+     */
+    public function getCooperationPartnersReturnsInitialValueForOrganization(): void
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getCooperationPartners()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setCooperationPartnersForObjectStorageContainingOrganizationSetsCooperationPartners(): void
+    {
+        $cooperationPartner = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $objectStorageHoldingExactlyOneCooperationPartners = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneCooperationPartners->attach($cooperationPartner);
+        $this->subject->setCooperationPartners($objectStorageHoldingExactlyOneCooperationPartners);
+
+        self::assertEquals($objectStorageHoldingExactlyOneCooperationPartners, $this->subject->_get('cooperationPartners'));
+    }
+
+    /**
+     * @test
+     */
+    public function addCooperationPartnerToObjectStorageHoldingCooperationPartners(): void
+    {
+        $cooperationPartner = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $cooperationPartnersObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cooperationPartnersObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($cooperationPartner));
+        $this->subject->_set('cooperationPartners', $cooperationPartnersObjectStorageMock);
+
+        $this->subject->addCooperationPartner($cooperationPartner);
+    }
+
+    /**
+     * @test
+     */
+    public function removeCooperationPartnerFromObjectStorageHoldingCooperationPartners(): void
+    {
+        $cooperationPartner = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
+        $cooperationPartnersObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->onlyMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cooperationPartnersObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($cooperationPartner));
+        $this->subject->_set('cooperationPartners', $cooperationPartnersObjectStorageMock);
+
+        $this->subject->removeCooperationPartner($cooperationPartner);
     }
 
     /**
@@ -507,64 +744,5 @@ class ProjectTest extends UnitTestCase
         $this->subject->_set('tags', $tagsObjectStorageMock);
 
         $this->subject->removeTag($tag);
-    }
-
-    /**
-     * @test
-     */
-    public function getPartnersReturnsInitialValueForOrganization(): void
-    {
-        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        self::assertEquals(
-            $newObjectStorage,
-            $this->subject->getPartners()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setPartnersForObjectStorageContainingOrganizationSetsPartners(): void
-    {
-        $partner = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
-        $objectStorageHoldingExactlyOnePartners = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $objectStorageHoldingExactlyOnePartners->attach($partner);
-        $this->subject->setPartners($objectStorageHoldingExactlyOnePartners);
-
-        self::assertEquals($objectStorageHoldingExactlyOnePartners, $this->subject->_get('partners'));
-    }
-
-    /**
-     * @test
-     */
-    public function addPartnerToObjectStorageHoldingPartners(): void
-    {
-        $partner = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
-        $partnersObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
-            ->onlyMethods(['attach'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $partnersObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($partner));
-        $this->subject->_set('partners', $partnersObjectStorageMock);
-
-        $this->subject->addPartner($partner);
-    }
-
-    /**
-     * @test
-     */
-    public function removePartnerFromObjectStorageHoldingPartners(): void
-    {
-        $partner = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
-        $partnersObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
-            ->onlyMethods(['detach'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $partnersObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($partner));
-        $this->subject->_set('partners', $partnersObjectStorageMock);
-
-        $this->subject->removePartner($partner);
     }
 }

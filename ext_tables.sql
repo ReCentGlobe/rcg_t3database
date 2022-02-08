@@ -9,10 +9,15 @@ CREATE TABLE tx_rcgprojectdb_domain_model_project (
 	funding_start int(11) NOT NULL DEFAULT '0',
 	funding_end int(11) NOT NULL DEFAULT '0',
 	funding_amount varchar(255) NOT NULL DEFAULT '',
+	funding_format varchar(255) NOT NULL DEFAULT '',
 	related_links int(11) unsigned NOT NULL DEFAULT '0',
-	persons int(11) unsigned NOT NULL DEFAULT '0',
-	tags int(11) unsigned NOT NULL DEFAULT '0',
-	partners int(11) unsigned NOT NULL DEFAULT '0'
+	related_project_leads int(11) unsigned NOT NULL DEFAULT '0',
+	related_project_members int(11) unsigned NOT NULL DEFAULT '0',
+	research_area int(11) unsigned DEFAULT '0',
+	institutions int(11) unsigned NOT NULL DEFAULT '0',
+	funder int(11) unsigned NOT NULL DEFAULT '0',
+	cooperation_partners int(11) unsigned NOT NULL DEFAULT '0',
+	tags int(11) unsigned NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_rcgprojectdb_domain_model_person (
@@ -26,6 +31,7 @@ CREATE TABLE tx_rcgprojectdb_domain_model_tag (
 );
 
 CREATE TABLE tx_rcgprojectdb_domain_model_organization (
+	project5 int(11) unsigned DEFAULT '0' NOT NULL,
 	project int(11) unsigned DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL DEFAULT '',
 	logo int(11) unsigned NOT NULL DEFAULT '0',
@@ -39,11 +45,37 @@ CREATE TABLE tx_rcgprojectdb_domain_model_sociallink (
 	url varchar(255) NOT NULL DEFAULT ''
 );
 
+CREATE TABLE tx_rcgprojectdb_domain_model_researcharea (
+	title varchar(255) NOT NULL DEFAULT ''
+);
+
 CREATE TABLE tx_rcgprojectdb_domain_model_project (
 	categories int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 CREATE TABLE tx_rcgprojectdb_project_person_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid_local,uid_foreign),
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+CREATE TABLE tx_rcgprojectdb_project_relatedprojectmembers_person_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid_local,uid_foreign),
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+CREATE TABLE tx_rcgprojectdb_project_institutions_organization_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,

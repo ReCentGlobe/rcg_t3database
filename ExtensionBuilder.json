@@ -3,8 +3,8 @@
         {
             "config": {
                 "position": [
-                    1073,
-                    35
+                    1249,
+                    29
                 ]
             },
             "name": "New Model Object",
@@ -162,30 +162,6 @@
                             "propertyIsL10nModeExclude": false,
                             "propertyIsNullable": false,
                             "propertyIsRequired": false,
-                            "propertyName": "researchArea",
-                            "propertyType": "None",
-                            "uid": "12789313265"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": true,
-                            "propertyIsL10nModeExclude": false,
-                            "propertyIsNullable": false,
-                            "propertyIsRequired": false,
-                            "propertyName": "funder",
-                            "propertyType": "None",
-                            "uid": "723665084496"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": true,
-                            "propertyIsL10nModeExclude": false,
-                            "propertyIsNullable": false,
-                            "propertyIsRequired": false,
                             "propertyName": "fundingStart",
                             "propertyType": "Date",
                             "uid": "1374989537115"
@@ -223,7 +199,7 @@
                             "propertyIsNullable": false,
                             "propertyIsRequired": false,
                             "propertyName": "fundingFormat",
-                            "propertyType": "None",
+                            "propertyType": "String",
                             "uid": "548282678227"
                         }
                     ]
@@ -246,11 +222,66 @@
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
-                            "relationName": "persons",
+                            "relationName": "relatedProjectLeads",
                             "relationType": "manyToMany",
                             "relationWire": "[wired]",
                             "renderType": "selectMultipleSideBySide",
                             "uid": "308275942330"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": false,
+                            "propertyIsExcludeField": true,
+                            "relationDescription": "",
+                            "relationName": "relatedProjectMembers",
+                            "relationType": "manyToMany",
+                            "relationWire": "[wired]",
+                            "renderType": "selectMultipleSideBySide",
+                            "uid": "214831869921"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": false,
+                            "propertyIsExcludeField": true,
+                            "relationDescription": "",
+                            "relationName": "researchArea",
+                            "relationType": "manyToOne",
+                            "relationWire": "[wired]",
+                            "renderType": "selectSingle",
+                            "uid": "940980358197"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": false,
+                            "propertyIsExcludeField": true,
+                            "relationDescription": "",
+                            "relationName": "institutions",
+                            "relationType": "manyToMany",
+                            "relationWire": "[wired]",
+                            "renderType": "selectMultipleSideBySide",
+                            "uid": "369080657591"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": false,
+                            "propertyIsExcludeField": true,
+                            "relationDescription": "",
+                            "relationName": "funder",
+                            "relationType": "zeroToMany",
+                            "relationWire": "[wired]",
+                            "renderType": "inline",
+                            "uid": "1536584582661"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": false,
+                            "propertyIsExcludeField": true,
+                            "relationDescription": "",
+                            "relationName": "cooperationPartners",
+                            "relationType": "zeroToMany",
+                            "relationWire": "[wired]",
+                            "renderType": "inline",
+                            "uid": "505303266043"
                         },
                         {
                             "foreignRelationClass": "",
@@ -262,17 +293,6 @@
                             "relationWire": "[wired]",
                             "renderType": "selectMultipleSideBySide",
                             "uid": "828740308777"
-                        },
-                        {
-                            "foreignRelationClass": "",
-                            "lazyLoading": false,
-                            "propertyIsExcludeField": true,
-                            "relationDescription": "",
-                            "relationName": "partners",
-                            "relationType": "zeroToMany",
-                            "relationWire": "[wired]",
-                            "renderType": "inline",
-                            "uid": "505303266043"
                         }
                     ]
                 }
@@ -411,7 +431,7 @@
         {
             "config": {
                 "position": [
-                    399,
+                    378,
                     423
                 ]
             },
@@ -488,8 +508,8 @@
         {
             "config": {
                 "position": [
-                    647,
-                    423
+                    620,
+                    422
                 ]
             },
             "name": "New Model Object",
@@ -561,6 +581,59 @@
                     "relations": []
                 }
             }
+        },
+        {
+            "config": {
+                "position": [
+                    141,
+                    662
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_index": false,
+                    "_default1_list": false,
+                    "_default2_show": false,
+                    "_default3_new_create": false,
+                    "_default4_edit_update": false,
+                    "_default5_delete": false,
+                    "customActions": []
+                },
+                "name": "ResearchArea",
+                "objectsettings": {
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "aggregateRoot": false,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "10111080994"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "title",
+                            "propertyType": "String",
+                            "uid": "349172114739"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
         }
     ],
     "properties": {
@@ -582,8 +655,8 @@
         },
         "extensionKey": "rcgprojectdb",
         "name": "ReCentGlobe Database",
-        "originalExtensionKey": "t3projectdb",
-        "originalVendorName": "Rcg",
+        "originalExtensionKey": "rcgprojectdb",
+        "originalVendorName": "ReCentGlobe",
         "persons": [
             {
                 "company": "ReCentGlobe",
@@ -642,7 +715,7 @@
         {
             "src": {
                 "moduleId": 0,
-                "terminal": "relationWire_2",
+                "terminal": "relationWire_7",
                 "uid": "828740308777"
             },
             "tgt": {
@@ -654,7 +727,7 @@
         {
             "src": {
                 "moduleId": 0,
-                "terminal": "relationWire_3",
+                "terminal": "relationWire_6",
                 "uid": "505303266043"
             },
             "tgt": {
@@ -674,11 +747,59 @@
                 "terminal": "SOURCES",
                 "uid": "181918485327"
             }
+        },
+        {
+            "src": {
+                "moduleId": 0,
+                "terminal": "relationWire_2",
+                "uid": "214831869921"
+            },
+            "tgt": {
+                "moduleId": 1,
+                "terminal": "SOURCES",
+                "uid": "1354518218027"
+            }
+        },
+        {
+            "src": {
+                "moduleId": 0,
+                "terminal": "relationWire_5",
+                "uid": "1536584582661"
+            },
+            "tgt": {
+                "moduleId": 3,
+                "terminal": "SOURCES",
+                "uid": "1182370147156"
+            }
+        },
+        {
+            "src": {
+                "moduleId": 0,
+                "terminal": "relationWire_3",
+                "uid": "940980358197"
+            },
+            "tgt": {
+                "moduleId": 5,
+                "terminal": "SOURCES",
+                "uid": "10111080994"
+            }
+        },
+        {
+            "src": {
+                "moduleId": 0,
+                "terminal": "relationWire_4",
+                "uid": "369080657591"
+            },
+            "tgt": {
+                "moduleId": 3,
+                "terminal": "SOURCES",
+                "uid": "1182370147156"
+            }
         }
     ],
     "storagePath": "\/var\/www\/packages\/",
     "log": {
-        "last_modified": "2022-02-08 04:03",
+        "last_modified": "2022-02-08 04:25",
         "extension_builder_version": "10.0.3",
         "be_user": " (1)"
     }

@@ -175,6 +175,11 @@ return [
             ]
         ],
     
+        'project5' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'project' => [
             'config' => [
                 'type' => 'passthrough',
