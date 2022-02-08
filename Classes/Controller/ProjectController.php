@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ReCentGlobe\Rcgprojectdb\Controller;
+
+
+/**
+ * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * (c) 2022 Florian Förster <florian.foerster@uni-leipzig.de>, ReCentGlobe
+ */
+
+/**
+ * ProjectController
+ */
+class ProjectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
+
+    /**
+     * projectRepository
+     *
+     * @var \ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository
+     */
+    protected $projectRepository = null;
+
+    /**
+     * action index
+     *
+     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
+     * @return string|object|null|void
+     */
+    public function indexAction()
+    {
+    }
+
+    /**
+     * action list
+     *
+     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
+     * @return string|object|null|void
+     */
+    public function listAction()
+    {
+        $projects = $this->projectRepository->findAll();
+        $this->view->assign('projects', $projects);
+    }
+
+    /**
+     * action show
+     *
+     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
+     * @return string|object|null|void
+     */
+    public function showAction(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $project)
+    {
+        $this->view->assign('project', $project);
+    }
+
+    /**
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository $ProjectRepository
+     */
+    public function injectProjectRepository(\ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository $projectRepository)
+    {
+        $this->projectRepository = $projectRepository;
+    }
+}

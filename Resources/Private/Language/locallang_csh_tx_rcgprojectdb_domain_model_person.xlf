@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_csh_tx_rcgprojectdb_domain_model_person.xlf" date="2022-02-08T16:03:15Z" product-name="rcgprojectdb">
+		<header/>
+		<body>
+			<trans-unit id="firstname.description" resname="firstname.description">
+				<source>firstname</source>
+			</trans-unit>
+			<trans-unit id="lastname.description" resname="lastname.description">
+				<source>lastname</source>
+			</trans-unit>
+			<trans-unit id="projects.description" resname="projects.description">
+				<source>projects</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf" date="2022-02-08T16:03:15Z" product-name="rcgprojectdb">
+		<header/>
+		<body>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project" resname="tx_rcgprojectdb_domain_model_project">
+				<source>Project</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.image" resname="tx_rcgprojectdb_domain_model_project.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.title" resname="tx_rcgprojectdb_domain_model_project.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.short_title" resname="tx_rcgprojectdb_domain_model_project.short_title">
+				<source>Short Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.account_number" resname="tx_rcgprojectdb_domain_model_project.account_number">
+				<source>Account Number</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.short_description" resname="tx_rcgprojectdb_domain_model_project.short_description">
+				<source>Short Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.description" resname="tx_rcgprojectdb_domain_model_project.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.contact" resname="tx_rcgprojectdb_domain_model_project.contact">
+				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.project_discipline" resname="tx_rcgprojectdb_domain_model_project.project_discipline">
+				<source>Project Discipline</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.project_regions" resname="tx_rcgprojectdb_domain_model_project.project_regions">
+				<source>Project Regions</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.project_era" resname="tx_rcgprojectdb_domain_model_project.project_era">
+				<source>Project Era</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.research_area" resname="tx_rcgprojectdb_domain_model_project.research_area">
+				<source>Research Area</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.funder" resname="tx_rcgprojectdb_domain_model_project.funder">
+				<source>Funder</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.funding_start" resname="tx_rcgprojectdb_domain_model_project.funding_start">
+				<source>Funding Start</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.funding_end" resname="tx_rcgprojectdb_domain_model_project.funding_end">
+				<source>Funding End</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.funding_amount" resname="tx_rcgprojectdb_domain_model_project.funding_amount">
+				<source>Funding Amount</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.funding_format" resname="tx_rcgprojectdb_domain_model_project.funding_format">
+				<source>Funding Format</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.related_links" resname="tx_rcgprojectdb_domain_model_project.related_links">
+				<source>Related Links</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.persons" resname="tx_rcgprojectdb_domain_model_project.persons">
+				<source>Persons</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.tags" resname="tx_rcgprojectdb_domain_model_project.tags">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_project.partners" resname="tx_rcgprojectdb_domain_model_project.partners">
+				<source>Partners</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_person" resname="tx_rcgprojectdb_domain_model_person">
+				<source>Person</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_person.firstname" resname="tx_rcgprojectdb_domain_model_person.firstname">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_person.lastname" resname="tx_rcgprojectdb_domain_model_person.lastname">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_person.projects" resname="tx_rcgprojectdb_domain_model_person.projects">
+				<source>Projects</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_tag" resname="tx_rcgprojectdb_domain_model_tag">
+				<source>Tag</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_tag.title" resname="tx_rcgprojectdb_domain_model_tag.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_organization" resname="tx_rcgprojectdb_domain_model_organization">
+				<source>Organization</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_organization.title" resname="tx_rcgprojectdb_domain_model_organization.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_organization.logo" resname="tx_rcgprojectdb_domain_model_organization.logo">
+				<source>Logo</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_organization.url" resname="tx_rcgprojectdb_domain_model_organization.url">
+				<source>Url</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_sociallink" resname="tx_rcgprojectdb_domain_model_sociallink">
+				<source>Social Link</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_sociallink.title" resname="tx_rcgprojectdb_domain_model_sociallink.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_sociallink.type" resname="tx_rcgprojectdb_domain_model_sociallink.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_rcgprojectdb_domain_model_sociallink.url" resname="tx_rcgprojectdb_domain_model_sociallink.url">
+				<source>Url</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

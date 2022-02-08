@@ -1,0 +1,70 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<table class="tx-rcgprojectdb">
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.image" /></td>
+		<td>
+				<f:image src="{project.image.originalResource.publicUrl}" width="200"/>
+            </td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.title" /></td>
+		<td>{project.title}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.short_title" /></td>
+		<td>{project.shortTitle}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.account_number" /></td>
+		<td>{project.accountNumber}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.short_description" /></td>
+		<td>{project.shortDescription}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.description" /></td>
+		<td>{project.description}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.contact" /></td>
+		<td>{project.contact}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.project_discipline" /></td>
+		<td>{project.projectDiscipline}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.project_regions" /></td>
+		<td>{project.projectRegions}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.project_era" /></td>
+		<td>{project.projectEra}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></td>
+		<td>{project.researchArea}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.funder" /></td>
+		<td>{project.funder}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.funding_start" /></td>
+		<td>{project.fundingStart -> f:format.date()}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.funding_end" /></td>
+		<td>{project.fundingEnd -> f:format.date()}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.funding_amount" /></td>
+		<td>{project.fundingAmount}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.funding_format" /></td>
+		<td>{project.fundingFormat}</td>
+	</tr>
+</table>
+</html>
