@@ -101,7 +101,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
-                'MM' => 'tx_rcgprojectdb_person_project_mm',
+                'MM' => 'tx_rcgprojectdb_project_person_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,

@@ -206,6 +206,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->funder = $this->funder ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->cooperationPartners = $this->cooperationPartners ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->tags = $this->tags ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->researchArea = $this->researchArea ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->projectDiscipline = $this->projectDiscipline ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->projectRegions = $this->projectRegions ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->projectEra = $this->projectEra ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**

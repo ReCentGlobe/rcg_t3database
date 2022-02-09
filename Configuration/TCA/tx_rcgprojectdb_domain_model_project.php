@@ -238,21 +238,21 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_discipline',
             'config' => [
-                'type' => 'none',
+                'type' => 'category',
             ]
         ],
         'project_regions' => [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_regions',
             'config' => [
-                'type' => 'none',
+                'type' => 'category',
             ]
         ],
         'project_era' => [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_era',
             'config' => [
-                'type' => 'none',
+                'type' => 'category',
             ]
         ],
         'funding_start' => [
@@ -371,12 +371,10 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.research_area',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_researcharea',
-                'default' => 0,
-                'minitems' => 0,
-                'maxitems' => 1,
+                'type' => 'category',
+                'treeConfig' => [
+                    'rootUid' => 3
+                ]
             ],
             
         ],
