@@ -153,7 +153,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * researchArea
      *
-     * @var \ReCentGlobe\Rcgprojectdb\Domain\Model\ResearchArea
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $researchArea = null;
 
@@ -674,7 +674,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the researchArea
      *
-     * @return \ReCentGlobe\Rcgprojectdb\Domain\Model\ResearchArea $researchArea
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $researchArea
      */
     public function getResearchArea()
     {
@@ -684,10 +684,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the researchArea
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\ResearchArea $researchArea
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $researchArea
      * @return void
      */
-    public function setResearchArea(\ReCentGlobe\Rcgprojectdb\Domain\Model\ResearchArea $researchArea)
+    public function setResearchArea(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $researchArea)
     {
         $this->researchArea = $researchArea;
     }

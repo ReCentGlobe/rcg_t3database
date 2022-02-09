@@ -1,3 +1,6 @@
+page.config.contentObjectExceptionHandler = 0
+page.config.no_cache = 1
+
 plugin.tx_rcgprojectdb_projectlist {
     view {
         templateRootPaths.0 = EXT:rcgprojectdb/Resources/Private/Templates/
