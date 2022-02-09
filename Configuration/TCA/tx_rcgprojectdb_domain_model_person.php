@@ -2,7 +2,8 @@
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person',
-        'label' => 'firstname',
+        'label' => 'lastname',
+        'label_userFunc' => \ReCentGlobe\Rcgprojectdb\UserFunc\Tca::class . '->formatPersonLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
