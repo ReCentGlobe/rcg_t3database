@@ -12,7 +12,7 @@ in /Configuration/ExtensionBuilder/settings.yaml:
           List.html: keep
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
+<f:debug>{project}</f:debug>
 <f:section name="content">
     <h1>Listing for Project</h1>
 
@@ -23,46 +23,33 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.image" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.title" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.short_title" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.account_number" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.short_description" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.description" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.contact" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.project_discipline" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.project_regions" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.project_era" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.funder" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_start" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_end" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_amount" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_format" /></th>
-            <th></th>
-            <th></th>
         </tr>
         <f:for each="{projects}" as="project">
             <tr>
-                <td><f:link.action action="show" arguments="{project : project}">{project.image.originalResource.name}</f:link.action></td>
+                <td>
+                    <f:link.action action="show" arguments="{project : project}">
+                        <f:image image="{project.image}" width="200"></f:image>
+                    </f:link.action>
+                </td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.accountNumber}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.shortDescription}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.description}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.contact}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.projectDiscipline}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.projectRegions}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.projectEra}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.researchArea}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.funder}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.fundingStart -> f:format.date()}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.fundingEnd -> f:format.date()}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.fundingAmount}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.fundingFormat}</f:link.action></td>
-                <td><f:link.action action="edit" arguments="{project : project}">Edit</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{project : project}">Delete</f:link.action></td>
+                <td>
+                    <f:if condition="{project.researchArea}">
+                        <f:then>
+                            <f:for each="{project.researchArea}" as="category" iteration="iterator">
+                                {category.title}
+                            </f:for>
+                        </f:then>
+                    </f:if>
+                </td>
             </tr>
         </f:for>
     </table>
 
-    <f:link.action action="new">New Project</f:link.action>
+    <a class="button load-more-items" data-page="{page}" data-url="{f:uri.action(action: 'search', controller: 'Project', pluginName: 'projectAJAXList', pageType:'{settings.ajax.projectAJAXList}')}">
+        mehr laden
+    </a>
+
 </f:section>
 </html>

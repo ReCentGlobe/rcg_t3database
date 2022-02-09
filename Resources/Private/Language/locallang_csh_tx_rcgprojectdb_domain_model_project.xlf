@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_csh_tx_rcgprojectdb_domain_model_project.xlf" date="2022-02-08T16:03:15Z" product-name="rcgprojectdb">
+	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_csh_tx_rcgprojectdb_domain_model_project.xlf" date="2022-02-08T16:25:04Z" product-name="rcgprojectdb">
 		<header/>
 		<body>
 			<trans-unit id="image.description" resname="image.description">
@@ -33,12 +33,6 @@
 			<trans-unit id="project_era.description" resname="project_era.description">
 				<source>projectEra</source>
 			</trans-unit>
-			<trans-unit id="research_area.description" resname="research_area.description">
-				<source>researchArea</source>
-			</trans-unit>
-			<trans-unit id="funder.description" resname="funder.description">
-				<source>funder</source>
-			</trans-unit>
 			<trans-unit id="funding_start.description" resname="funding_start.description">
 				<source>fundingStart</source>
 			</trans-unit>
@@ -54,14 +48,26 @@
 			<trans-unit id="related_links.description" resname="related_links.description">
 				<source>Related Social Links (e.g. Facebook, Twitter, Homepage)</source>
 			</trans-unit>
-			<trans-unit id="persons.description" resname="persons.description">
-				<source>persons</source>
+			<trans-unit id="related_project_leads.description" resname="related_project_leads.description">
+				<source>relatedProjectLeads</source>
+			</trans-unit>
+			<trans-unit id="related_project_members.description" resname="related_project_members.description">
+				<source>relatedProjectMembers</source>
+			</trans-unit>
+			<trans-unit id="research_area.description" resname="research_area.description">
+				<source>researchArea</source>
+			</trans-unit>
+			<trans-unit id="institutions.description" resname="institutions.description">
+				<source>institutions</source>
+			</trans-unit>
+			<trans-unit id="funder.description" resname="funder.description">
+				<source>funder</source>
+			</trans-unit>
+			<trans-unit id="cooperation_partners.description" resname="cooperation_partners.description">
+				<source>cooperationPartners</source>
 			</trans-unit>
 			<trans-unit id="tags.description" resname="tags.description">
 				<source>tags</source>
-			</trans-unit>
-			<trans-unit id="partners.description" resname="partners.description">
-				<source>partners</source>
 			</trans-unit>
 		</body>
 	</file>

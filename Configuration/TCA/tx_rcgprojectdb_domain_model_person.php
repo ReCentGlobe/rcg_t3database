@@ -2,7 +2,8 @@
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person',
-        'label' => 'firstname',
+        'label' => 'lastname',
+        'label_userFunc' => \ReCentGlobe\Rcgprojectdb\UserFunc\Tca::class . '->formatPersonLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -16,7 +17,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'firstname,lastname',
-        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.gif'
+        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.png'
     ],
     'types' => [
         '1' => ['showitem' => 'firstname, lastname, projects, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
@@ -101,7 +102,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
-                'MM' => 'tx_rcgprojectdb_person_project_mm',
+                'MM' => 'tx_rcgprojectdb_project_person_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,

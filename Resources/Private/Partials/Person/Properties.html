@@ -8,5 +8,13 @@
 		<td><f:translate key="tx_rcgprojectdb_domain_model_person.lastname" /></td>
 		<td>{person.lastname}</td>
 	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_person.projects" /></td>
+		<td>
+			<f:for each="{person.projects}" as="project">
+				<f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action>
+			</f:for>
+		</td>
+	</tr>
 </table>
 </html>
