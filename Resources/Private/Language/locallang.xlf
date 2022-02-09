@@ -69,9 +69,6 @@
 			<trans-unit id="tx_rcgprojectdb_domain_model_project.cooperation_partners" resname="tx_rcgprojectdb_domain_model_project.cooperation_partners">
 				<source>Cooperation Partners</source>
 			</trans-unit>
-			<trans-unit id="tx_rcgprojectdb_domain_model_project.tags" resname="tx_rcgprojectdb_domain_model_project.tags">
-				<source>Tags</source>
-			</trans-unit>
 			<trans-unit id="tx_rcgprojectdb_domain_model_person" resname="tx_rcgprojectdb_domain_model_person">
 				<source>Person</source>
 			</trans-unit>
@@ -83,9 +80,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rcgprojectdb_domain_model_person.projects" resname="tx_rcgprojectdb_domain_model_person.projects">
 				<source>Projects</source>
-			</trans-unit>
-			<trans-unit id="tx_rcgprojectdb_domain_model_tag" resname="tx_rcgprojectdb_domain_model_tag">
-				<source>Tag</source>
 			</trans-unit>
 			<trans-unit id="tx_rcgprojectdb_domain_model_tag.title" resname="tx_rcgprojectdb_domain_model_tag.title">
 				<source>Title</source>

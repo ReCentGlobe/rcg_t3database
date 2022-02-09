@@ -19,8 +19,7 @@ CREATE TABLE tx_rcgprojectdb_domain_model_project (
 	related_project_members int(11) unsigned NOT NULL DEFAULT '0',
 	institutions int(11) unsigned NOT NULL DEFAULT '0',
 	funder int(11) unsigned NOT NULL DEFAULT '0',
-	cooperation_partners int(11) unsigned NOT NULL DEFAULT '0',
-	tags int(11) unsigned NOT NULL DEFAULT '0'
+	cooperation_partners int(11) unsigned NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_rcgprojectdb_domain_model_person (

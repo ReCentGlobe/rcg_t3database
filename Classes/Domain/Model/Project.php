@@ -136,13 +136,6 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $relatedProjectLeads = null;
 
     /**
-     * tags
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Tag>
-     */
-    protected $tags = null;
-
-    /**
      * cooperationPartners
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization>
@@ -483,49 +476,6 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setFundingAmount(string $fundingAmount)
     {
         $this->fundingAmount = $fundingAmount;
-    }
-
-    /**
-     * Adds a Tag
-     *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Tag $tag
-     * @return void
-     */
-    public function addTag(\ReCentGlobe\Rcgprojectdb\Domain\Model\Tag $tag)
-    {
-        $this->tags->attach($tag);
-    }
-
-    /**
-     * Removes a Tag
-     *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Tag $tagToRemove The Tag to be removed
-     * @return void
-     */
-    public function removeTag(\ReCentGlobe\Rcgprojectdb\Domain\Model\Tag $tagToRemove)
-    {
-        $this->tags->detach($tagToRemove);
-    }
-
-    /**
-     * Returns the tags
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Tag> tags
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Sets the tags
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Tag> $tags
-     * @return void
-     */
-    public function setTags(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags)
-    {
-        $this->tags = $tags;
     }
 
     /**

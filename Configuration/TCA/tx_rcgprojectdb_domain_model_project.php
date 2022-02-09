@@ -372,9 +372,6 @@ return [
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.research_area',
             'config' => [
                 'type' => 'category',
-                'treeConfig' => [
-                    'rootUid' => 3
-                ]
             ],
             
         ],
@@ -440,32 +437,5 @@ return [
             ],
 
         ],
-        'tags' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.tags',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_tag',
-                'MM' => 'tx_rcgprojectdb_project_tag_mm',
-                'size' => 10,
-                'autoSizeMax' => 30,
-                'maxitems' => 9999,
-                'multiple' => 0,
-                'fieldControl' => [
-                    'editPopup' => [
-                        'disabled' => false,
-                    ],
-                    'addRecord' => [
-                        'disabled' => false,
-                    ],
-                    'listModule' => [
-                        'disabled' => true,
-                    ],
-                ],
-            ],
-            
-        ],
-    
     ],
 ];
