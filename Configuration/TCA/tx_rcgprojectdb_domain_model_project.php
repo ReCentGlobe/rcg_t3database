@@ -21,7 +21,14 @@ return [
         'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_project.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'image, title, short_title, account_number, short_description, description, contact, project_discipline, project_regions, project_era, funding_start, funding_end, funding_amount, funding_format, related_links, related_project_leads, related_project_members, research_area, institutions, funder, cooperation_partners, tags, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => [
+            'showitem' => '--palette--;;general, short_description, description,related_links,contact, 
+                        --div--;ProjectCat,  project_discipline, project_regions, project_era, 
+                        --div--;People, related_project_leads, related_project_members, 
+                        --div--;InOut, 
+                        --div--;Related, research_area, institutions, 
+                        --div--;Funding, --palette--;;funding,  
+                        --div--;Cooperation, cooperation_partners, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -438,4 +445,16 @@ return [
 
         ],
     ],
+    'palettes' => [
+        'general' => [
+            'label' => 'General Stuff',
+            'description' => 'palette description',
+            'showitem' => 'title,--linebreak--, short_title, account_number, --linebreak--, image',
+        ],
+        'funding' => [
+            'label' => 'Funding',
+            'description' => 'palette description',
+            'showitem' => 'funder, --linebreak--, funding_start, funding_end,--linebreak--, funding_amount, funding_format',
+        ],
+    ]
 ];
