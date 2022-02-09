@@ -20,6 +20,16 @@
 		<td>{project.accountNumber}</td>
 	</tr>
 	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.related_links" /></td>
+		<td>
+			<f:then>
+				<f:for each="{project.relatedLinks}" as="link" iteration="iterator">
+					<f:link.external uri="{link.url}" title="{link.title}" target="_blank">{link.title}</f:link.external>
+				</f:for>
+			</f:then>
+		</td>
+	</tr>
+	<tr>
 		<td><f:translate key="tx_rcgprojectdb_domain_model_project.short_description" /></td>
 		<td>{project.shortDescription}</td>
 	</tr>
@@ -37,6 +47,17 @@
 			<f:then>
 				<f:for each="{project.researchArea}" as="category" iteration="iterator">
 					{category.title}
+				</f:for>
+			</f:then>
+		</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_rcgprojectdb_domain_model_project.institutions" /></td>
+		<td>
+			<f:then>
+				<f:for each="{project.institutions}" as="institution" iteration="iterator">
+					<f:image src="{institution.logo.originalResource.publicUrl}" width="200"/>
+					{institution.title}
 				</f:for>
 			</f:then>
 		</td>

@@ -1,7 +1,32 @@
 page.config.contentObjectExceptionHandler = 0
-page.config.no_cache = 1
+#page.config.no_cache = 1
+
+plugin.tx_rcgprojectdb {
+    settings {
+        # default items per page for asynchronous requests
+        defaultItemsPerPage = 12
+
+        # ajax page types
+        ajax {
+            projectAJAXList = 808
+        }
+    }
+}
+
+
+rcgprojectdb_projectAJAXList = PAGE
+rcgprojectdb_projectAJAXList {
+    typeNum < plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList
+    10 < tt_content.list.20.rcgprojectdb_projectAJAXList
+
+    config {
+        additionalHeaders = Content-type:application/json
+    }
+}
 
 plugin.tx_rcgprojectdb_projectlist {
+
+
     view {
         templateRootPaths.0 = EXT:rcgprojectdb/Resources/Private/Templates/
         templateRootPaths.1 = {$plugin.tx_rcgprojectdb_projectlist.view.templateRootPath}

@@ -17,7 +17,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'firstname,lastname',
-        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.gif'
+        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.png'
     ],
     'types' => [
         '1' => ['showitem' => 'firstname, lastname, projects, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],

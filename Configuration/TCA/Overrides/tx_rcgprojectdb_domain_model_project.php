@@ -10,22 +10,6 @@ defined('TYPO3_MODE') || die();
         'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.research_area',
         'fieldConfiguration' => [
             'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
-            'treeConfig' => [
-                'rootUid' => '3'
-            ]
-        ],
-    ]
-);
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-    'rcgprojectdb',
-    'tx_rcgprojectdb_domain_model_project',
-    'research_area',
-    [
-        // Set a custom label
-        'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.research_area',
-        'fieldConfiguration' => [
-            'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
         ],
     ]
 );

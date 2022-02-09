@@ -2,7 +2,8 @@
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_sociallink',
-        'label' => 'title',
+        'label' => 'url',
+        'hideTable' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -121,7 +122,9 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['-- Label --', 0],
+                    ['-- Homepage --', 0],
+                    ['-- Facebook --', 1],
+                    ['-- Twitter --', 2],
                 ],
                 'size' => 1,
                 'maxitems' => 1,

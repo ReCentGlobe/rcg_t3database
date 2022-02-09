@@ -18,7 +18,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,short_title,account_number,short_description,description,contact,funding_amount,funding_format',
-        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_project.gif'
+        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_project.png'
     ],
     'types' => [
         '1' => [
