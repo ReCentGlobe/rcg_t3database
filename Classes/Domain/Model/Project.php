@@ -74,23 +74,23 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * projectDiscipline
      *
-     * @var mixed
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
-    protected $projectDiscipline = 0;
+    protected $projectDiscipline = null;
 
     /**
      * projectRegions
      *
-     * @var mixed
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
-    protected $projectRegions = 0;
+    protected $projectRegions = null;
 
     /**
      * projectEra
      *
-     * @var mixed
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
-    protected $projectEra = 0;
+    protected $projectEra = null;
 
     /**
      * fundingStart
@@ -355,7 +355,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the projectDiscipline
      *
-     * @return mixed projectDiscipline
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectDiscipline
      */
     public function getProjectDiscipline()
     {
@@ -365,10 +365,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the projectDiscipline
      *
-     * @param int $projectDiscipline
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectDiscipline
      * @return void
      */
-    public function setProjectDiscipline(int $projectDiscipline)
+    public function setProjectDiscipline(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectDiscipline)
     {
         $this->projectDiscipline = $projectDiscipline;
     }
@@ -376,7 +376,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the projectRegions
      *
-     * @return mixed projectRegions
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectRegions
      */
     public function getProjectRegions()
     {
@@ -386,10 +386,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the projectRegions
      *
-     * @param int $projectRegions
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectRegions
      * @return void
      */
-    public function setProjectRegions(int $projectRegions)
+    public function setProjectRegions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectRegions)
     {
         $this->projectRegions = $projectRegions;
     }
@@ -397,7 +397,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the projectEra
      *
-     * @return mixed projectEra
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectEra
      */
     public function getProjectEra()
     {
@@ -407,10 +407,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the projectEra
      *
-     * @param int $projectEra
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectEra
      * @return void
      */
-    public function setProjectEra(int $projectEra)
+    public function setProjectEra(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectEra)
     {
         $this->projectEra = $projectEra;
     }

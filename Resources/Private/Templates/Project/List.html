@@ -12,7 +12,7 @@ in /Configuration/ExtensionBuilder/settings.yaml:
           List.html: keep
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
+<f:debug>{project}</f:debug>
 <f:section name="content">
     <h1>Listing for Project</h1>
 
@@ -23,18 +23,18 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.image" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.title" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.short_title" /></th>
+            <th><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></th>
         </tr>
         <f:for each="{projects}" as="project">
             <tr>
                 <td>
                     <f:link.action action="show" arguments="{project : project}">
-                        <f:image image="{project.image}"></f:image>
+                        <f:image image="{project.image}" width="200"></f:image>
                     </f:link.action>
                 </td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
                 <td>
-                    <f:debug>{project}</f:debug>
                     <f:if condition="{project.researchArea}">
                         <f:then>
                             <f:for each="{project.researchArea}" as="category" iteration="iterator">
