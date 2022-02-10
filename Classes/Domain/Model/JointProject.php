@@ -6,18 +6,18 @@ namespace ReCentGlobe\Rcgprojectdb\Domain\Model;
 
 
 /**
- * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
+ * This file is part of the "temp" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2022 Florian Förster <florian.foerster@uni-leipzig.de>, ReCentGlobe
+ * (c) 2022 
  */
 
 /**
- * Project
+ * JointProject
  */
-class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class JointProject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
@@ -173,12 +173,12 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $funder = null;
 
     /**
-     * parentProject
+     * subProject
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected $parentProject = null;
+    protected $subProject = null;
 
     /**
      * __construct
@@ -211,7 +211,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->projectDiscipline = $this->projectDiscipline ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->projectRegions = $this->projectRegions ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->projectEra = $this->projectEra ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->parentProject = $this->parentProject ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->subProject = $this->subProject ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -788,23 +788,45 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns a parent project
+     * Adds a Project
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject> $parentProject
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $subProject
+     * @return void
      */
-    public function getParentProject()
+    public function addSubProject(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $subProject)
     {
-        return $this->parentProject;
+        $this->subProject->attach($subProject);
     }
 
     /**
-     * Sets the parent project
+     * Removes a Project
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject> $parentProject
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $subProjectToRemove The Project to be removed
      * @return void
      */
-    public function setParentProject(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $funder)
+    public function removeSubProject(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $subProjectToRemove)
     {
-        $this->parentProject = $parentProject;
+        $this->subProject->detach($subProjectToRemove);
+    }
+
+    /**
+     * Returns the subProject
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> $subProject
+     */
+    public function getSubProject()
+    {
+        return $this->subProject;
+    }
+
+    /**
+     * Sets the subProject
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> $subProject
+     * @return void
+     */
+    public function setSubProject(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $subProject)
+    {
+        $this->subProject = $subProject;
     }
 }
