@@ -1,0 +1,21 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="content">
+    <h1>SEARCH Project</h1>
+
+    <f:flashMessages />
+
+    <table class="tx_rcgprojectdb">
+
+        <f:for each="{projects}" as="project">
+            <tr>
+
+                <td><f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
+
+            </tr>
+        </f:for>
+    </table>
+
+</f:section>
+</html>

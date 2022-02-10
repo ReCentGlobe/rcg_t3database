@@ -50,6 +50,31 @@ class ProjectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     /**
+     * action search
+     *
+     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
+     * @return string|object|null|void
+     */
+    public function searchAction() {
+        $itemsPerPage = $this->settings['defaultItemsPerPage'];
+        $page = 0;
+
+        if ($this->request->hasArgument('page')) {
+            $page = intval($this->request->getArgument('page'));
+        }
+
+        // get items, set items per page and next page
+        $next = $this->projectRepository->findItems(intval($this->settings['defaultItemsPerPage']), $page);
+
+        $projects = $this->offerRepository->findByAccountNumber('123456');
+        $this->view->assign('projects', $projects);
+
+        //$this->view->assign('settings', $this->settings);
+        //$this->view->assign('next', $next->count());
+        //$this->view->assign('page', $page + 1);
+    }
+
+    /**
      * action show
      *
      * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project

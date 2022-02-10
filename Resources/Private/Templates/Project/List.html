@@ -47,7 +47,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
         </f:for>
     </table>
 
-    <a class="button load-more-items" data-page="{page}" data-url="{f:uri.action(action: 'search', controller: 'Project', pluginName: 'projectAJAXList', pageType:'{settings.ajax.projectAJAXList}')}">
+    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'Search', controller: 'Project', pluginName: 'projectlist_AJAX', pageType:'{settings.ajax.projectAJAXList}')}">
         mehr laden
     </a>
 
