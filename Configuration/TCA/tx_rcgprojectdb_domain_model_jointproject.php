@@ -1,12 +1,11 @@
 <?php
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project',
+        'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_jointproject',
         'label' => 'short_title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'sortby' => 'sorting',
         'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -17,13 +16,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,short_title,account_number,short_description,description,contact,funding_amount,funding_format',
+        'searchFields' => 'title',
         'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_project.png'
     ],
     'types' => [
         '1' => [
             'showitem' => '--palette--;;general, short_description, description,related_links,contact, 
-                        --div--;ProjectCat, parent_project, project_discipline, project_regions, project_era, 
+                        --div--;ProjectCat, sub_project,  project_discipline, project_regions, project_era, 
                         --div--;People, related_project_leads, related_project_members, 
                         --div--;InOut, 
                         --div--;Related, research_area, institutions, 
@@ -58,8 +57,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
-                'foreign_table_where' => 'AND {#tx_rcgprojectdb_domain_model_project}.{#pid}=###CURRENT_PID### AND {#tx_rcgprojectdb_domain_model_project}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_jointproject',
+                'foreign_table_where' => 'AND {#tx_rcgprojectdb_domain_model_jointproject}.{#pid}=###CURRENT_PID### AND {#tx_rcgprojectdb_domain_model_jointproject}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
@@ -162,7 +161,7 @@ return [
                 ],
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
-            
+
         ],
         'title' => [
             'exclude' => true,
@@ -221,7 +220,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-            
+
         ],
         'contact' => [
             'exclude' => true,
@@ -238,17 +237,6 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-            ],
-            
-        ],
-        'parent_project' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.parent_project',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_jointproject',
-                'MM' => 'tx_rcgprojectdb_jointproject_project_mm',
             ],
 
         ],
@@ -357,7 +345,7 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
         'related_project_members' => [
             'exclude' => true,
@@ -383,7 +371,7 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
         'research_area' => [
             'exclude' => true,
@@ -391,7 +379,7 @@ return [
             'config' => [
                 'type' => 'category',
             ],
-            
+
         ],
         'institutions' => [
             'exclude' => true,
@@ -417,7 +405,7 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
         'funder' => [
             'exclude' => true,
@@ -455,6 +443,34 @@ return [
             ],
 
         ],
+        'sub_project' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_jointproject.sub_project',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'MM' => 'tx_rcgprojectdb_jointproject_project_mm',
+                'default' => 0,
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
+            ],
+
+        ],
+    
     ],
     'palettes' => [
         'general' => [

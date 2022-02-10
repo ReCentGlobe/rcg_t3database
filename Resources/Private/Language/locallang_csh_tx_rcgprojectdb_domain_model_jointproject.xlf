@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_csh_tx_rcgprojectdb_domain_model_project.xlf" date="2022-02-08T16:25:04Z" product-name="rcgprojectdb">
+	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_csh_tx_rcgprojectdb_domain_model_jointproject.xlf" date="2022-02-10T14:30:04Z" product-name="rcgprojectdb">
 		<header/>
 		<body>
 			<trans-unit id="image.description" resname="image.description">
@@ -66,11 +66,11 @@
 			<trans-unit id="cooperation_partners.description" resname="cooperation_partners.description">
 				<source>cooperationPartners</source>
 			</trans-unit>
-			<trans-unit id="parent_project.description" resname="parent_project.description">
-				<source>parentProject</source>
-			</trans-unit>
 			<trans-unit id="tags.description" resname="tags.description">
 				<source>tags</source>
+			</trans-unit>
+			<trans-unit id="sub_project.description" resname="sub_project.description">
+				<source>subProject</source>
 			</trans-unit>
 		</body>
 	</file>

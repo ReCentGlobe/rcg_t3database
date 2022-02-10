@@ -14,14 +14,18 @@ plugin.tx_rcgprojectdb {
 }
 
 
-rcgprojectdb_projectAJAXList = PAGE
-rcgprojectdb_projectAJAXList {
+tx_rcgprojectdb_projectlist_AJAX = PAGE
+tx_rcgprojectdb_projectlist_AJAX {
     typeNum < plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList
-    10 < tt_content.list.20.rcgprojectdb_projectAJAXList
-
     config {
-        additionalHeaders = Content-type:application/json
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:text/html
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 1
+        no_cache = 1
     }
+    10 < tt_content.list.20.rcgprojectdb_projectlist
 }
 
 plugin.tx_rcgprojectdb_projectlist {

@@ -6,7 +6,7 @@ defined('TYPO3_MODE') || die();
         'Rcgprojectdb',
         'Projectlist',
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => 'list, show'
+            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => 'list, show, search'
         ],
         // non-cacheable actions
         [
