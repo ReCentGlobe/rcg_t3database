@@ -1,4 +1,7 @@
 <?php
+
+$ll = 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:';
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project',
@@ -22,8 +25,8 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => '--palette--;;general, short_description, description,related_links,contact, 
-                        --div--;ProjectCat, parent_project, project_discipline, project_regions, project_era, 
+            'showitem' => 'project_tree, type, --palette--;;general, short_description, description,related_links,contact, 
+                        --div--;ProjectCat, child_project, parent_project, project_discipline, project_regions, project_era, 
                         --div--;People, related_project_leads, related_project_members, 
                         --div--;InOut, 
                         --div--;Related, research_area, institutions, 
@@ -241,17 +244,6 @@ return [
             ],
             
         ],
-        'parent_project' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.parent_project',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_jointproject',
-                'MM' => 'tx_rcgprojectdb_jointproject_project_mm',
-            ],
-
-        ],
         'project_discipline' => [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_discipline',
@@ -400,11 +392,9 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_organization',
-                'MM' => 'tx_rcgprojectdb_project_institutions_organization_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
-                'multiple' => 0,
                 'fieldControl' => [
                     'editPopup' => [
                         'disabled' => false,
@@ -417,22 +407,26 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
         'funder' => [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funder',
             'config' => [
-                'type' => 'inline',
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_organization',
-                'foreign_field' => 'project5',
                 'maxitems' => 9999,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
                 ],
             ],
 
@@ -441,19 +435,88 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.cooperation_partners',
             'config' => [
-                'type' => 'inline',
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_organization',
-                'foreign_field' => 'project',
                 'maxitems' => 9999,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
                 ],
             ],
 
+        ],
+
+        'type' => [
+            'exclude' => true,
+            'label' => $ll.'tx_rcgprojectdb_domain_model_project.type',
+            'config' => [
+                'type' => 'category',
+                'relationship' => 'oneToOne',
+                'treeConfig' => [
+                    'startingPoints' => '24',
+                ],
+            ],
+        ],
+        'child_project' => [
+            'exclude' => true,
+            'label' => $ll.'tx_rcgprojectdb_domain_model_project.child_project',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_rcgprojectdb_domain_model_project',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'MM_opposite_field' => 'parent_project',
+                'size' => 5,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'readOnly' => 1,
+                'MM' => 'tx_rcgprojectdb_domain_model_project_related_mm',
+                'suggestOptions' => [
+                    'default' => [
+                        'suggestOptions' => true,
+                        'addWhere' => ' AND tx_rcgprojectdb_domain_model_project.uid != ###THIS_UID###'
+                    ]
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
+        'parent_project' => [
+            'exclude' => true,
+            'label' => $ll.'tx_rcgprojectdb_domain_model_project.parent_project',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'allowed' => 'tx_rcgprojectdb_domain_model_project',
+                'size' => 5,
+                'maxitems' => 1,
+                'MM' => 'tx_rcgprojectdb_domain_model_project_related_mm',
+                'readOnly' => 0,
+            ]
+        ],
+
+        'project_tree' => [
+            'exclude' => true,
+            'label' => $ll.'tx_rcgprojectdb_domain_model_project.project_tree',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectTree',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'treeConfig' => [
+                    'parentField' => 'parent_project',
+                    'childrenField' => 'child_project',
+                ],
+            ],
         ],
     ],
     'palettes' => [

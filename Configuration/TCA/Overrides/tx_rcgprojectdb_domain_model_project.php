@@ -52,3 +52,16 @@ defined('TYPO3_MODE') || die();
         ],
     ]
 );
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
+    'rcgprojectdb',
+    'tx_rcgprojectdb_domain_model_project',
+    'type',
+    [
+        // Set a custom label
+        'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.type',
+        'fieldConfiguration' => [
+            'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
+        ],
+    ]
+);

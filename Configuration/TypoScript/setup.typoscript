@@ -1,6 +1,32 @@
 page.config.contentObjectExceptionHandler = 0
 #page.config.no_cache = 1
 
+# ==============================================
+# Persistence object mapping configuration
+# ==============================================
+config.tx_extbase.persistence.classes {
+    ReCentGlobe\Rcgprojectdb\Domain\Model\Project {
+        subclasses {
+            0 = ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectDefault
+            1 = ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectJoint
+        }
+    }
+
+    ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectDefault {
+        mapping {
+            recordType = 0
+            tableName = tx_rcgprojectdb_domain_model_project
+        }
+    }
+
+    ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectJoint {
+        mapping {
+            recordType = 1
+            tableName = tx_rcgprojectdb_domain_model_project
+        }
+    }
+}
+
 plugin.tx_rcgprojectdb {
     settings {
         # default items per page for asynchronous requests
