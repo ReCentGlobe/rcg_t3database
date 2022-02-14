@@ -1,0 +1,429 @@
+@use '~sass-mq/mq' as mq;
+
+.c-header {
+  $self: &;
+
+  z-index: 100;
+  background: var(--sig-white);
+  //transform: translate3d(0, 0, 0);
+  //transition: transform 0.5s ease-in-out;
+  position: relative;
+
+  @include mq.mq($until: desktop) {
+    //position: initial;
+    //transform: none;
+  }
+
+  @at-root .has-nav-open .c-header {
+    @include mq.mq($until: desktop) {
+      position: initial;
+      transform: none !important;
+    }
+  }
+  @at-root [data-direction='down'] .c-header {
+    transform: translate3d(0, -100%, 0);
+  }
+  @at-root [data-direction='up'] .c-header {
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+  /*  @at-root html.has-nav-open .c-header {
+    @include mq.mq($until: desktop) {
+      position: initial;
+      transform: none;
+    }
+  }*/
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  &.is-fixed {
+    position: fixed;
+    width: 100%;
+    box-shadow: 5px 5px 10px #00000019;
+    transition: transform 0.2s cubic-bezier(0.55, 0.09, 0.68, 0.53);
+
+    //@include u-underline(rgba(var(--sig-primary-decimal, 0.3)), 1px, 0);
+    /*&:after {
+      opacity: 0.3;
+    } */
+
+    & #{$self}_logo img,
+    & #{$self}_logo .c-logo.-large {
+      opacity: 0;
+      transform: scale(0);
+      --sig-hidden: 0;
+      max-width: rem(57px);
+    }
+    & #{$self}_logo .c-logo.-small {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+    }
+    & #{$self}_wrapper {
+      padding-bottom: rem(25px);
+      padding-top: rem(25px);
+    }
+    & #{$self}_navItem {
+      margin-bottom: 0;
+    }
+    & .c-metaNav {
+    }
+    & .c-languageMenu.-meta {
+      opacity: 0;
+      transform: translateY(-10rem);
+      height: 0;
+      position: relative;
+      margin: 0;
+    }
+    @include mq.mq($from: desktop) {
+      & .c-metaNav {
+        opacity: 0;
+        transform: translateY(-10rem);
+        height: 0;
+        position: relative;
+        margin: 0;
+      }
+    }
+  }
+
+  &_logo {
+    display: block;
+  }
+  &_logo img,
+  &_logo .c-logo.-large {
+    --sig-hidden: 1;
+    opacity: 1;
+    transform: scale(1);
+    color: var(--sig-primary);
+    max-width: rem(156px, 14px);
+    transition: opacity 0.35s ease-in-out;
+
+    @include mq.mq($from: tablet) {
+      max-width: rem(180px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      max-width: rem(210px);
+    }
+  }
+  &_logo .c-logo.-small {
+    color: var(--sig-primary);
+    //display: none;
+    transform: scale(0);
+    opacity: 0;
+    //visibility: hidden;
+    width: rem(58px);
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  // Likrat Customization
+  @at-root .is-likrat &_logoWrapper {
+    align-self: flex-start;
+  }
+  @at-root .is-likrat &_logo {
+    //margin-left: -22%;
+    & .c-logo.-large {
+      max-width: rem(275px);
+    }
+  }
+  @at-root .is-likrat &.is-fixed .c-logo.-small {
+    width: auto;
+    transform: translateY(-17px);
+  }
+  // VSJF Customization
+  @at-root .is-vsjf &_logo {
+    //margin-left: -22%;
+    & .c-logo.-large {
+      transform: translateY(13px);
+      max-height: rem(50px, 14px);
+
+      @include mq.mq($from: tablet) {
+        max-height: rem(60px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        max-height: rem(65px);
+      }
+    }
+  }
+  @at-root .is-vsjf &.is-fixed .c-logo.-small {
+    width: auto;
+    transform: translateY(-3px);
+  }
+
+  &_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: var(--sig-white);
+    height: var(--sig-header-height);
+    padding-bottom: rem(25px, 14px);
+    padding-top: rem(15px, 14px);
+
+    @include mq.mq($from: tablet) {
+      padding-bottom: rem(30px, 12px);
+      padding-top: rem(20px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      padding-bottom: rem(35px);
+      padding-top: rem(20px);
+    }
+  }
+
+  &_nav {
+    display: flex;
+    flex-flow: row;
+    align-items: flex-end;
+
+    @include mq.mq($from: desktop) {
+      flex-flow: column;
+    }
+  }
+  &_navList {
+    display: flex;
+    flex-flow: row;
+    //margin-right: rem(16px) * -1;
+
+    @include mq.mq($until: desktop) {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--sig-white);
+      z-index: 500;
+      flex-flow: column;
+
+      // Fake Container
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: var(--sig-page-margin);
+      padding-left: var(--sig-page-margin);
+      max-width: 100%;
+
+      padding-top: rem(120px, 12px);
+    }
+
+    @include mq.mq($until: tablet) {
+      padding-top: rem(120px, 14px);
+      padding-right: rem(40px, 14px);
+      padding-left: rem(40px, 14px);
+    }
+  }
+  &_navItem {
+    //display: none;
+    margin-bottom: 0;
+    --svg-color: var(--sig-primary);
+    & + & {
+      margin-top: rem(10px, 14px);
+    }
+    @include mq.mq($from: tablet) {
+      & + & {
+        margin-top: rem(10px, 12px);
+      }
+    }
+    @include mq.mq($from: desktop) {
+      & + & {
+        margin-top: 0;
+        margin-left: rem(10px);
+      }
+      margin-bottom: rem(10px) * -1;
+      display: inline-block;
+    }
+  }
+
+  &_navInput {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    border: 0;
+    background: 0 0;
+    overflow: hidden;
+
+    &:checked + #{$self}_navLabel:focus,
+    &:checked + #{$self}_navLabel:hover,
+    &:checked + #{$self}_navLabel {
+      color: var(--sig-primary);
+      border: 2px solid var(--sig-primary);
+    }
+
+    &:checked ~ .c-nav {
+      display: block;
+    }
+  }
+  &_navLabel {
+    display: block;
+    @include u-font(20px, 24px);
+    font-weight: 500;
+
+    cursor: pointer;
+    letter-spacing: 0.04px;
+    color: var(--sig-primary);
+    padding: rem(10px) rem(16px);
+    border: 2px solid transparent;
+    border-radius: 4px;
+    user-select: none;
+    transition: border 0.1s ease;
+
+    @include u-hocus() {
+      color: var(--sig-primary);
+      border: 2px solid var(--sig-primary);
+    }
+
+    @include mq.mq($until: desktop) {
+      @include u-font(28px, 34px, 12px);
+      padding: 0;
+      @include u-hocus() {
+        border: 2px solid transparent;
+        opacity: 0.6;
+      }
+    }
+    @include mq.mq($until: tablet) {
+      @include u-font(28px, 34px, 14px);
+    }
+  }
+
+  &_navLink {
+    display: block;
+    @include u-font(20px, 24px);
+
+    letter-spacing: 0.04px;
+    color: var(--sig-primary);
+    padding: rem(10px) rem(16px);
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    @include u-hocus() {
+      color: var(--sig-primary);
+      border: 2px solid var(--sig-primary);
+    }
+  }
+  &_navItem.-search {
+    display: flex;
+    align-items: center;
+    margin-left: rem(20px);
+
+    #{$self}_navInput {
+      &:checked + #{$self}_navLabel:focus,
+      &:checked + #{$self}_navLabel:hover,
+      &:checked + #{$self}_navLabel {
+        color: var(--sig-primary);
+        border: none;
+      }
+    }
+    #{$self}_navLabel {
+      padding: 0;
+      border: none;
+      transition: opacity 0.1s ease;
+
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+    }
+
+    @include mq.mq($until: desktop) {
+      display: none;
+    }
+  }
+  &_navItem.-close {
+    display: none;
+
+    #{$self}_navInput {
+      &:checked + #{$self}_navLabel:focus,
+      &:checked + #{$self}_navLabel:hover,
+      &:checked + #{$self}_navLabel {
+        color: var(--sig-primary);
+        border: none;
+      }
+    }
+    #{$self}_navLabel {
+      padding: 0;
+      border: none;
+    }
+
+    @include mq.mq($until: desktop) {
+      display: flex;
+      position: absolute;
+      top: rem(34px, 12px);
+      right: rem(34px, 12px);
+      margin-top: 0;
+    }
+    @include mq.mq($until: tablet) {
+      top: rem(25px, 14px);
+      right: rem(25px, 14px);
+    }
+  }
+  &_navItem.-back {
+    display: none;
+    #{$self}_navInput {
+      &:checked + #{$self}_navLabel:focus,
+      &:checked + #{$self}_navLabel:hover,
+      &:checked + #{$self}_navLabel {
+        color: var(--sig-primary);
+        border: none;
+      }
+    }
+    #{$self}_navLabel {
+      padding: 0;
+      border: none;
+    }
+    & svg {
+      transform: rotate(180deg);
+    }
+    @include mq.mq($until: desktop) {
+      opacity: 0;
+      position: absolute;
+      display: block;
+      top: rem(34px, 12px);
+      left: rem(34px, 12px);
+      transition: opacity 0.35s ease-in-out;
+      margin-top: 0;
+
+      @at-root html.has-subnav-open .c-header_navItem.-back {
+        display: flex;
+        opacity: 1;
+      }
+    }
+    @include mq.mq($until: tablet) {
+      top: rem(25px, 14px);
+      left: rem(25px, 14px);
+    }
+  }
+
+  &_navItem.-meta {
+    display: none;
+    @include mq.mq($until: desktop) {
+      display: flex;
+      flex-flow: column;
+      margin-top: rem(40px, 12px);
+      & a {
+        @include u-font(18px, 28px, 12px);
+        color: var(--sig-shipcove);
+      }
+      & a + a {
+        margin-top: rem(7px, 12px);
+      }
+    }
+    @include mq.mq($until: tablet) {
+      margin-top: rem(40px, 14px);
+      & a {
+        @include u-font(18px, 28px, 14px);
+      }
+      & a + a {
+        margin-top: rem(7px, 14px);
+      }
+    }
+  }
+}

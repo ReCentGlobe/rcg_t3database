@@ -1,0 +1,228 @@
+.c-imageHeader {
+  $self: &;
+  color: var(--sig-white);
+
+  //temp
+  //margin-bottom: 100px;
+
+  &_wrapper {
+    @include u-grid(12, $padding-l);
+    grid-row-gap: 0;
+  }
+
+  &_content {
+    display: inherit;
+    grid-template-columns: inherit;
+    grid-gap: inherit;
+    grid-column: span 12;
+  }
+
+  &_pageTitle {
+    grid-column: 1 / 6;
+
+    font-size: 3.125rem;
+    line-height: 3.75rem;
+    letter-spacing: 0.1px;
+    color: var(--sig-white);
+    font-weight: 400;
+
+    margin-bottom: rem(50px);
+
+    & span {
+      font-weight: 500;
+    }
+  }
+
+  &_leftElement,
+  &_rightElement {
+    position: relative;
+
+    &.-end {
+      align-items: flex-end;
+    }
+    &.-start {
+      align-items: flex-start;
+    }
+    &.has-text > picture:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      z-index: 3;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: linear-gradient(0deg, #262626, transparent);
+      display: block;
+      mix-blend-mode: multiply;
+      opacity: 0.5;
+    }
+  }
+
+  &_leftWrapper,
+  &_rightWrapper {
+    grid-column: 1 / 6;
+
+    margin-bottom: rem(50px);
+    margin-top: rem(50px);
+  }
+
+  &_leftElement {
+    &:before {
+      content: '';
+      margin-left: calc(-50vw + 50%);
+      background-color: var(--sig-grey);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    & > picture {
+      margin-left: calc(-50vw + 50%);
+      background-color: var(--sig-grey);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+
+      & img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  &_rightElement {
+    &:before {
+      content: '';
+      margin-right: calc(-50vw + 50%);
+      background-color: var(--sig-grey);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    & > picture {
+      margin-right: calc(-50vw + 50%);
+      background-color: var(--sig-grey);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+
+      & img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &.-front {
+    margin-bottom: rem(50px);
+    #{$self}_leftElement {
+      grid-column: 1 / 9;
+      background-color: red;
+      grid-row: 1;
+      z-index: 2;
+      min-height: 580px;
+      display: inherit;
+      grid-template-columns: repeat(8, 1fr);
+      grid-gap: inherit;
+      //align-items: flex-end;
+      margin-top: rem(50px);
+      margin-bottom: rem(-50px);
+
+      & > #{$self}_leftWrapper {
+        grid-column: 1 / 6;
+      }
+    }
+    #{$self}_rightElement {
+      position: relative;
+      background-color: var(--sig-grey);
+      grid-row: 1;
+      grid-column: 4 / -1;
+      z-index: 1;
+      min-height: 580px;
+
+      display: flex;
+      //align-items: flex-end;
+      display: inherit;
+      grid-template-columns: repeat(9, 1fr);
+      grid-gap: inherit;
+
+      & > #{$self}_rightWrapper {
+        grid-column: 6 / -1;
+      }
+    }
+  }
+  &.-split {
+    #{$self}_leftElement {
+      position: relative;
+      background-color: red;
+      grid-column: 1 / 10;
+      grid-row: 1;
+      z-index: 1;
+      min-height: 580px;
+
+      display: flex;
+      //align-items: flex-end;
+      display: inherit;
+      grid-template-columns: repeat(9, 1fr);
+      grid-gap: inherit;
+
+      &:before {
+        content: '';
+        margin-left: calc(-50vw + 50%);
+        background-color: var(--sig-grey);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+
+      & ul {
+        font-size: 42px;
+        grid-column: 6 / -1;
+      }
+    }
+    #{$self}_rightElement {
+      position: relative;
+      background-color: var(--sig-grey);
+      grid-row: 1;
+      grid-column: 5 / -1;
+      z-index: 2;
+      min-height: 580px;
+
+      display: flex;
+      align-items: flex-end;
+      margin-top: rem(50px);
+      margin-bottom: rem(-50px);
+      & > picture {
+        margin-right: calc(-50vw + 50%);
+        background-color: var(--sig-grey);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+
+        & img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@use '~sass-mq/mq' as mq;
+
+.c-person {
+  --svg-color: var(--sig-primary);
+
+  &_image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1.63 / 1;
+    & img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: center center;
+      transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+  &_meta {
+    position: relative;
+    margin-top: rem(20px);
+  }
+
+  &_title {
+    color: var(--sig-primary);
+    font-weight: 400;
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(17px, 23px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(18px, 24px);
+    }
+  }
+  &_content {
+    font-weight: 400;
+    margin-top: rem(8px);
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(15px, 21px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(15px, 21px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(16px, 22px);
+    }
+  }
+  &_link {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &_icon {
+    color: var(--svg-color);
+    width: rem(21px);
+    height: rem(21px);
+  }
+
+  margin-bottom: 0;
+  @include mq.mq($from: tablet) {
+    margin-bottom: rem(13px, 12px);
+  }
+  @include mq.mq($from: desktop) {
+    margin-bottom: rem(8px, 15px);
+  }
+  @include mq.mq($from: wide) {
+    margin-bottom: rem(18px);
+  }
+}

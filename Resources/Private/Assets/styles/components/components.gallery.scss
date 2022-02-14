@@ -1,0 +1,134 @@
+@use '~sass-mq/mq' as mq;
+
+.c-gallery {
+  $self: &;
+
+  margin: rem(20px) 0;
+
+  @include mq.mq($from: tablet) {
+    margin: rem(5px) 0;
+  }
+  @include mq.mq($from: desktop) {
+    margin: rem(10px) 0;
+  }
+  @include mq.mq($from: wide) {
+    margin: rem(20px) 0;
+  }
+
+  /*  & figure {
+    display: inline-flex;
+  }*/
+
+  &_item {
+    display: none;
+    @include first(1) {
+      display: grid;
+    }
+  }
+
+  &_media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+
+    & img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      transform-origin: center center;
+      transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+
+  &_link {
+    display: inherit;
+    position: relative;
+  }
+
+  &_description {
+  }
+  &_info {
+    position: absolute;
+    bottom: rem(30px);
+    left: rem(40px);
+    right: rem(40px);
+    color: var(--sig-white);
+
+    & h3.c-heading.-h3 {
+      margin-top: rem(30px);
+      margin-bottom: 0;
+    }
+  }
+
+  &_icon {
+    color: var(--sig-white);
+    width: rem(51px);
+    height: rem(51px);
+  }
+
+  &_overlay {
+    & > .pswp {
+      z-index: 999;
+    }
+    & .pswp__top-bar {
+      background: none;
+    }
+    &Background {
+      background: var(--sig-darkgrey);
+      background-blend-mode: multiply;
+      mix-blend-mode: multiply;
+    }
+
+    &Caption,
+    .pswp__caption {
+      background: none;
+      & > .pswp__caption__center {
+        font-weight: 500;
+        padding: rem(15px) 0;
+        color: var(--sig-white);
+
+        @include u-font(14px, 19px, 14px);
+
+        @include mq.mq($from: tablet) {
+          @include u-font(13px, 18px, 12px);
+        }
+        @include mq.mq($from: desktop) {
+          @include u-font(13px, 18px, 15px);
+        }
+        @include mq.mq($from: wide) {
+          @include u-font(14px, 19px);
+        }
+      }
+    }
+    &Left {
+      & svg {
+        color: var(--sig-white);
+        transform: rotateZ(180deg);
+      }
+      &:before {
+        background: none;
+      }
+    }
+    &Right {
+      & svg {
+        color: var(--sig-white);
+      }
+      &:before {
+        background: none;
+      }
+    }
+    &Close {
+      display: grid;
+      justify-content: center;
+      align-content: center;
+
+      color: var(--sig-white);
+      @include u-hocus() {
+        color: var(--sig-white);
+      }
+    }
+  }
+}

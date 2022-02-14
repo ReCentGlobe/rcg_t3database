@@ -1,0 +1,69 @@
+@use '~sass-mq/mq' as mq;
+
+.c-button {
+  width: auto;
+  letter-spacing: 0.04px;
+  color: var(--sig-primary);
+  font-weight: 500;
+  padding: rem(8px) rem(14px);
+  border-radius: 4px;
+  background-color: transparent;
+  border: 2px solid var(--sig-primary);
+  @include u-font(16px, 22px, 14px);
+
+  @include mq.mq($from: tablet) {
+    @include u-font(16px, 22px, 12px);
+  }
+  @include mq.mq($from: desktop) {
+    @include u-font(17px, 23px, 15px);
+  }
+  @include mq.mq($from: wide) {
+    @include u-font(18px, 24px);
+  }
+
+  @include u-hocus {
+    background-color: var(--sig-primary);
+    color: var(--sig-white);
+  }
+
+  &.-large {
+    @include u-font(20px, 24px);
+  }
+  &.-transparent {
+    border-color: transparent;
+    @include u-hocus {
+      background-color: var(--sig-white);
+      border-color: var(--sig-primary);
+      color: var(--sig-primary);
+    }
+  }
+  &.-borderless {
+    border: none;
+    padding: 0;
+
+    @include u-hocus {
+      background-color: inherit;
+      color: inherit;
+      opacity: 0.6;
+    }
+  }
+  &.-white {
+    color: var(--sig-white);
+    border-color: var(--sig-white);
+    @include u-hocus {
+      background-color: var(--sig-white);
+      color: var(--sig-grey);
+    }
+  }
+  &.-small {
+    color: var(--sig-shipcove);
+    border-color: var(--sig-shipcove);
+    @include u-font(14px, 22px);
+    padding: rem(4px) rem(10px);
+
+    @include u-hocus {
+      color: var(--sig-white);
+      background-color: var(--sig-shipcove);
+    }
+  }
+}

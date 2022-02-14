@@ -1,0 +1,280 @@
+@use '~sass-mq/mq' as mq;
+
+.c-splitHeader {
+  $self: &;
+  color: var(--sig-white);
+  --module-color: var(--sig-grey);
+
+  @at-root .is-vsjf #{$self} {
+    --module-color: var(--sig-primary);
+  }
+  @at-root .is-vsjf #{$self}.-news #{$self}_leftElement:before {
+    background: var(--sig-primary);
+  }
+
+  &_wrapper {
+    @include u-grid(4, $padding-s);
+    grid-row-gap: 0;
+
+    @include mq.mq($from: tablet) {
+      @include u-grid(12, $padding-m);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-grid(12, $padding-l);
+      grid-row-gap: 0;
+    }
+  }
+
+  &_content {
+    display: inherit;
+    grid-template-columns: inherit;
+    grid-gap: inherit;
+    grid-column: span 12;
+
+    margin-bottom: rem(40px);
+
+    @include mq.mq($until: tablet) {
+      grid-column: span 4;
+      margin-bottom: 0;
+    }
+  }
+
+  &_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    margin-left: calc(-50vw + 50%);
+
+    & img,
+    & canvas {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    @include mq.mq($until: tablet) {
+      margin-right: calc(-50vw + 50%);
+      margin-left: calc(-50vw + 50%);
+    }
+  }
+
+  &_title {
+    color: var(--sig-white);
+    margin-top: 0;
+    margin-bottom: rem(30px);
+    @include u-font(22px, 27px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(19px, 23px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(26px, 32px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h3, 34px);
+    }
+  }
+  &_category {
+    @extend .c-newsBox_category;
+    color: var(--sig-white);
+    margin-bottom: rem(15px);
+  }
+  &_date {
+    @extend .c-newsBox_date;
+    color: var(--sig-white);
+    opacity: 0.5;
+  }
+
+  &_leftElement,
+  &_rightElement {
+    position: relative;
+
+    &.-end {
+      align-items: flex-end;
+    }
+    &.-start {
+      align-items: flex-start;
+    }
+    &.has-text > picture:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(0deg, #262626, transparent);
+      display: block;
+      mix-blend-mode: multiply;
+      opacity: 0.5;
+    }
+  }
+
+  &_leftWrapper,
+  &_rightWrapper {
+    grid-column: 1 / 5;
+
+    margin-bottom: rem(60px);
+    margin-top: rem(60px);
+    z-index: 10;
+
+    @include mq.mq($until: tablet) {
+      grid-column: 1 / -1;
+      margin-bottom: rem(25px, 14px);
+      margin-top: rem(40px, 14px);
+    }
+  }
+
+  &_leftElement {
+    &:before {
+      content: '';
+      //margin-left: calc(-50vw + 50%);
+      margin-left: calc(-65.55vw + 46.92%);
+      background-color: var(--module-color);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+    & > picture {
+      //margin-left: calc(-50vw + 50%);
+      margin-left: calc(-65.55vw + 46.92%);
+      background-color: var(--sig-grey);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+
+      & img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    @include mq.mq($until: tablet) {
+      margin-bottom: 0;
+
+      & > picture {
+        margin-right: calc(-50vw + 50%);
+        margin-left: calc(-50vw + 50%);
+      }
+    }
+  }
+  &_rightElement {
+    &:before {
+      content: '';
+      //margin-right: calc(-50vw + 50%);
+      margin-right: calc(-46.92vw + 65.55%);
+      background-color: var(--module-color);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+    & > picture {
+      //margin-right: calc(-50vw + 50%);
+      margin-right: calc(-46.92vw + 65.55%);
+      background-color: var(--sig-grey);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+
+      & img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    @include mq.mq($until: tablet) {
+      grid-row: 2;
+
+      & > picture {
+        margin-right: calc(-50vw + 50%);
+        margin-left: calc(-50vw + 50%);
+      }
+    }
+  }
+
+  &.-news {
+    #{$self}_leftElement {
+      position: relative;
+      background-color: red;
+      grid-column: 1 / 10;
+      grid-row: 1;
+      z-index: 1;
+      min-height: rem(500px);
+
+      margin-top: rem(40px);
+      margin-bottom: rem(-40px);
+
+      //display: flex;
+      align-items: flex-end;
+      display: inherit;
+      grid-template-columns: repeat(9, 1fr);
+      grid-gap: inherit;
+
+      &:before {
+        content: '';
+        //margin-left: calc(-50vw + 50%);
+        margin-left: calc(-65.55vw + 46.92%);
+        background-color: var(--sig-grey);
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+      }
+
+      @include mq.mq($until: tablet) {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        margin-bottom: 0;
+        margin-top: 0;
+        min-height: rem(240px, 14px);
+        &:before {
+          margin-right: calc(-50vw + 50%);
+          margin-left: calc(-50vw + 50%);
+        }
+      }
+    }
+    #{$self}_rightElement {
+      position: relative;
+      background-color: var(--sig-grey);
+      grid-row: 1;
+      grid-column: 5 / -1;
+      z-index: 2;
+      min-height: rem(500px);
+
+      display: flex;
+      align-items: flex-end;
+
+      & > picture {
+        //margin-right: calc(-50vw + 50%);
+        margin-right: calc(-46.92vw + 65.55%);
+        background-color: var(--sig-grey);
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        & img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      @include mq.mq($until: tablet) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        min-height: rem(240px, 14px);
+        &:before {
+          margin-right: calc(-50vw + 50%);
+          margin-left: calc(-50vw + 50%);
+        }
+        & > picture {
+          margin-right: calc(-50vw + 50%);
+        }
+      }
+    }
+  }
+}

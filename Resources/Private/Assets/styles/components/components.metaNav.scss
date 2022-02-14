@@ -1,0 +1,50 @@
+@use '~sass-mq/mq' as mq;
+
+.c-metaNav {
+  $self: &;
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 0;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease-in-out, height 0.35s ease-in-out;
+
+  @include mq.mq($from: desktop) {
+    flex-flow: row;
+    margin-bottom: rem(50px);
+  }
+
+  &_list {
+    display: none;
+
+    @include mq.mq($from: desktop) {
+      display: flex;
+    }
+  }
+  &_item {
+    & + & {
+      margin-left: rem(20px);
+    }
+  }
+  &_link {
+    color: var(--sig-shipcove);
+    opacity: 1;
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(16px, 22px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(17px, 23px);
+    }
+
+    @include u-hocus() {
+      opacity: 0.6;
+      color: var(--sig-shipcove);
+    }
+  }
+}

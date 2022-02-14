@@ -1,0 +1,58 @@
+@use '~sass-mq/mq' as mq;
+
+// Remove Upper Padding From Modules
+.o-section:not(.-news) + .o-section .o-module,
+.o-section.-news + .o-section.-topic,
+.o-section + .c-imageHeader,
+.o-section.-news + .o-section.-masonry .o-module.-padding,
+.o-section.-news + .o-section.-topic .o-module.-padding {
+  padding-top: 0;
+}
+
+//Move Special into previous Section
+.o-section + .c-imageHeader,
+.o-section.-fullModule + .o-section.-news {
+  margin-top: rem(-40px);
+}
+
+.o-section.-fullModule + .o-section.-news .c-newsModule_wrapper:before {
+  background: transparent;
+}
+
+//Overlap Modules
+.o-module.-overlap {
+  & .c-newsModule_wrapper:after {
+    background: transparent;
+  }
+  & .c-fullModule_wrapper:after {
+    background: var(--sig-lightgrey);
+  }
+}
+
+//Fix Scrolljank Menu Style
+.c-header.is-fixed + .o-page {
+  padding-top: rem(111px, 12px);
+  @include mq.mq($from: tablet) {
+    padding-top: rem(135px, 14px);
+  }
+  @include mq.mq($from: desktop) {
+    padding-top: rem(160px);
+  }
+}
+
+//Table Hack Abstand
+.o-wysiwyg tr td:first-child {
+  padding-right: rem(20px);
+}
+
+// hCaptcha Error Messages
+.c-form .InputfieldHCaptcha .c-form_errorMessage {
+  bottom: rem(-45px);
+}
+
+// Scale Vector to Size
+.c-fullModule_background .o-vector_element {
+  @include mq.mq($until: tablet) {
+    transform: scale(8);
+  }
+}

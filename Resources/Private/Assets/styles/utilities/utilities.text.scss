@@ -1,0 +1,15 @@
+// ==========================================================================
+// Utilities / Textcolor
+// ==========================================================================
+
+.u-text {
+  &-primary {
+    color: var(--sig-primary);
+  }
+  &-marker {
+    color: var(--sig-vectorcolor);
+  }
+  &-grey {
+    color: var(--sig-grey);
+  }
+}

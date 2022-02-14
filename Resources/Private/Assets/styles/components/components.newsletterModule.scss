@@ -1,0 +1,74 @@
+@use '~sass-mq/mq' as mq;
+
+.c-newsletterModule {
+  $self: &;
+  background-color: var(--sig-lightgrey);
+  color: var(--sig-primary);
+
+  // Test Animation
+  /*  opacity: 0;
+  transition: 0.8s opacity cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
+  &.is-inview {
+    opacity: 1;
+  }*/
+
+  &_wrapper {
+    @include u-grid(3, $padding-s);
+
+    @include mq.mq($from: tablet) {
+      @include u-grid(12, $padding-m);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-grid(12, $padding-l);
+      //grid-template-rows: repeat(3, 1fr);
+      grid-row-gap: 0;
+    }
+  }
+
+  &_content {
+    grid-column: 1 / -1;
+    display: inherit;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: inherit;
+    grid-row-gap: 0;
+
+    padding: rem(50px, 14px) 0;
+  }
+
+  &_title {
+    grid-column: 1 / -1;
+    color: var(--sig-primary);
+    margin-bottom: rem(40px);
+
+    @include u-font(22px, 27px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(19px, 23px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(26px, 32px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h3, 34px);
+    }
+  }
+  & .c-form {
+    grid-column: 1 / -1;
+  }
+
+  @include mq.mq($from: tablet) {
+    #{$self}_content {
+      padding: rem(65px, 12px) 0;
+    }
+  }
+  @include mq.mq($from: desktop) {
+    #{$self}_content {
+      padding: rem(70px, 15px) 0;
+    }
+  }
+  @include mq.mq($from: wide) {
+    #{$self}_content {
+      padding: rem(80px) 0;
+    }
+  }
+}

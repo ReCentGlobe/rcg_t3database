@@ -1,0 +1,270 @@
+@use '~sass-mq/mq' as mq;
+
+.c-nav {
+  $self: &;
+  background: var(--sig-white);
+  color: var(--sig-primary);
+
+  position: absolute;
+  top: var(--sig-header-height);
+  left: 0;
+  right: 0;
+  //border-bottom: 1px solid rgba(var(--sig-primary-decimal), 0.3);
+  z-index: -1;
+
+  @include mq.mq($until: desktop) {
+    top: rem(120px, 12px);
+    border-bottom: 0;
+    z-index: 100;
+    //padding-top: rem(120px, 11px);
+  }
+  @include mq.mq($until: tablet) {
+    top: rem(120px, 14px);
+  }
+
+  &.is-open {
+    display: block;
+    box-shadow: 5px 5px 10px #00000019;
+    @include mq.mq($until: desktop) {
+      box-shadow: none;
+    }
+    @include mq.mq($until: tablet) {
+      & .o-container {
+        padding-left: rem(40px);
+        padding-right: rem(40px);
+      }
+    }
+  }
+
+  &_page {
+    &.is-active {
+      transform: translateX(0);
+    }
+  }
+
+  &_wrapper {
+    @include u-grid(2, $padding-s);
+    grid-row-gap: 0;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight'
+      'content content content content content content content content content content content content';
+
+    /*    &:before {
+      content: '';
+      background: var(--sig-white);
+      height: rem(40px);
+
+      grid-area: indentRight;
+      margin-left: -100vw;
+      grid-column: auto / 4;
+    }*/
+
+    @include mq.mq($from: tablet) {
+      @include u-grid(12, $padding-m);
+      grid-row-gap: 0;
+      grid-template-rows: auto 1fr;
+
+      grid-template-areas:
+        'indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight'
+        'content content content content content content content content content content content content';
+    }
+    @include mq.mq($from: desktop) {
+      @include u-grid(12, $padding-l);
+      grid-row-gap: 0;
+      grid-template-rows: rem(30px) 1fr;
+
+      grid-template-areas:
+        'indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight'
+        'content content content content content content content content highlight highlight highlight highlight';
+    }
+
+    &.has-no-widget {
+      grid-template-areas:
+        'indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight indentRight'
+        'content content content content content content content content content content content content';
+    }
+    &.-search {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  & .c-languageMenu {
+    grid-area: indentRight;
+  }
+
+  &_content {
+    grid-area: content;
+    //grid-column: span 8;
+
+    //padding-top: rem(50px);
+    padding-bottom: rem(110px); // von 150px
+    //height: calc(100vh - var(--sig-header-height));
+    height: rem(630px);
+
+    @include mq.mq($until: desktop) {
+      height: calc(100vh - #{rem(360px, 12px)});
+    }
+    @include mq.mq($from: tablet, $until: desktop) {
+      height: 100vh;
+    }
+    @include mq.mq($until: tablet) {
+      height: 100%;
+    }
+  }
+  &_search {
+    grid-row: 2;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: inherit;
+    grid-column: 3 / 11;
+
+    align-items: flex-end;
+    height: rem(320px);
+    @include mq.mq($until: desktop) {
+      display: none;
+    }
+  }
+  &_highlight {
+    grid-area: highlight;
+    @include mq.mq($until: desktop) {
+      display: none;
+    }
+  }
+
+  &_title {
+    display: block;
+    @include u-font(28px, 34px);
+    font-weight: 500;
+    color: var(--sig-primary);
+    margin-bottom: rem(50px);
+
+    @include mq.mq($until: desktop) {
+      @include u-font(28px, 34px, 12px);
+      margin-bottom: rem(50px, 12px);
+    }
+    @include mq.mq($until: tablet) {
+      @include u-font(28px, 34px, 14px);
+      margin-bottom: rem(50px, 14px);
+    }
+  }
+
+  &_menu {
+    display: flex;
+    flex-flow: column wrap;
+    max-height: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    align-content: flex-start;
+    //margin-top: rem(-40px);
+
+    margin-top: rem(40px);
+    row-gap: rem(40px);
+    column-gap: rem(45px);
+    height: 95%;
+
+    @include mq.mq($until: desktop) {
+      //margin-top: rem(-40px, 12px);
+      margin-top: rem(40px, 12px);
+      row-gap: rem(40px, 12px);
+      column-gap: rem(34px, 12px);
+      overflow: auto;
+    }
+    @include mq.mq($until: tablet) {
+      margin-top: rem(40px, 14px);
+      row-gap: rem(40px, 14px);
+      column-gap: rem(45px, 14px);
+      //margin-top: rem(-40px, 14px);
+    }
+
+    &Item {
+      display: inline-flex;
+      flex-flow: column;
+
+      //margin-top: rem(40px);
+      max-width: rem(242px);
+      //margin-right: rem(45px);
+
+      @include mq.mq($until: desktop) {
+        //margin-top: rem(40px, 12px);
+        max-width: rem(212px, 12px);
+        //margin-right: rem(34px, 12px);
+      }
+      @include mq.mq($until: tablet) {
+        //margin-top: rem(40px, 14px);
+        max-width: 100%;
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+    &Link {
+      @include u-font(20px, 28px);
+      font-weight: 500;
+      letter-spacing: 0.04px;
+      color: var(--sig-primary);
+      transition: opacity 0.2s ease-in-out;
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+
+      @include mq.mq($until: desktop) {
+        @include u-font(20px, 28px, 12px);
+      }
+
+      &.-noClick {
+        @include u-hocus() {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &_submenu {
+    margin-top: rem(20px);
+
+    @include mq.mq($until: desktop) {
+      margin-top: rem(20px, 12px);
+    }
+    @include mq.mq($until: tablet) {
+      margin-top: rem(20px, 14px);
+    }
+
+    &Item + &Item {
+      margin-top: rem(10px);
+
+      @include mq.mq($until: desktop) {
+        margin-top: rem(12px, 12px);
+      }
+      @include mq.mq($until: desktop) {
+        margin-top: rem(12px, 14px);
+      }
+    }
+    &Icon {
+      height: rem(14px);
+      width: rem(14px);
+      margin-left: rem(20px);
+      opacity: 0;
+    }
+    &Link {
+      display: flex;
+      align-items: center;
+      @include u-font(17px, 24px);
+      font-weight: 400;
+      letter-spacing: 0.04px;
+      color: var(--sig-primary);
+      transition: opacity 0.2s ease-in-out;
+
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+
+      @include mq.mq($until: desktop) {
+        @include u-font(17px, 24px, 12px);
+      }
+      @include mq.mq($until: tablet) {
+        @include u-font(17px, 24px, 14px);
+      }
+    }
+  }
+}

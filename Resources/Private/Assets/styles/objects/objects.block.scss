@@ -1,0 +1,8 @@
+.o-block {
+  margin-bottom: rem(80px);
+
+  @include last-child() {
+    margin-bottom: 0;
+    padding-bottom: rem(100px);
+  }
+}

@@ -1,0 +1,110 @@
+/// Accordion Component
+/// @todo improve blabla
+///
+@use '~sass-mq/mq' as mq;
+
+.c-accordion {
+  $self: &;
+
+  &_title {
+    display: block;
+    letter-spacing: 0.04px;
+    color: var(--sig-primary);
+    font-weight: 400;
+    margin-bottom: rem(40px);
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(19px, 24px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h5, 26px);
+    }
+  }
+
+  &_item {
+    @include u-underline(var(--sig-primary), 1px, 0);
+  }
+  &_item + &_item {
+    margin-top: rem(20px);
+  }
+
+  &_header {
+    cursor: pointer;
+    color: var(--sig-primary);
+    font-weight: 400;
+    margin-bottom: rem(20px);
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(22px, 27px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(19px, 23px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(26px, 32px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h3, 34px);
+    }
+  }
+  &_content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    letter-spacing: 0.04px;
+    color: var(--sig-grey);
+    // margin-right: rem(108px);
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(17px, 23px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(18px, 24px);
+    }
+  }
+  &_icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &_item.is-open {
+    @include u-underline(var(--sig-primary), 2px, 0);
+
+    #{ $self }_content {
+      max-height: 1000px;
+    }
+  }
+
+  &.-small {
+    #{$self}_header {
+      @include u-font(16px, 22px, 14px);
+
+      @include mq.mq($from: tablet) {
+        @include u-font(16px, 22px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(19px, 24px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        @include u-font($font-size-h5, 26px);
+      }
+    }
+    #{$self}_icon {
+      width: rem(16px);
+      height: rem(16px);
+    }
+  }
+}

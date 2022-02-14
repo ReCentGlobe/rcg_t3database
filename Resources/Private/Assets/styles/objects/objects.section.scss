@@ -1,0 +1,82 @@
+@use '~sass-mq/mq' as mq;
+
+.o-section {
+  position: relative;
+  will-change: transform, opacity;
+  // Test Animation
+  &.is-inview > .has-scrollfx,
+  &[data-scroll-section-inview] > .has-scrollfx {
+    opacity: 1;
+    transition: 0.4s opacity cubic-bezier(0.215, 0.61, 0.355, 1) 0.3s;
+
+    //animation-name: fadeInDown;
+    //animation-duration: 0.4s;
+    //animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    //animation-fill-mode: forwards;
+  }
+  /*  &.has-scrollfx {
+    opacity: 0;
+    transition: none;
+    &.is-inview {
+      opacity: 1;
+      transition: 0.8s opacity cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
+    }
+  }*/
+
+  &.-padding {
+    padding-top: rem(100px);
+    padding-bottom: rem(100px);
+  }
+  &.-fullModule {
+    z-index: 10;
+  }
+
+  &_content {
+    font-size: rem(22px);
+    line-height: rem(30px);
+    //margin-bottom: rem(60px);
+  }
+  &_title {
+    font-weight: 400;
+    color: var(--sig-primary);
+    max-width: rem(500px);
+    margin-top: 0;
+    margin-bottom: rem(40px);
+
+    @include u-font(22px, 27px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(19px, 23px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(26px, 32px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h3, 34px);
+    }
+
+    &.-margin {
+      margin-bottom: rem(40px, 14px);
+      @include mq.mq($from: tablet) {
+        margin-bottom: rem(65px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        margin-bottom: rem(70px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        margin-bottom: rem(80px, 16px);
+      }
+    }
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -40%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,55 @@
+@use '~sass-mq/mq' as mq;
+
+.c-pagination {
+  $self: &;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  @include u-font(20px, 24px);
+  font-weight: 500;
+  color: var(--sig-primary);
+  margin-bottom: rem(110px);
+
+  @include mq.mq($from: tablet) {
+    flex-flow: row;
+  }
+
+  &_item {
+    margin-right: rem(10px);
+    &.is-last {
+      margin-right: 0;
+    }
+
+    @include mq.mq($until: tablet) {
+      display: none;
+
+      &#{$self}_current {
+        display: block;
+      }
+    }
+  }
+  &_next,
+  &_prev,
+  & .MarkupPagerNavLastNum {
+    @include mq.mq($until: tablet) {
+      display: block;
+    }
+  }
+  &_link {
+    display: block;
+    padding: rem(10px) rem(16px);
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    &.is-current {
+      border: 2px solid var(--sig-primary);
+    }
+    @include u-hocus() {
+      border: 2px solid var(--sig-primary);
+    }
+  }
+  &_separator {
+    display: block;
+    padding: rem(10px) rem(16px);
+  }
+}

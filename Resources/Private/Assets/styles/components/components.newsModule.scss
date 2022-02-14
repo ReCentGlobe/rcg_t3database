@@ -1,0 +1,131 @@
+@use '~sass-mq/mq' as mq;
+
+.c-newsModule {
+  $self: &;
+  position: relative;
+  background: var(--sig-lightgrey);
+  overflow: hidden;
+
+  &_wrapper {
+    @include u-grid(4, $padding-s);
+    grid-row-gap: 0;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      'indentLeft'
+      'content'
+      'indentRight';
+
+    @include mq.mq($from: tablet) {
+      @include u-grid(12, $padding-m);
+      grid-row-gap: 0;
+    }
+    @include mq.mq($from: desktop) {
+      @include u-grid(12, $padding-l);
+      grid-row-gap: 0;
+    }
+
+    &:after,
+    &:before {
+      content: '';
+      background: var(--sig-white);
+      height: rem(25px, 14px);
+      z-index: 50;
+
+      @include mq.mq($from: tablet) {
+        height: rem(30px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        height: rem(35px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        height: rem(42px);
+      }
+    }
+    &:before {
+      grid-area: indentLeft;
+      margin-left: -100vw;
+      grid-column: auto/span 3;
+      @include mq.mq($from: tablet) {
+        grid-column: auto/span 3;
+      }
+    }
+    &:after {
+      grid-area: indentRight;
+      margin-right: -100vw;
+      grid-column: 2 / auto;
+      @include mq.mq($from: tablet) {
+        grid-column: 7 / auto;
+      }
+    }
+  }
+  &_content {
+    grid-area: content;
+    grid-column: 1 / -1;
+    display: inherit;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: inherit;
+    grid-row-gap: rem(40px, 14px);
+    z-index: 50;
+    padding: rem(60px, 14px) 0;
+
+    @include mq.mq($from: tablet) {
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+
+  &_title {
+    color: var(--sig-primary);
+    margin-top: rem(20px, 14px);
+    margin-bottom: rem(30px);
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+      margin-top: 0;
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(19px, 24px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h5, 26px);
+    }
+  }
+  &_cta {
+    position: relative;
+    align-self: flex-end;
+    margin-top: rem(60px, 14px);
+
+    @include mq.mq($from: tablet) {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-top: rem(60px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      margin-top: rem(60px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      margin-top: rem(60px);
+    }
+  }
+
+  @include mq.mq($from: tablet) {
+    #{$self}_content {
+      padding: rem(80px, 12px) 0;
+      grid-row-gap: rem(45px, 12px);
+    }
+  }
+  @include mq.mq($from: desktop) {
+    #{$self}_content {
+      padding: rem(90px, 15px) 0;
+      grid-row-gap: rem(50px, 15px);
+    }
+  }
+  @include mq.mq($from: wide) {
+    #{$self}_content {
+      padding: rem(110px) 0;
+      grid-row-gap: rem(60px);
+    }
+  }
+}

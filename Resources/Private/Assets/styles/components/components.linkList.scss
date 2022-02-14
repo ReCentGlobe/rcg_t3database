@@ -1,0 +1,105 @@
+@use '~sass-mq/mq' as mq;
+
+.c-linkList {
+  $self: &;
+  display: block;
+
+  &.-primary {
+    --text-color: var(--sig-primary);
+  }
+  &.-white {
+    --text-color: var(--sig-white);
+  }
+
+  &_item {
+    & + & {
+      margin-top: rem(8px);
+    }
+  }
+  &_link {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-weight: 500;
+    color: var(--text-color);
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    @include u-font(18px, 24px, 14px);
+    @include mq.mq($from: tablet) {
+      @include u-font(18px, 24px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(23px, 30px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h4, 30px);
+    }
+
+    & span {
+      max-width: calc(100% - #{rem(60px)});
+    }
+    #{$self}_icon {
+      height: rem(23px);
+      width: rem(23px);
+      transform: rotateZ(180deg);
+      margin-top: 5px;
+    }
+    @include u-hocus() {
+      color: var(--text-color);
+      opacity: 0.6;
+
+      & #{$self}_icon {
+        animation: linkList 0.3s ease-in-out;
+        transform: rotateZ(0deg);
+      }
+    }
+
+    @include mq.mq($until: desktop) {
+      @include u-font(16px, 22px, 12px);
+      & span {
+        max-width: calc(100% - #{rem(40px, 12px)});
+      }
+      #{$self}_icon {
+        height: rem(14px, 12px);
+        width: rem(14px, 12px);
+      }
+    }
+  }
+
+  &.-large {
+    #{$self}_link {
+      @include u-font(22px, 27px, 14px);
+
+      @include mq.mq($from: tablet) {
+        @include u-font(19px, 23px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(26px, 32px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        @include u-font($font-size-h3, 34px);
+      }
+    }
+    #{$self}_icon {
+      height: rem(30px);
+      width: rem(30px);
+    }
+  }
+}
+
+@keyframes linkList {
+  0% {
+    transform: rotateZ(180deg);
+  }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    transform: rotateZ(180deg);
+  }
+  51% {
+    transform: rotateZ(0deg);
+  }
+}

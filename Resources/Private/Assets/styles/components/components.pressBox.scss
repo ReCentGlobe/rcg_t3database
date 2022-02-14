@@ -1,0 +1,42 @@
+.c-pressBox {
+  $self: &;
+  @extend .c-newsBox;
+
+  &_content {
+    @extend .c-newsBox_content;
+  }
+  &_date {
+    @extend .c-newsBox_date;
+    margin-bottom: rem(8px);
+  }
+  &_title {
+    @extend .c-newsBox_title;
+    color: var(--sig-primary);
+    margin-bottom: rem(8px);
+  }
+  &_description {
+    //margin-bottom: rem(30px);
+  }
+  &.-vertical {
+    grid-template-rows: 1fr;
+    #{ $self }_title {
+      margin-bottom: rem(8px);
+    }
+    #{ $self }_date {
+      margin-bottom: rem(8px);
+    }
+  }
+
+  @include u-hocus() {
+    #{ $self }_title {
+      color: var(--sig-primary);
+    }
+    #{ $self }_content {
+      @include u-underline(var(--sig-primary), 2px, 0);
+
+      &:after {
+        transition: 0.3s height $easing;
+      }
+    }
+  }
+}

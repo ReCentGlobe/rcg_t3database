@@ -1,0 +1,30 @@
+.c-bookEntry {
+  $self: &;
+
+  &_detail {
+    display: flex;
+    flex-flow: column;
+    margin-top: rem(30px);
+    margin-bottom: rem(30px);
+  }
+  &_detailEntry {
+    display: flex;
+
+    & + & {
+      margin-top: rem(10px);
+    }
+  }
+  &_detailTitle {
+    color: var(--sig-primary);
+    font-weight: 600;
+    flex-basis: rem(144px);
+    min-width: rem(144px);
+    margin-right: rem(30px);
+  }
+  &_detailsContent {
+  }
+
+  &_link {
+    margin-bottom: rem(15px);
+  }
+}

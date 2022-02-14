@@ -1,0 +1,260 @@
+@use '~sass-mq/mq' as mq;
+
+.c-eventBox {
+  $self: &;
+  display: inherit;
+  grid-template-columns: inherit;
+  grid-gap: inherit;
+
+  &.-inverted {
+    & #{ $self }_content {
+      grid-column: 2 / span 5;
+    }
+    & #{ $self }_media {
+      grid-column: span 5;
+    }
+  }
+
+  &_content {
+    grid-column: span 5;
+    @include u-underline(var(--sig-primary), 1px, 0);
+
+    &:after {
+      transition: 0.6s height $easing;
+    }
+  }
+  &_media {
+    position: relative;
+    grid-column: 2 / span 5;
+    overflow: hidden;
+    aspect-ratio: 1.76 / 1;
+
+    & img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      transform-origin: center center;
+      transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+
+  &_category {
+    font-weight: 400;
+    color: var(--sig-primary);
+    margin-bottom: rem(10px);
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(19px, 24px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h5, 26px);
+    }
+  }
+  &_title {
+    font-weight: 400;
+    color: var(--sig-grey);
+    margin-bottom: rem(10px);
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(18px, 24px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(18px, 24px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(23px, 30px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h4, 30px);
+    }
+  }
+  &_date {
+    display: block;
+    font-weight: 500;
+    color: var(--sig-darkgrey);
+    opacity: 1;
+    max-width: calc(100% - #{rem(66px)});
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(15px, 21px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(15px, 21px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(16px, 22px);
+    }
+  }
+  &_summary {
+    margin-top: rem(10px);
+  }
+
+  &_icon {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    color: var(--sig-primary);
+    width: rem(21px);
+    height: rem(21px);
+    transform: rotateZ(180deg);
+    transition: fill 0.5s ease, transform 0.5s ease;
+  }
+
+  &.-large {
+    /*    #{ $self }_media {
+      grid-column: 2 / span 5;
+    }
+    #{ $self }_category {
+      font-size: rem(20px);
+      line-height: rem(26px);
+      margin-bottom: rem(10px);
+    }*/
+  }
+  &.-small {
+    grid-template-columns: repeat(7, 1fr);
+    grid-column: span 7;
+
+    #{ $self }_content {
+      grid-column: span 4;
+    }
+    #{ $self }_media {
+      grid-column: 1 / 4;
+    }
+
+    #{ $self }_category {
+      margin-bottom: rem(10px);
+
+      @include u-font(16px, 22px, 14px);
+
+      @include mq.mq($from: tablet) {
+        @include u-font(16px, 22px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(17px, 23px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        @include u-font(18px, 24px);
+      }
+    }
+    #{ $self }_title {
+      margin-bottom: rem(8px);
+
+      @include u-font(16px, 22px, 14px);
+
+      @include mq.mq($from: tablet) {
+        @include u-font(16px, 22px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(17px, 23px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        @include u-font(18px, 24px);
+      }
+    }
+    #{ $self }_date {
+      margin-bottom: rem(16px);
+    }
+  }
+  &.-vertical {
+    grid-column: span 4;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+
+    #{ $self }_content {
+      grid-column: span 4;
+      padding-bottom: rem(30px, 14px);
+    }
+    #{ $self }_media {
+      grid-column: span 4;
+    }
+
+    #{ $self }_category {
+      margin-bottom: rem(10px);
+
+      @include u-font(16px, 22px, 14px);
+
+      @include mq.mq($from: tablet) {
+        @include u-font(16px, 22px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(17px, 23px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        @include u-font(18px, 24px);
+      }
+    }
+    #{ $self }_title {
+      margin-bottom: rem(15px);
+      @include u-font(18px, 24px, 14px);
+
+      @include mq.mq($from: tablet) {
+        @include u-font(18px, 24px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(23px, 30px, 15px);
+      }
+      @include mq.mq($from: wide) {
+        @include u-font($font-size-h4, 30px);
+      }
+    }
+    #{ $self }_date {
+      //margin-bottom: rem(16px);
+      color: var(--sig-darkgrey);
+      opacity: 0.45;
+    }
+
+    margin-bottom: 0;
+    @include mq.mq($from: tablet) {
+      margin-bottom: rem(13px, 12px);
+      #{ $self }_content {
+        padding-bottom: rem(32px, 12px);
+      }
+    }
+    @include mq.mq($from: desktop) {
+      margin-bottom: rem(8px, 15px);
+      #{ $self }_content {
+        padding-bottom: rem(35px, 15px);
+      }
+    }
+    @include mq.mq($from: wide) {
+      margin-bottom: rem(18px);
+      #{ $self }_content {
+        padding-bottom: rem(40px);
+      }
+    }
+  }
+
+  @include u-hocus() {
+    #{ $self }_title {
+      color: var(--sig-primary);
+    }
+    #{ $self }_content {
+      @include u-underline(var(--sig-primary), 2px, 0);
+
+      &:after {
+        transition: 0.3s height $easing;
+      }
+    }
+    #{ $self }_media img {
+      transform: scale(1.15);
+      transition-delay: 0s;
+      transition-duration: 0.3s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    #{$self}_icon {
+      transform: rotateZ(0deg);
+    }
+  }
+}

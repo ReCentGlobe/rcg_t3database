@@ -1,0 +1,42 @@
+@use '~sass-mq/mq' as mq;
+
+.c-social {
+  $self: &;
+  display: flex;
+  //margin-top: rem(40px);
+
+  @include mq.mq($until: tablet) {
+    display: none;
+  }
+
+  &.-body {
+    grid-column: -1 / 1;
+    justify-content: flex-end;
+  }
+
+  &.-primary {
+  }
+  &.-white {
+    & #{$self}_item img {
+      filter: saturate(0) brightness(100);
+    }
+  }
+
+  & &_heading {
+    margin-right: rem(20px);
+  }
+
+  &_item {
+    display: flex;
+    & img {
+      max-width: rem(26px);
+    }
+    & + & {
+      margin-left: rem(15px);
+    }
+
+    @include u-hocus() {
+      opacity: 0.6;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+// ==========================================================================
+// Base / Fonts
+// ==========================================================================
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-Light-WebS', ('woff2')) {
+  font-style: normal;
+  font-weight: 300;
+  font-display: optional;
+}
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-LightItalic-WebS', ('woff2')) {
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-Regular-WebS', ('woff2')) {
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-RegularItalic-WebS', ('woff2')) {
+  font-style: italic;
+  font-weight: 400;
+  font-display: optional;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-Medium-WebS', ('woff2')) {
+  font-style: normal;
+  font-weight: 500;
+  font-display: optional;
+}
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-MediumItalic-WebS', ('woff2')) {
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-Semibold-WebS', ('woff2')) {
+  font-style: normal;
+  font-weight: 600;
+  font-display: optional;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-SemiboldItalic-WebS', ('woff2')) {
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-Bold-WebS', ('woff2')) {
+  font-style: normal;
+  font-weight: 700;
+  font-display: optional;
+}
+
+@include font-face('EuclidCircular', 'fonts/EuclidCircularA-BoldItalic-WebS', ('woff2')) {
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+// @include font-face(
+//     $font-foobar,
+//     "fonts/Foobar/Regular"
+// ) {
+//     font-style:  normal;
+//     font-weight: 400;
+// }
+
+// @include font-face(
+//     $font-foobar,
+//     "fonts/Foobar/Medium"
+// ) {
+//     font-style:  normal;
+//     font-weight: 500;
+// }
+
+// @include font-face(
+//     $font-foobar,
+//     "fonts/Foobar/Semibold"
+// ) {
+//     font-style:  normal;
+//     font-weight: 600;
+// }
+
+// @include font-face(
+//     $font-bazqux,
+//     "fonts/Bazqux/Regular",
+//     ("eot", "woff2", "woff", "ttf")
+// ) {
+//     font-style:  normal;
+//     font-weight: 400;
+// }

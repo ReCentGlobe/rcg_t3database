@@ -1,0 +1,59 @@
+@use '~sass-mq/mq' as mq;
+
+.c-languageMenu {
+  $self: &;
+  //grid-area: top;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+  margin-top: rem(20px);
+
+  &_item {
+    & + & {
+      margin-left: rem(20px);
+    }
+  }
+
+  &_link {
+    @include u-font(14px, 19px, 12px);
+    letter-spacing: 0.04px;
+    color: var(--sig-primary);
+    opacity: 1;
+    @include u-hocus() {
+      opacity: 0.6;
+    }
+
+    @include mq.mq($from: desktop) {
+      @include u-font(18px, 24px);
+    }
+  }
+
+  &.-meta {
+    margin-top: 0;
+    text-transform: uppercase;
+    margin-bottom: rem(40px);
+
+    @include mq.mq($from: desktop) {
+      margin-bottom: 0;
+      margin-right: rem(40px);
+    }
+
+    #{$self}_item + #{$self}_item {
+      margin-left: rem(10px);
+    }
+    #{$self}_link {
+      @include u-font(14px, 19px, 14px);
+      opacity: 1;
+      color: var(--sig-shipcove);
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+      @include mq.mq($from: tablet) {
+        @include u-font(14px, 19px, 12px);
+      }
+      @include mq.mq($from: desktop) {
+        @include u-font(14px, 19px);
+      }
+    }
+  }
+}

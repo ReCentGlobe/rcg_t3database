@@ -1,0 +1,233 @@
+@use '~sass-mq/mq' as mq;
+
+.c-entryList {
+  $self: &;
+  display: flex;
+  flex-flow: column;
+  --svg-color: var(--sig-primary);
+  --title-color: var(--sig-primary);
+  --text-color: var(--sig-grey);
+
+  &_item {
+    @include u-underline(var(--sig-primary), 1px, 0);
+    margin-top: rem(40px);
+
+    @include u-hocus() {
+      --text-color: var(--sig-primary);
+      @include u-underline(var(--sig-primary), 2px, 0);
+    }
+    @include first(1) {
+      //margin-top: rem(50px);
+      margin-top: 0;
+    }
+
+    /*    &.-link {
+      & #{$self}_mediaIcon {
+        position: absolute;
+        display: block;
+        top: 0;
+        right: 0;
+        width: rem(15px);
+        height: rem(15px);
+        transform: rotateZ(180deg);
+        transition: fill 0.5s ease, transform 0.5s ease;
+      }
+      @include u-hocus() {
+        #{$self}_mediaIcon {
+          transform: rotateZ(0deg);
+        }
+      }
+    }*/
+    &.-link {
+      & #{$self}_mediaIcon {
+        width: rem(21px);
+        height: rem(21px);
+        transform: rotate(0);
+        transition: transform 0.35s ease;
+      }
+      @include u-hocus() {
+        #{$self}_mediaIcon {
+          transform: rotateZ(90deg);
+        }
+      }
+    }
+    &.-list {
+      margin-top: rem(20px);
+      & #{$self}_title {
+        margin-bottom: rem(20px);
+      }
+      @include u-hocus() {
+        #{$self}_mediaIcon {
+          transform: rotateZ(0deg);
+        }
+      }
+    }
+    &.-extLink,
+    &.-link,
+    &.-file {
+      display: flex;
+      #{$self}_wrapper {
+        flex-basis: calc(100% - (#{rem(66px)} * 2));
+        margin-left: rem(40px);
+      }
+    }
+    &.-search {
+      @include u-underline(var(--sig-primary), 0, 0);
+      #{$self}_content {
+        margin-bottom: 0;
+      }
+    }
+    &.-text {
+      @include u-hocus() {
+        --text-color: var(--sig-grey);
+        @include u-underline(var(--sig-primary), 1px, 0);
+      }
+    }
+    &.-image {
+      display: flex;
+      gap: rem(40px);
+
+      @include mq.mq($until: tablet) {
+        flex-flow: column;
+      }
+
+      #{$self}_image {
+        flex-basis: 15%;
+        margin-bottom: rem(40px);
+        height: 100%;
+
+        @include mq.mq($until: tablet) {
+          width: 50%;
+          margin-bottom: 0;
+        }
+        @include mq.mq($until: desktop) {
+          flex-basis: 25%;
+        }
+      }
+      #{$self}_wrapper {
+        flex: 1;
+      }
+    }
+  }
+  &_wrapper {
+    margin-right: 0;
+    @include mq.mq($from: tablet) {
+      margin-right: rem(66px);
+    }
+  }
+
+  &_title {
+    display: block;
+    margin-bottom: rem(15px);
+    color: var(--title-color);
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(19px, 24px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h5, 26px);
+    }
+
+    @include u-hocus() {
+      color: var(--title-color);
+    }
+  }
+  &_category {
+    font-style: italic;
+    color: var(--sig-darkgrey);
+    opacity: 0.5;
+    margin-bottom: rem(10px);
+
+    @include u-font(14px, 19px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(13px, 18px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(13px, 18px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(14px, 19px);
+    }
+  }
+
+  &_content {
+    margin-bottom: rem(40px);
+    color: var(--text-color);
+  }
+
+  &_mediaIcon {
+    color: var(--svg-color);
+    width: rem(26px);
+    height: rem(26px);
+  }
+
+  &_header {
+    margin-top: 0;
+    margin-bottom: rem(60px);
+    & > *,
+    & > .c-heading {
+      margin: 0;
+    }
+  }
+  &_readmore {
+    margin-top: rem(50px);
+    text-align: left;
+
+    & > a {
+      color: var(--sig-primary);
+      font-weight: 500;
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &.-text {
+  }
+  &.-search {
+    & + & {
+      margin-top: rem(110px);
+    }
+    & + .c-pagination {
+      margin-top: rem(140px);
+    }
+    & + .c-form.-searchBox {
+      margin-top: rem(140px);
+    }
+
+    & #{$self}_header + #{$self}_item {
+      margin-top: 0;
+    }
+  }
+  &.-file {
+    display: block;
+
+    #{$self}_wrapper {
+      margin-left: rem(40px);
+    }
+    #{$self}_link {
+      display: flex;
+      position: relative;
+    }
+  }
+
+  &.-gray {
+    position: relative;
+    margin-top: rem(60px);
+    margin-bottom: rem(60px);
+
+    &:before {
+      content: '';
+      position: absolute;
+      inset: rem(-60px);
+      background: var(--sig-lightgrey);
+      z-index: -1;
+    }
+  }
+}

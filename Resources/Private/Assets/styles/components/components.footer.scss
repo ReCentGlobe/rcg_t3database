@@ -1,0 +1,252 @@
+@use '~sass-mq/mq' as mq;
+
+.c-footer {
+  $self: &;
+  background-color: var(--sig-grey);
+  color: rgba(var(--sig-white-decimal), 0.6);
+  padding-top: rem(50px);
+  padding-bottom: rem($unit);
+  z-index: 10;
+  overflow: hidden;
+
+  @include mq.mq($until: tablet) {
+    padding-top: rem(40px, 14px);
+    padding-bottom: rem(40px, 14px);
+  }
+  @include mq.mq($until: desktop) {
+    padding-top: rem(50px, 12px);
+    padding-bottom: rem(40px, 12px);
+  }
+
+  /*  // Test Animation
+  opacity: 0;
+  transition: 0.8s opacity cubic-bezier(0.215, 0.61, 0.355, 1) 0.9s;
+  &.is-inview {
+    opacity: 1;
+  }*/
+
+  &_wrapper {
+    @include u-grid(4, $padding-s);
+
+    @include mq.mq($from: tablet) {
+      @include u-grid(12, $padding-m);
+      grid-row-gap: 0;
+    }
+    @include mq.mq($from: desktop) {
+      @include u-grid(12, $padding-l);
+      //grid-template-rows: repeat(3, 1fr);
+      grid-row-gap: 0;
+    }
+  }
+
+  &_logoWrapper {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+  &_nav {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: 9 / 13;
+    grid-row: 1;
+    margin-top: rem(10px);
+
+    #{$self}_navLink {
+      color: var(--sig-white);
+      opacity: 1;
+      white-space: nowrap;
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+    }
+
+    @include mq.mq($from: desktop) {
+      #{$self}_navLink {
+        @include u-font(18px, 24px);
+      }
+      #{$self}_navItem + #{$self}_navItem {
+        margin-left: rem(20px);
+      }
+    }
+    @include mq.mq($until: tablet) {
+      flex-flow: column;
+      grid-column: 1 / -1;
+      grid-row: 2;
+      margin-top: rem(40px, 14px);
+      #{$self}_navLink {
+        @include u-font(18px, 24px, 14px);
+        opacity: 0.7;
+      }
+      #{$self}_navItem + #{$self}_navItem {
+        margin-top: rem(8px, 14px);
+      }
+    }
+    @include mq.mq($from: tablet, $until: desktop) {
+      margin-top: 0;
+      #{$self}_navLink {
+        @include u-font(18px, 24px, 12px);
+        opacity: 0.7;
+      }
+      #{$self}_navItem + #{$self}_navItem {
+        margin-left: rem(20px, 12px);
+      }
+    }
+  }
+
+  &_logo > svg {
+    max-height: rem(75px);
+    max-width: rem(210px);
+    @include mq.mq($until: tablet) {
+      max-height: rem(56px, 14px);
+      max-width: rem(156px, 14px);
+    }
+    @include mq.mq($until: desktop) {
+      max-height: rem(64px, 12px);
+      max-width: rem(180px, 12px);
+    }
+  }
+
+  &_contentLeft {
+    grid-column: 1 / 5;
+    grid-row: 2;
+    align-self: flex-end;
+
+    margin-top: rem(40px);
+
+    @include mq.mq($until: tablet) {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      margin-top: rem(20px, 14px);
+    }
+    @include mq.mq($until: desktop) {
+      grid-column: 1/7;
+    }
+  }
+  &_title {
+    @include u-font(28px, 34px);
+    font-weight: 400;
+    margin-right: rem(-42px);
+    & span {
+      font-weight: 600;
+    }
+
+    @include mq.mq($until: tablet) {
+      @include u-font(20px, 26px, 14px);
+    }
+    @include mq.mq($until: desktop) {
+      @include u-font(24px, 30px, 12px);
+    }
+  }
+  &_project {
+    margin-bottom: rem(20px);
+
+    @include u-font(14px, 19px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(13px, 18px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(13px, 18px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(14px, 19px);
+    }
+  }
+
+  &_contentRight {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: inherit;
+
+    grid-column: 7 / 13;
+    grid-row: 2;
+    align-self: flex-end;
+
+    margin-top: rem(40px);
+
+    @include mq.mq($until: tablet) {
+      display: none;
+    }
+    @include mq.mq($until: desktop) {
+      margin-top: rem(90px, 12px);
+    }
+  }
+  &_social {
+    display: flex;
+    flex-flow: column;
+
+    @include mq.mq($until: desktop) {
+      &#{$self}_content {
+        grid-column: span 4 / 7;
+      }
+    }
+  }
+  &_socialItem {
+    display: flex;
+    align-items: center;
+    color: rgba(var(--sig-white-decimal), 0.6);
+    & span {
+      @include u-font(16px, 22px);
+      margin-left: rem(20px);
+
+      @include mq.mq($until: desktop) {
+        @include u-font(16px, 22px, 12px);
+        margin-left: rem(20px, 12px);
+      }
+    }
+    & img {
+      max-width: rem(26px);
+      filter: saturate(0) brightness(100);
+      opacity: 0.6;
+    }
+    & + & {
+      margin-top: rem(15px);
+
+      @include mq.mq($until: desktop) {
+        margin-top: rem(15px, 12px);
+      }
+    }
+
+    @include u-hocus() {
+      opacity: 0.6;
+    }
+  }
+  &_content {
+    grid-column: span 2;
+    & p {
+      margin-top: rem(10px);
+    }
+
+    @include mq.mq($until: desktop) {
+      grid-column: span 3;
+      &:not(.c-footer_social) {
+        display: none;
+      }
+    }
+  }
+  &_contentTitle {
+    @include u-font(20px, 26px);
+    margin-bottom: rem(25px);
+
+    @include mq.mq($until: desktop) {
+      @include u-font(20px, 26px, 12px);
+      margin-bottom: rem(25px, 12px);
+    }
+  }
+
+  &_copyright {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    @include u-font(14px, 19px);
+    margin-top: rem(30px);
+
+    @include mq.mq($until: tablet) {
+      grid-row: 4;
+      @include u-font(14px, 19px, 14px);
+      margin-top: rem(10px, 14px);
+    }
+    @include mq.mq($until: desktop) {
+      @include u-font(14px, 19px, 12px);
+      margin-top: rem(30px, 12px);
+    }
+  }
+}

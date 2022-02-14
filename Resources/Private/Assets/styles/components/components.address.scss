@@ -1,0 +1,142 @@
+@use '~sass-mq/mq' as mq;
+
+.c-address {
+  $self: &;
+  --svg-color: var(--sig-primary);
+  --title-color: var(--sig-primary);
+  --text-color: var(--sig-grey);
+  @include u-underline(var(--text-color), 1px, 0);
+
+  &_inner {
+    margin-right: rem(66px);
+  }
+
+  &_category {
+    font-weight: 400;
+    color: var(--title-color);
+    margin-bottom: rem(10px);
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(16px, 22px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(19px, 24px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font($font-size-h5, 26px);
+    }
+  }
+
+  &_title {
+    display: block;
+    @include u-font(20px, 24px);
+    font-weight: 400;
+    color: var(--title-color);
+    margin-bottom: rem(15px);
+    max-width: calc(100% - #{rem(66px)});
+  }
+
+  &_content {
+    letter-spacing: 0.04px;
+    color: var(--text-color);
+    margin-bottom: rem(20px);
+    max-width: calc(100%);
+
+    @include u-font(16px, 22px, 14px);
+
+    @include mq.mq($from: tablet) {
+      @include u-font(15px, 21px, 12px);
+    }
+    @include mq.mq($from: desktop) {
+      @include u-font(15px, 21px, 15px);
+    }
+    @include mq.mq($from: wide) {
+      @include u-font(16px, 22px);
+    }
+
+    & h2.c-heading.-h2,
+    h2 {
+      margin-bottom: rem(20px);
+      margin-top: 0;
+    }
+    & h3.c-heading.-h3,
+    h3 {
+      margin-bottom: rem(20px);
+      margin-top: 0;
+    }
+    & h4.c-heading.-h4,
+    h4 {
+      margin-bottom: rem(15px);
+      margin-top: 0;
+    }
+    & h5.c-heading.-h5,
+    h5 {
+      margin-bottom: rem(15px);
+      margin-top: 0;
+    }
+    & p {
+      margin-bottom: rem(15px);
+      margin-top: 0;
+    }
+    & * {
+      @include last(1) {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &_meta {
+    color: var(--text-color);
+    padding-bottom: rem(20px, 14px);
+    //max-width: calc(100% - #{rem(66px)});
+
+    display: grid;
+    grid-template-rows: auto;
+  }
+  &_metaRow {
+    display: flex;
+    flex-flow: column;
+    & span {
+      font-weight: 500;
+      color: var(--sig-primary);
+      flex-basis: rem(78px);
+    }
+    & a {
+      color: var(--sig-primary);
+      font-weight: 500;
+      @include u-hocus() {
+        opacity: 0.6;
+      }
+    }
+    &.-marginSmall {
+      margin-bottom: rem(10px);
+    }
+    &.-marginLarge {
+      margin-bottom: rem(30px);
+    }
+    &.-marginTopLarge {
+      margin-top: rem(20px);
+    }
+  }
+
+  @include mq.mq($from: tablet) {
+    //margin-bottom: rem(13px, 12px);
+    #{ $self }_meta {
+      padding-bottom: rem(20px, 12px);
+    }
+  }
+  @include mq.mq($from: desktop) {
+    //margin-bottom: rem(8px, 15px);
+    #{ $self }_meta {
+      padding-bottom: rem(20px, 15px);
+    }
+  }
+  @include mq.mq($from: wide) {
+    //margin-bottom: rem(18px);
+    #{ $self }_meta {
+      padding-bottom: rem(25px);
+      max-width: calc(100% - #{rem(66px)});
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use '~sass-mq/mq' as mq;
+
+.o-page {
+  overflow-x: hidden;
+  min-height: 100vh;
+  //position: relative;
+  //z-index: 1;
+
+  @include mq.mq($from: tablet) {
+  }
+}
+
+[data-debug='true'] {
+  & .dg.ac {
+    z-index: 100;
+  }
+}

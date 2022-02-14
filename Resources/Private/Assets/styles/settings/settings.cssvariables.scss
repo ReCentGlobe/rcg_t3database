@@ -1,0 +1,60 @@
+// CSS Variables
+// =============================================================================
+@use '~sass-mq/mq' as mq;
+
+:root {
+  --sig-white: #ffffff;
+  --sig-white-decimal: 255, 255, 255;
+  --sig-black: #000000;
+  --sig-grey: #262626;
+  --sig-lightgrey: #f2f2f2;
+  --sig-darkgrey: #333333;
+  --sig-primary: #002982;
+  --sig-primary-decimal: 0, 41, 130;
+
+  --vsjf-primary: #004f93;
+  --vsjf-primary-decimal: 0, 79, 147;
+
+  --sig-resolutionblue: #002982;
+  --sig-shipcove: #667fb4;
+  --sig-malibu: #70c7fd;
+  --sig-pastelgreen: #83e796;
+  --sig-coralred: #ff454f;
+  --sig-mysin: #ffbd1f;
+
+  --sig-vectorcolor: '';
+  --sig-vectorrotation: '';
+  --sig-vectorscale: '';
+
+  --sig-unit-xxs: 10px;
+  --sig-unit-xs: 15px;
+  --sig-unit-s: 30px;
+  --sig-unit: 40px;
+  --sig-unit-m: 60px;
+  --sig-unit-l: 80px;
+  --sig-unit-xl: 110px;
+  --sig-unit-xxl: 160px;
+
+  --sig-header-height: var(--sig-header-large);
+
+  --sig-header-small: 95px;
+  //--sig-header-large: 160px;
+  @include mq.mq($from: tablet) {
+    --sig-header-large: 135px;
+  }
+  @include mq.mq($from: desktop) {
+    --sig-header-large: 160px;
+    --sig-header-small: 95px;
+  }
+  //--sig-page-margin: 42px;
+
+  @include mq.mq($from: mobile) {
+    --sig-page-margin: clamp(21px, 2vw, 31px);
+  }
+  @include mq.mq($from: tablet) {
+    --sig-page-margin: clamp(34px, 2vw, 42px);
+  }
+  @include mq.mq($from: desktop) {
+    --sig-page-margin: 42px;
+  }
+}

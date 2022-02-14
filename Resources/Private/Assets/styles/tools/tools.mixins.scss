@@ -1,0 +1,393 @@
+// ==========================================================================
+// Tools / Mixins
+// ==========================================================================
+
+//
+// Set the color of the highlight that appears over a link while it's being tapped.
+//
+// By default, the highlight is suppressed.
+//
+// @param  {Color} $value [rgba(0, 0, 0, 0)] - The value of the highlight.
+// @output `-webkit-tap-highlight-color`
+//
+@use "sass:math";
+@use "sass:list";
+@use '~sass-mq/mq' as mq;
+
+@mixin tap-highlight-color($value: rgba(0, 0, 0, 0)) {
+  -webkit-tap-highlight-color: $value;
+}
+
+//
+// Set whether or not touch devices use momentum-based scrolling for the given element.
+//
+// By default, applies momentum-based scrolling for the current element.
+//
+// @param  {String} $value [rgba(0, 0, 0, 0)] - The type of scrolling.
+// @output `-webkit-overflow-scrolling`
+//
+@mixin overflow-scrolling($value: touch) {
+  -webkit-overflow-scrolling: $value;
+}
+
+//
+// Micro clearfix rules for containing floats.
+//
+// @link   http://www.cssmojo.com/the-very-latest-clearfix-reloaded/
+// @param  {List} $supports The type of clearfix to generate.
+// @output Injects `:::after` pseudo-element.
+//
+@mixin u-clearfix($supports...) {
+  &::after {
+    display: if(list-contains($supports, table), table, block);
+    clear: both;
+    content: if(list-contains($supports, opera), ' ', '');
+  }
+}
+
+//
+// Generate a font-size and baseline-compatible line-height.
+//
+// @link   https://github.com/inuitcss/inuitcss/c14029c/tools/_tools.font-size.scss
+// @param  {Number}  $font-size           - The size of the font.
+// @param  {Number}  $line-height [auto]  - The line box height.
+// @param  {Boolean} $important   [false] - Whether the font-size is important.
+// @output `font-size`, `line-height`
+//
+@mixin font-size($font-size, $font-line-height: auto, $important: false) {
+  $important: important($important);
+  font-size: rem($font-size) $important;
+
+  @if ($font-line-height == 'auto') {
+    line-height: ceil(math.div($font-size, $line-height)) *
+      math.div($line-height, $font-size)
+      $important;
+  } @else {
+    @if (
+      type-of($font-line-height) ==
+        number or
+        $font-line-height ==
+        'inherit' or
+        $font-line-height ==
+        'normal'
+    ) {
+      line-height: $font-line-height $important;
+    } @else if ($font-line-height != 'none' and $font-line-height != false) {
+      @error "D’oh! `#{$font-line-height}` is not a valid value for `$line-height`.";
+    }
+  }
+}
+
+//
+// Vertically-center the direct descendants of the current element.
+//
+// Centering is achieved by displaying children as inline-blocks. Any whitespace
+// between elements is nullified by redefining the font size of the container
+// and its children.
+//
+// @output `font-size`, `display`, `vertical-align`
+//
+@mixin o-vertical-center {
+  font-size: 0;
+
+  &::before {
+    display: inline-block;
+    height: 100%;
+    content: '';
+    vertical-align: middle;
+  }
+
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+  }
+}
+
+//
+// Generate `:hover` and `:focus` styles in one go.
+//
+// @link    https://github.com/inuitcss/inuitcss/blob/master/tools/_tools.mixins.scss
+// @content Wrapped in `:focus` and `:hover` pseudo-classes.
+// @output  Wraps the given content in `:focus` and `:hover` pseudo-classes.
+//
+@mixin u-hocus {
+  &:focus,
+  &:hover {
+    @content;
+  }
+}
+
+//
+// Generate `:active` and `:focus` styles in one go.
+//
+// @see     {Mixin} u-hocus
+// @content Wrapped in `:focus` and `:active` pseudo-classes.
+// @output  Wraps the given content in `:focus` and `:hover` pseudo-classes.
+//
+@mixin u-actus {
+  &:focus,
+  &:active {
+    @content;
+  }
+}
+
+//
+// Prevent text from wrapping onto multiple lines for the current element.
+//
+// An ellipsis is appended to the end of the line.
+//
+// 1. Ensure that the node has a maximum width after which truncation can occur.
+// 2. Fix for IE 8/9 if `word-wrap: break-word` is in effect on ancestor nodes.
+//
+// @param  {Number} $width [100%] - The maximum width of element.
+// @output `max-width`, `word-wrap`, `white-space`, `overflow`, `text-overflow`
+//
+@mixin u-truncate($width: 100%) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; // [2]
+  @if $width {
+    max-width: $width; // [1]
+  }
+}
+
+//
+// Applies accessible hiding to the current element.
+//
+// @param  {Boolean} $important [true] - Whether the visibility is important.
+// @output Properties for removing the element from the document flow.
+//
+@mixin u-accessibly-hidden($important: true) {
+  $important: important($important);
+  position: absolute $important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+
+//
+// Allows an accessibly hidden element to be focusable via keyboard navigation.
+//
+// @content For styling the now visible element.
+// @output  Injects `:focus`, `:active` pseudo-classes.
+//
+@mixin u-accessibly-focusable {
+  @include u-actus {
+    clip: auto;
+    width: auto;
+    height: auto;
+
+    @content;
+  }
+}
+
+//
+// Hide the current element from all.
+//
+// The element will be hidden from screen readers and removed from the document flow.
+//
+// @link   http://juicystudio.com/article/screen-readers-display-none.php
+// @param  {Boolean} $important [true] - Whether the visibility is important.
+// @output `display`, `visibility`
+//
+@mixin u-hidden($important: true) {
+  $important: important($important);
+  display: none $important;
+  visibility: hidden $important;
+}
+
+//
+// Show the current element for all.
+//
+// The element will be accessible from screen readers and visible in the document flow.
+//
+// @param  {String}  $display   [block] - The rendering box used for the element.
+// @param  {Boolean} $important [true]  - Whether the visibility is important.
+// @output `display`, `visibility`
+//
+@mixin u-shown($display: block, $important: true) {
+  $important: important($important);
+  display: $display $important;
+  visibility: visible $important;
+}
+
+//
+// Create Names Grid Areas for all Children
+//
+@mixin u-grid-template($elements...) {
+  @each $element in $elements {
+    &_#{$element} {
+      grid-area: $element;
+    }
+  }
+}
+
+@mixin u-grid($cols, $gutter) {
+  display: grid;
+  grid-template-columns: [full-start] repeat($cols, 1fr) [full-end];
+  grid-gap: $gutter;
+
+  // default to full width PLEASE RETAIN THIS OR EVERYTHING BREAKS
+  > * {
+    grid-column-end: span $cols;
+  }
+}
+
+@mixin u-grid-classes($columns, $breakpoint: null, $important: false) {
+  $important: important($important);
+
+  .#{$prefix}.-col-full {
+    grid-column: 1 / -1;
+  }
+
+  .#{$prefix}.-row-full {
+    grid-row: 1 / -1;
+  }
+
+  @for $i from 1 through $columns {
+    .#{$prefix}.-template-#{$i}#{$breakpoint} {
+      grid-template: list.slash(repeat($i, 1fr), repeat($i, 1fr));
+    }
+
+    .#{$prefix}.-template-cols-#{$i}#{$breakpoint} {
+      grid-template-columns: repeat($i, 1fr);
+    }
+
+    .#{$prefix}.-template-rows-#{$i}#{$breakpoint} {
+      grid-template-rows: repeat($i, 1fr);
+    }
+
+    .#{$prefix}.-col-#{$i}#{$breakpoint} {
+      grid-column: span $i;
+    }
+    .#{$prefix}.-row-#{$i}#{$breakpoint} {
+      grid-row: span $i;
+    }
+
+    .#{$prefix}.-col-pos-#{$i}#{$breakpoint} {
+      grid-column: $i;
+    }
+
+    .#{$prefix}.-col-start-#{$i}#{$breakpoint} {
+      grid-column-start: $i;
+    }
+
+    .#{$prefix}.-col-end-#{$i}#{$breakpoint} {
+      grid-column-end: $i;
+    }
+
+    .#{$prefix}.-row-pos-#{$i}#{$breakpoint} {
+      grid-row: $i;
+    }
+
+    .#{$prefix}.-row-start-#{$i}#{$breakpoint} {
+      grid-row-start: $i;
+    }
+
+    .#{$prefix}.-row-end-#{$i}#{$breakpoint} {
+      grid-row-end: $i;
+    }
+  }
+}
+
+@mixin u-grid-autofit($type: cols, $min: 0, $max: 1fr) {
+  $auto-fit: repeat(auto-fit, minmax($min, $max));
+
+  @if $type == cols {
+    grid-template-columns: $auto-fit;
+  } @else {
+    grid-template-rows: $auto-fit;
+  }
+}
+
+// $type: cols | rows
+@mixin u-grid-autofill($type: cols, $min: 0, $max: 1fr) {
+  $auto-fill: repeat(auto-fill, minmax($min, $max));
+
+  @if $type == cols {
+    grid-template-columns: $auto-fill;
+  } @else {
+    grid-template-rows: $auto-fill;
+  }
+}
+
+// a as block
+@mixin u-linkblock {
+  display: block;
+  text-decoration: none;
+  @include on-event {
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+// better underline
+@mixin u-underline($color, $thickness, $offset) {
+  position: relative;
+
+  &:after {
+    display: block;
+    content: '';
+
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: $offset;
+    left: 0;
+
+    height: $thickness;
+    width: 100%;
+    margin: auto;
+
+    background-color: $color;
+
+    transition: 0.3s;
+    transform-origin: center center;
+  }
+}
+
+@mixin u-font($font-size, $line-height, $base-font: 16px) {
+  font-size: rem($font-size, $base-font);
+  line-height: lineheight($font-size, $line-height);
+}
+///
+/// Generate extendable FontSize classes %u-font-size--{name}
+/// @param {map} $sd-font-size
+///     Array of Font Sizes
+///
+@if variable-exists(sd-font-size) {
+  $interpolation: false;
+  $symbol: '%';
+
+  @each $name, $value in $sd-font-size {
+    #{$symbol}u-font-size--#{$name} {
+      @each $fs-breakpoint, $fs-font-size in $value {
+        @if $fs-breakpoint == null {
+          //line-height: 15px;
+          //@include make-font-size($fs-font-size);
+        } @else {
+          // If $fs-font-size is a key that exists in
+          // $fs-breakpoints, use the value
+          @if map-has-key($mq-breakpoints, $fs-breakpoint) {
+            @include mq.mq($from: $fs-breakpoint) {
+              /*              @debug $fs-breakpoint;
+              @if type-of($fs-font-size) == 'list' {
+                @debug nth($fs-font-size, 1);
+                @if (length($fs-font-size) > 1) {
+                  @debug nth($fs-font-size, 2);
+                }
+              }*/
+              @include u-font(nth($fs-font-size, 1), nth($fs-font-size, 2));
+            }
+          }
+        }
+      }
+    }
+  }
+}
