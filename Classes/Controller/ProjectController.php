@@ -10,6 +10,7 @@ use ReCentGlobe\Rcgprojectdb\Utility\CategoryUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
@@ -53,7 +54,7 @@ class ProjectController extends ActionController
 
         $context = GeneralUtility::makeInstance(Context::class);
         $langId = $context->getPropertyFromAspect('language', 'id');
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(array_values($this->settings['categories']));
+        DebuggerUtility::var_dump(array_values($this->settings['categories']));
 
         $catfilter = array_values($this->settings['categories']);
         foreach ($catfilter as $k => $v) {
