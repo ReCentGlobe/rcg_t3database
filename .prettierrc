@@ -1,6 +1,0 @@
-{
-  "trailingComma": "es5",
-  "printWidth": 100,
-  "singleQuote": true,
-  "plugins": ["./node_modules/prettier-plugin-twig-melody", "./node_modules/@prettier/plugin-php"]
-}

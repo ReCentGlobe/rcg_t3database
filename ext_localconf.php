@@ -1,35 +1,57 @@
 <?php
+
+use ReCentGlobe\Rcgprojectdb\Controller\JsonProjectController;
+use ReCentGlobe\Rcgprojectdb\Controller\PersonController;
+use ReCentGlobe\Rcgprojectdb\Controller\ProjectController;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3_MODE') || die();
 
 (static function() {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Rcgprojectdb',
         'Projectlist',
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => 'list, show, search'
+            ProjectController::class => 'list, show',
         ],
         // non-cacheable actions
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => '',
-            \ReCentGlobe\Rcgprojectdb\Controller\PersonController::class => ''
+            ProjectController::class => 'list, show',
+            PersonController::class => ''
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Rcgprojectdb',
-        'Personlist',
+        'Projectajax',
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\PersonController::class => 'list, show'
+            JsonProjectController::class => 'list, show, search',
         ],
         // non-cacheable actions
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => '',
-            \ReCentGlobe\Rcgprojectdb\Controller\PersonController::class => ''
+            JsonProjectController::class => 'list, show, search',
+            PersonController::class => ''
+        ]
+    );
+
+    ExtensionUtility::configurePlugin(
+        'Rcgprojectdb',
+        'Personlist',
+        [
+            PersonController::class => 'list, show'
+        ],
+        // non-cacheable actions
+        [
+            PersonController::class => 'list, show'
         ]
     );
 
     // wizards
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    ExtensionManagementUtility::addPageTSConfig(
         'mod {
             wizards.newContentElement.wizardItems.plugins {
                 elements {
@@ -57,15 +79,15 @@ defined('TYPO3_MODE') || die();
        }'
     );
 
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+    $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon(
         'rcgprojectdb-plugin-projectlist',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_projectlist.svg']
     );
     $iconRegistry->registerIcon(
         'rcgprojectdb-plugin-personlist',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_personlist.svg']
     );
 })();

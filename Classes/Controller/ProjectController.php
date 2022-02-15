@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace ReCentGlobe\Rcgprojectdb\Controller;
 
+use \ReCentGlobe\Rcgprojectdb\Domain\Repository\CategoryRepository;
+use \ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository;
+use ReCentGlobe\Rcgprojectdb\Utility\CategoryUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
@@ -17,25 +23,22 @@ namespace ReCentGlobe\Rcgprojectdb\Controller;
 /**
  * ProjectController
  */
-class ProjectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ProjectController extends ActionController
 {
 
     /**
      * projectRepository
      *
-     * @var \ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository
+     * @var ProjectRepository
      */
     protected $projectRepository = null;
 
     /**
-     * action index
+     * categoryRepository
      *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
-     * @return string|object|null|void
+     * @var CategoryRepository
      */
-    public function indexAction()
-    {
-    }
+    protected $categoryRepository = null;
 
     /**
      * action list
@@ -45,33 +48,26 @@ class ProjectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
-        $projects = $this->projectRepository->findAll();
-        $this->view->assign('projects', $projects);
-    }
+        $data = GeneralUtility::_GP('tx_fgzdatabase_showpeople');
 
-    /**
-     * action search
-     *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
-     * @return string|object|null|void
-     */
-    public function searchAction() {
-        $itemsPerPage = $this->settings['defaultItemsPerPage'];
-        $page = 0;
 
-        if ($this->request->hasArgument('page')) {
-            $page = intval($this->request->getArgument('page'));
+        $context = GeneralUtility::makeInstance(Context::class);
+        $langId = $context->getPropertyFromAspect('language', 'id');
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(array_values($this->settings['categories']));
+
+        $catfilter = array_values($this->settings['categories']);
+        foreach ($catfilter as $k => $v) {
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(CategoryUtility::getCategoryListWithChilds($v));
+            $categoryList = $this->categoryRepository->getCategoryfilter($v);
+            //$cat = GeneralUtility::intExplode(',', $categoryList, true);
+
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categoryList);
+            $this->view->assign('cat-'.$v, $categoryList);
         }
 
-        // get items, set items per page and next page
-        $next = $this->projectRepository->findItems(intval($this->settings['defaultItemsPerPage']), $page);
-
-        $projects = $this->offerRepository->findByAccountNumber('123456');
+        $projects = $this->projectRepository->findAll();
         $this->view->assign('projects', $projects);
-
-        //$this->view->assign('settings', $this->settings);
-        //$this->view->assign('next', $next->count());
-        //$this->view->assign('page', $page + 1);
+        $this->view->assign('sysLanguageUid', $langId);
     }
 
     /**
@@ -86,10 +82,21 @@ class ProjectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     /**
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository $ProjectRepository
+     * @param ProjectRepository $ProjectRepository
      */
-    public function injectProjectRepository(\ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository $projectRepository)
+    public function injectProjectRepository(ProjectRepository $projectRepository)
     {
         $this->projectRepository = $projectRepository;
     }
+
+    /**
+     * Inject categoryRepository
+     *
+     * @param CategoryRepository $CategoryRepository
+     */
+    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
 }

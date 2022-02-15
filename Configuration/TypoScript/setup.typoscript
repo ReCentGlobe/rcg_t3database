@@ -1,61 +1,67 @@
 page.config.contentObjectExceptionHandler = 0
-#page.config.no_cache = 1
-
-# ==============================================
-# Persistence object mapping configuration
-# ==============================================
-config.tx_extbase.persistence.classes {
-    ReCentGlobe\Rcgprojectdb\Domain\Model\Project {
-        subclasses {
-            0 = ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectDefault
-            1 = ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectJoint
-        }
-    }
-
-    ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectDefault {
-        mapping {
-            recordType = 0
-            tableName = tx_rcgprojectdb_domain_model_project
-        }
-    }
-
-    ReCentGlobe\Rcgprojectdb\Domain\Model\ProjectJoint {
-        mapping {
-            recordType = 1
-            tableName = tx_rcgprojectdb_domain_model_project
-        }
-    }
-}
+page.config.no_cache = 1
 
 plugin.tx_rcgprojectdb {
     settings {
+        # DETAIL pages
+        detailPidProjects = 28
+
+        # LIST pages
+        listPidProjects = 2
+        listPidPersons = 2
+
         # default items per page for asynchronous requests
-        defaultItemsPerPage = 12
+        itemsPerPage = 50
+
+        categories {
+            projectType = 13
+            projectRegion = 7
+            projectDiscipline = 8
+            projectEra = 5
+            researchAreas = 3
+        }
 
         # ajax page types
         ajax {
             projectAJAXList = 808
         }
     }
+    features {
+        #skipDefaultArguments = 1
+        # if set to 1, the enable fields are ignored in BE context
+        ignoreAllEnableFieldsInBe = 0
+        requireCHashArgumentForActionArguments = 0
+    }
 }
-
 
 tx_rcgprojectdb_projectlist_AJAX = PAGE
 tx_rcgprojectdb_projectlist_AJAX {
     typeNum < plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList
     config {
+        additionalHeaders = Content-Type: application/json
+        additionalHeaders.10.header = Content-Type: application/json
         disableAllHeaderCode = 1
-        additionalHeaders = Content-type:text/html
+        disablePrefixComment = 1
         xhtml_cleaning = 0
         admPanel = 0
         debug = 1
         no_cache = 1
     }
-    10 < tt_content.list.20.rcgprojectdb_projectlist
+    features {
+        requireCHashArgumentForActionArguments = 0
+    }
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Projectajax
+        vendorName = ReCentGlobe
+        extensionName = Rcgprojectdb
+        controller = JsonProjectController
+    }
+    10 < tt_content.list.20.rcgprojectdb_projectajax
 }
 
 plugin.tx_rcgprojectdb_projectlist {
-
 
     view {
         templateRootPaths.0 = EXT:rcgprojectdb/Resources/Private/Templates/
@@ -73,9 +79,26 @@ plugin.tx_rcgprojectdb_projectlist {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
         ignoreAllEnableFieldsInBe = 0
+        requireCHashArgumentForActionArguments = 0
     }
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1
+    }
+}
+plugin.tx_rcgprojectdb_projectAjax {
+    persistence {
+        storagePid = {$plugin.tx_rcgprojectdb_projectlist.persistence.storagePid}
+        #recursive = 1
+    }
+    settings {
+        # default items per page for asynchronous requests
+        itemsPerPage = 50
+    }
+    features {
+        #skipDefaultArguments = 1
+        # if set to 1, the enable fields are ignored in BE context
+        ignoreAllEnableFieldsInBe = 0
+        requireCHashArgumentForActionArguments = 0
     }
 }
 plugin.tx_rcgprojectdb_personlist {
@@ -95,6 +118,7 @@ plugin.tx_rcgprojectdb_personlist {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
         ignoreAllEnableFieldsInBe = 0
+        requireCHashArgumentForActionArguments = 0
     }
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1

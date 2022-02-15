@@ -33,7 +33,6 @@ CREATE TABLE tx_rcgprojectdb_domain_model_person (
 );
 
 CREATE TABLE tx_rcgprojectdb_domain_model_organization (
-	project5 int(11) unsigned DEFAULT '0' NOT NULL,
 	project int(11) unsigned DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL DEFAULT '',
 	logo int(11) unsigned NOT NULL DEFAULT '0',
@@ -95,4 +94,8 @@ CREATE TABLE tx_rcgprojectdb_domain_model_project_related_mm (
       sorting_foreign int(11) DEFAULT '0' NOT NULL,
       KEY uid_local (uid_local),
       KEY uid_foreign (uid_foreign)
+);
+
+CREATE TABLE tx_rcgprojectdb_domain_model_category (
+    title varchar(255) DEFAULT '' NOT NULL
 );

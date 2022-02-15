@@ -17,6 +17,48 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <h1>Listing for Project</h1>
 
     <f:flashMessages />
+    <f:debug>{cat-7}</f:debug>
+
+    <f:form class="">
+        <f:form.select
+                class="custom-select"
+                name="cat-{settings.categories.projectType}"
+                options="{cat-{settings.categories.projectType}}"
+                optionValueField="uid"
+                optionLabelField="title"
+                value="{selectedCat-{settings.categories.projectType}}"/>
+        <f:form.select
+                class="custom-select"
+                name="cat-{settings.categories.projectRegion}"
+                options="{cat-{settings.categories.projectRegion}}"
+                optionValueField="uid"
+                optionLabelField="title"
+                value="{selectedCat-{settings.categories.projectRegion}}"  />
+        <f:form.select
+                class="custom-select"
+                name="cat-{settings.categories.projectDiscipline}"
+                options="{cat-{settings.categories.projectDiscipline}}"
+                optionValueField="uid"
+                optionLabelField="title"
+                value="{selectedCat-{settings.categories.projectDiscipline}}"  />
+        <f:form.select
+                class="custom-select"
+                name="cat-{settings.categories.projectEra}"
+                options="{cat-{settings.categories.projectEra}}"
+                optionValueField="uid"
+                optionLabelField="title"
+                value="{selectedCat-{settings.categories.projectEra}}"  />
+        <f:form.select
+                class="custom-select"
+                name="cat-{settings.categories.researchAreas}"
+                options="{cat-{settings.categories.researchAreas}}"
+                optionValueField="uid"
+                optionLabelField="title"
+                value="{selectedCat-{settings.categories.researchAreas}}"  />
+
+        <f:form.textfield name="q"/>
+        <f:form.submit value="Send" />
+    </f:form>
 
     <table class="tx_rcgprojectdb">
         <tr>
@@ -47,9 +89,19 @@ Otherwise your changes will be overwritten the next time you save the extension 
         </f:for>
     </table>
 
-    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'Search', controller: 'Project', pluginName: 'projectlist_AJAX', pageType:'{settings.ajax.projectAJAXList}')}">
+    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'List', controller: 'JsonProject', pluginName: 'projectlist_AJAX', pageType:'{settings.ajax.projectAJAXList}')}">
         mehr laden
     </a>
 
+    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'show', controller: 'JsonProject', pluginName: 'projectajax', pageType:'{settings.ajax.projectAJAXList}', arguments:'{currentPage: 1, perPage: 1}')}">
+        show #1
+    </a>
+    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'show', controller: 'JsonProject', pluginName: 'projectajax', pageType:'{settings.ajax.projectAJAXList}', noCacheHash: 1, arguments:'{project: 2}')}">
+        show #2
+    </a>
+
+    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'list', controller: 'JsonProject', pluginName: 'projectajax', pageType:'{settings.ajax.projectAJAXList}', noCacheHash: 1, arguments:'{}')}">
+        show all
+    </a>
 </f:section>
 </html>
