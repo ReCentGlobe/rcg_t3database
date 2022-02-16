@@ -460,9 +460,6 @@ return [
             'config' => [
                 'type' => 'category',
                 'relationship' => 'oneToOne',
-                'treeConfig' => [
-                    'startingPoints' => '24',
-                ],
             ],
         ],
         'child_project' => [
@@ -503,20 +500,6 @@ return [
                 'MM' => 'tx_rcgprojectdb_domain_model_project_related_mm',
                 'readOnly' => 0,
             ]
-        ],
-
-        'project_tree' => [
-            'exclude' => true,
-            'label' => $ll.'tx_rcgprojectdb_domain_model_project.project_tree',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectTree',
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
-                'treeConfig' => [
-                    'parentField' => 'parent_project',
-                    'childrenField' => 'child_project',
-                ],
-            ],
         ],
     ],
     'palettes' => [
