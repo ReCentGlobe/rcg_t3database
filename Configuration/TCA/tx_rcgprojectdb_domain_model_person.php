@@ -1,4 +1,8 @@
 <?php
+
+$ll = 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:';
+
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person',
