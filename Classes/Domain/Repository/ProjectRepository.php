@@ -30,13 +30,7 @@ class ProjectRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected $defaultOrderings = ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING];
 
     public function initializeObject() {
-        /** @var Typo3QuerySettings $querySettings */
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
 
-        // set the storagePids to respect
-        $querySettings->setStoragePageIds(array(3));
-
-        $this->setDefaultQuerySettings($querySettings);
     }
 
     public function findViaAccNo($querystring = '') {

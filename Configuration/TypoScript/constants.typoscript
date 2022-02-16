@@ -1,3 +1,36 @@
+page.config.contentObjectExceptionHandler = 0
+page.config.no_cache = 1
+
+plugin.tx_rcgprojectdb {
+    settings {
+        # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default project detail PID
+        detailPidProjects =
+        # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default project list PID
+        listPidProjects =
+        # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default persons list PID
+        listPidPersons =
+
+        categories {
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectType category UID
+            projectType =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectRegion category UID
+            projectRegion =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectDiscipline category UID
+            projectDiscipline =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectEra category UID
+            projectEra =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default researchAreas category UID
+            researchAreas =
+        }
+        # default items per page for asynchronous requests
+        itemsPerPage =
+        # ajax page types
+        ajax {
+            projectAJAXList =
+        }
+    }
+}
+
 plugin.tx_rcgprojectdb_projectlist {
     view {
         # cat=plugin.tx_rcgprojectdb_projectlist/file; type=string; label=Path to template root (FE)
@@ -9,7 +42,7 @@ plugin.tx_rcgprojectdb_projectlist {
     }
     persistence {
         # cat=plugin.tx_rcgprojectdb_projectlist//a; type=string; label=Default storage PID
-        storagePid = 3
+        storagePid =
     }
 }
 plugin.tx_rcgprojectdb_projectAjax {
@@ -23,7 +56,7 @@ plugin.tx_rcgprojectdb_projectAjax {
     }
     persistence {
         # cat=plugin.tx_rcgprojectdb_projectlist//a; type=string; label=Default storage PID
-        storagePid = 3
+        storagePid =
     }
 }
 plugin.tx_rcgprojectdb_personlist {

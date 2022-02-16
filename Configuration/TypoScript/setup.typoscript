@@ -1,29 +1,23 @@
-page.config.contentObjectExceptionHandler = 0
-page.config.no_cache = 1
-
 plugin.tx_rcgprojectdb {
     settings {
         # DETAIL pages
-        detailPidProjects = 28
-
+        detailPidProjects = {$plugin.tx_rcgprojectdb.settings.detailPidProjects}
         # LIST pages
-        listPidProjects = 2
-        listPidPersons = 2
-
-        # default items per page for asynchronous requests
-        itemsPerPage = 50
-
+        listPidProjects = {$plugin.tx_rcgprojectdb.settings.listPidProjects}
+        listPidPersons = {$plugin.tx_rcgprojectdb.settings.listPidPersons}
+        # CATEGORY pages
         categories {
-            projectType = 13
-            projectRegion = 7
-            projectDiscipline = 8
-            projectEra = 5
-            researchAreas = 3
+            projectType = {$plugin.tx_rcgprojectdb.settings.categories.projectType}
+            projectRegion = {$plugin.tx_rcgprojectdb.settings.categories.projectRegion}
+            projectDiscipline = {$plugin.tx_rcgprojectdb.settings.categories.projectDiscipline}
+            projectEra = {$plugin.tx_rcgprojectdb.settings.categories.projectEra}
+            researchAreas = {$plugin.tx_rcgprojectdb.settings.categories.researchAreas}
         }
-
+        # default items per page for asynchronous requests
+        itemsPerPage = {$plugin.tx_rcgprojectdb.settings.itemsPerPage}
         # ajax page types
         ajax {
-            projectAJAXList = 808
+            projectAJAXList = {$plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList}
         }
     }
     features {
@@ -90,10 +84,6 @@ plugin.tx_rcgprojectdb_projectAjax {
         storagePid = {$plugin.tx_rcgprojectdb_projectlist.persistence.storagePid}
         #recursive = 1
     }
-    settings {
-        # default items per page for asynchronous requests
-        itemsPerPage = 50
-    }
     features {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
@@ -124,37 +114,3 @@ plugin.tx_rcgprojectdb_personlist {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
-
-# these classes are only used in auto-generated templates
-plugin.tx_rcgprojectdb._CSS_DEFAULT_STYLE (
-    textarea.f3-form-error {
-        background-color:#FF9F9F;
-        border: 1px #FF0000 solid;
-    }
-
-    input.f3-form-error {
-        background-color:#FF9F9F;
-        border: 1px #FF0000 solid;
-    }
-
-    .tx-rcgprojectdb table {
-        border-collapse:separate;
-        border-spacing:10px;
-    }
-
-    .tx-rcgprojectdb table th {
-        font-weight:bold;
-    }
-
-    .tx-rcgprojectdb table td {
-        vertical-align:top;
-    }
-
-    .typo3-messages .message-error {
-        color:red;
-    }
-
-    .typo3-messages .message-ok {
-        color:green;
-    }
-)
