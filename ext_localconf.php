@@ -118,4 +118,5 @@ defined('TYPO3_MODE') || die();
         SvgIconProvider::class,
         ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_projectdetail.svg']
     );
+
 })();

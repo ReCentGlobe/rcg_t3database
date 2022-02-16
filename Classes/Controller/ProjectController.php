@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace ReCentGlobe\Rcgprojectdb\Controller;
 
-use \ReCentGlobe\Rcgprojectdb\Domain\Repository\CategoryRepository;
-use \ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository;
+use ReCentGlobe\Rcgprojectdb\Domain\Model\Project;
+use ReCentGlobe\Rcgprojectdb\Domain\Repository\CategoryRepository;
+use ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository;
 use ReCentGlobe\Rcgprojectdb\Utility\CategoryUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -41,16 +42,18 @@ class ProjectController extends ActionController
      */
     protected $categoryRepository = null;
 
+
+    // TODO: Cleanup List Action
+
     /**
      * action list
      *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
+     * @param Project
      * @return string|object|null|void
      */
     public function listAction()
     {
         $data = GeneralUtility::_GP('tx_fgzdatabase_showpeople');
-
 
         $context = GeneralUtility::makeInstance(Context::class);
         $langId = $context->getPropertyFromAspect('language', 'id');
@@ -58,12 +61,9 @@ class ProjectController extends ActionController
 
         $catfilter = array_values($this->settings['categories']);
         foreach ($catfilter as $k => $v) {
-            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(CategoryUtility::getCategoryListWithChilds($v));
-            $categoryList = $this->categoryRepository->getCategoryfilter($v);
-            //$cat = GeneralUtility::intExplode(',', $categoryList, true);
-
-            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categoryList);
-            $this->view->assign('cat-'.$v, $categoryList);
+            $categoryList = $this->categoryRepository->findChildren($v);
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categoryList);
+            $this->view->assign('cat-' . $v, $categoryList);
         }
 
         $projects = $this->projectRepository->findAll();
@@ -74,10 +74,10 @@ class ProjectController extends ActionController
     /**
      * action show
      *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Project
+     * @param Project $project
      * @return string|object|null|void
      */
-    public function showAction(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $project)
+    public function showAction(Project $project)
     {
         $this->view->assign('project', $project);
     }

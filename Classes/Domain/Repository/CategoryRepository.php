@@ -22,13 +22,14 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 /**
  * The repository for Categories
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class CategoryRepository extends Repository
 {
 
     /**
      * Find categories by a given parent
      *
-     * @param $categories
+     * @param $parent
+     * @return mixed
      */
     public function getCategoryfilter($parent)
     {
@@ -49,6 +50,24 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         array_multisort($sort, SORT_ASC, $items);
 
         return $items;
+    }
+
+    /**
+     * Find categories by a given parent
+     *
+     * @param int $parent parent
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     */
+    public function findChildren($parent)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        return $query->matching(
+            $query->logicalAnd(
+                $query->equals('parentCategory', (int)$parent)
+            )
+        )->execute();
     }
 
     /**

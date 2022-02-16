@@ -1,3 +1,6 @@
+page.config.contentObjectExceptionHandler = 0
+page.config.no_cache = 1
+
 plugin.tx_rcgprojectdb {
     settings {
         # DETAIL pages
@@ -13,6 +16,7 @@ plugin.tx_rcgprojectdb {
             projectEra = {$plugin.tx_rcgprojectdb.settings.categories.projectEra}
             researchAreas = {$plugin.tx_rcgprojectdb.settings.categories.researchAreas}
         }
+
         # default items per page for asynchronous requests
         itemsPerPage = {$plugin.tx_rcgprojectdb.settings.itemsPerPage}
         # ajax page types
@@ -20,6 +24,7 @@ plugin.tx_rcgprojectdb {
             projectAJAXList = {$plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList}
         }
     }
+
     features {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
@@ -41,9 +46,11 @@ tx_rcgprojectdb_projectlist_AJAX {
         debug = 1
         no_cache = 1
     }
+
     features {
         requireCHashArgumentForActionArguments = 0
     }
+
     10 = USER_INT
     10 {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
@@ -52,6 +59,7 @@ tx_rcgprojectdb_projectlist_AJAX {
         extensionName = Rcgprojectdb
         controller = JsonProjectController
     }
+
     10 < tt_content.list.20.rcgprojectdb_projectajax
 }
 
@@ -65,16 +73,19 @@ plugin.tx_rcgprojectdb_projectlist {
         layoutRootPaths.0 = EXT:rcgprojectdb/Resources/Private/Layouts/
         layoutRootPaths.1 = {$plugin.tx_rcgprojectdb_projectlist.view.layoutRootPath}
     }
+
     persistence {
         storagePid = {$plugin.tx_rcgprojectdb_projectlist.persistence.storagePid}
         #recursive = 1
     }
+
     features {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
         ignoreAllEnableFieldsInBe = 0
         requireCHashArgumentForActionArguments = 0
     }
+
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1
     }
@@ -84,6 +95,7 @@ plugin.tx_rcgprojectdb_projectAjax {
         storagePid = {$plugin.tx_rcgprojectdb_projectlist.persistence.storagePid}
         #recursive = 1
     }
+
     features {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
@@ -100,16 +112,19 @@ plugin.tx_rcgprojectdb_personlist {
         layoutRootPaths.0 = EXT:rcgprojectdb/Resources/Private/Layouts/
         layoutRootPaths.1 = {$plugin.tx_rcgprojectdb_personlist.view.layoutRootPath}
     }
+
     persistence {
         storagePid = {$plugin.tx_rcgprojectdb_personlist.persistence.storagePid}
         #recursive = 1
     }
+
     features {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
         ignoreAllEnableFieldsInBe = 0
         requireCHashArgumentForActionArguments = 0
     }
+
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1
     }

@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace ReCentGlobe\Rcgprojectdb\Domain\Model;
 
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
  *
@@ -17,13 +21,13 @@ namespace ReCentGlobe\Rcgprojectdb\Domain\Model;
 /**
  * Project
  */
-class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Project extends AbstractEntity
 {
 
     /**
      * image
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var FileReference
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $image = null;
@@ -74,21 +78,21 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * projectDiscipline
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $projectDiscipline = null;
 
     /**
      * projectRegions
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $projectRegions = null;
 
     /**
      * projectEra
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $projectEra = null;
 
@@ -123,7 +127,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Related Social Links (e.g. Facebook, Twitter, Homepage)
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink>
+     * @var ObjectStorage<SocialLink>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $relatedLinks = null;
@@ -131,14 +135,14 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * relatedProjectLeads
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Person>
+     * @var ObjectStorage<Person>
      */
     protected $relatedProjectLeads = null;
 
     /**
      * cooperationPartners
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization>
+     * @var ObjectStorage<Organization>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $cooperationPartners = null;
@@ -146,40 +150,40 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * relatedProjectMembers
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Person>
+     * @var ObjectStorage<Person>
      */
     protected $relatedProjectMembers = null;
 
     /**
      * researchArea
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $researchArea = null;
 
     /**
      * institutions
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization>
+     * @var ObjectStorage<Organization>
      */
     protected $institutions = null;
 
     /**
      * funder
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization>
+     * @var ObjectStorage<Organization>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $funder = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project>
+     * @var ObjectStorage<Project>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $parentProject;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project>
+     * @var ObjectStorage<Project>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $childProject;
@@ -209,22 +213,22 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function initializeObject()
     {
-        $this->relatedLinks = $this->relatedLinks ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->relatedProjectLeads = $this->relatedProjectLeads ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->relatedProjectMembers = $this->relatedProjectMembers ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->institutions = $this->institutions ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->funder = $this->funder ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->cooperationPartners = $this->cooperationPartners ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->researchArea = $this->researchArea ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->projectDiscipline = $this->projectDiscipline ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->projectRegions = $this->projectRegions ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->projectEra = $this->projectEra ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->relatedLinks = $this->relatedLinks ?: new ObjectStorage();
+        $this->relatedProjectLeads = $this->relatedProjectLeads ?: new ObjectStorage();
+        $this->relatedProjectMembers = $this->relatedProjectMembers ?: new ObjectStorage();
+        $this->institutions = $this->institutions ?: new ObjectStorage();
+        $this->funder = $this->funder ?: new ObjectStorage();
+        $this->cooperationPartners = $this->cooperationPartners ?: new ObjectStorage();
+        $this->researchArea = $this->researchArea ?: new ObjectStorage();
+        $this->projectDiscipline = $this->projectDiscipline ?: new ObjectStorage();
+        $this->projectRegions = $this->projectRegions ?: new ObjectStorage();
+        $this->projectEra = $this->projectEra ?: new ObjectStorage();
     }
 
     /**
      * Returns the image
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference image
+     * @return FileReference image
      */
     public function getImage()
     {
@@ -234,10 +238,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the image
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @param FileReference $image
      * @return void
      */
-    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function setImage(FileReference $image)
     {
         $this->image = $image;
     }
@@ -371,7 +375,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the projectDiscipline
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectDiscipline
+     * @return ObjectStorage $projectDiscipline
      */
     public function getProjectDiscipline()
     {
@@ -381,10 +385,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the projectDiscipline
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectDiscipline
+     * @param ObjectStorage $projectDiscipline
      * @return void
      */
-    public function setProjectDiscipline(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectDiscipline)
+    public function setProjectDiscipline(ObjectStorage $projectDiscipline)
     {
         $this->projectDiscipline = $projectDiscipline;
     }
@@ -392,7 +396,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the projectRegions
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectRegions
+     * @return ObjectStorage $projectRegions
      */
     public function getProjectRegions()
     {
@@ -402,10 +406,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the projectRegions
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectRegions
+     * @param ObjectStorage $projectRegions
      * @return void
      */
-    public function setProjectRegions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectRegions)
+    public function setProjectRegions(ObjectStorage $projectRegions)
     {
         $this->projectRegions = $projectRegions;
     }
@@ -413,7 +417,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the projectEra
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectEra
+     * @return ObjectStorage $projectEra
      */
     public function getProjectEra()
     {
@@ -423,10 +427,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the projectEra
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectEra
+     * @param ObjectStorage $projectEra
      * @return void
      */
-    public function setProjectEra(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $projectEra)
+    public function setProjectEra(ObjectStorage $projectEra)
     {
         $this->projectEra = $projectEra;
     }
@@ -497,10 +501,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a SocialLink
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink $relatedLink
+     * @param SocialLink $relatedLink
      * @return void
      */
-    public function addRelatedLink(\ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink $relatedLink)
+    public function addRelatedLink(SocialLink $relatedLink)
     {
         $this->relatedLinks->attach($relatedLink);
     }
@@ -508,10 +512,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a SocialLink
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink $relatedLinkToRemove The SocialLink to be removed
+     * @param SocialLink $relatedLinkToRemove The SocialLink to be removed
      * @return void
      */
-    public function removeRelatedLink(\ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink $relatedLinkToRemove)
+    public function removeRelatedLink(SocialLink $relatedLinkToRemove)
     {
         $this->relatedLinks->detach($relatedLinkToRemove);
     }
@@ -519,7 +523,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the relatedLinks
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink> $relatedLinks
+     * @return ObjectStorage<SocialLink> $relatedLinks
      */
     public function getRelatedLinks()
     {
@@ -529,10 +533,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the relatedLinks
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\SocialLink> $relatedLinks
+     * @param ObjectStorage<SocialLink> $relatedLinks
      * @return void
      */
-    public function setRelatedLinks(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedLinks)
+    public function setRelatedLinks(ObjectStorage $relatedLinks)
     {
         $this->relatedLinks = $relatedLinks;
     }
@@ -561,10 +565,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Person
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectLead
+     * @param Person $relatedProjectLead
      * @return void
      */
-    public function addRelatedProjectLead(\ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectLead)
+    public function addRelatedProjectLead(Person $relatedProjectLead)
     {
         $this->relatedProjectLeads->attach($relatedProjectLead);
     }
@@ -572,10 +576,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Person
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectLeadToRemove The Person to be removed
+     * @param Person $relatedProjectLeadToRemove The Person to be removed
      * @return void
      */
-    public function removeRelatedProjectLead(\ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectLeadToRemove)
+    public function removeRelatedProjectLead(Person $relatedProjectLeadToRemove)
     {
         $this->relatedProjectLeads->detach($relatedProjectLeadToRemove);
     }
@@ -583,7 +587,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the relatedProjectLeads
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Person> relatedProjectLeads
+     * @return ObjectStorage<Person> relatedProjectLeads
      */
     public function getRelatedProjectLeads()
     {
@@ -593,10 +597,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the relatedProjectLeads
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Person> $relatedProjectLeads
+     * @param ObjectStorage<Person> $relatedProjectLeads
      * @return void
      */
-    public function setRelatedProjectLeads(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedProjectLeads)
+    public function setRelatedProjectLeads(ObjectStorage $relatedProjectLeads)
     {
         $this->relatedProjectLeads = $relatedProjectLeads;
     }
@@ -604,10 +608,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Organization
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $cooperationPartner
+     * @param Organization $cooperationPartners
      * @return void
      */
-    public function addCooperationPartner(\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $cooperationPartner)
+    public function addCooperationPartner(Organization $cooperationPartners): void
     {
         $this->cooperationPartners->attach($cooperationPartners);
     }
@@ -615,10 +619,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Organization
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $cooperationPartnerToRemove The Organization to be removed
+     * @param Organization $cooperationPartnerToRemove The Organization to be removed
      * @return void
      */
-    public function removeCooperationPartner(\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $cooperationPartnerToRemove)
+    public function removeCooperationPartner(Organization $cooperationPartnerToRemove)
     {
         $this->cooperationPartners->detach($cooperationPartnerToRemove);
     }
@@ -626,7 +630,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the cooperationPartners
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization> cooperationPartners
+     * @return ObjectStorage<Organization> cooperationPartners
      */
     public function getCooperationPartners()
     {
@@ -636,10 +640,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the cooperationPartners
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization> $cooperationPartners
+     * @param ObjectStorage<Organization> $cooperationPartners
      * @return void
      */
-    public function setCooperationPartners(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $cooperationPartners)
+    public function setCooperationPartners(ObjectStorage $cooperationPartners)
     {
         $this->cooperationPartners = $cooperationPartners;
     }
@@ -647,10 +651,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Person
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectMember
+     * @param Person $relatedProjectMember
      * @return void
      */
-    public function addRelatedProjectMember(\ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectMember)
+    public function addRelatedProjectMember(Person $relatedProjectMember)
     {
         $this->relatedProjectMembers->attach($relatedProjectMember);
     }
@@ -658,10 +662,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Person
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectMemberToRemove The Person to be removed
+     * @param Person $relatedProjectMemberToRemove The Person to be removed
      * @return void
      */
-    public function removeRelatedProjectMember(\ReCentGlobe\Rcgprojectdb\Domain\Model\Person $relatedProjectMemberToRemove)
+    public function removeRelatedProjectMember(Person $relatedProjectMemberToRemove)
     {
         $this->relatedProjectMembers->detach($relatedProjectMemberToRemove);
     }
@@ -669,7 +673,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the relatedProjectMembers
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Person> $relatedProjectMembers
+     * @return ObjectStorage<Person> $relatedProjectMembers
      */
     public function getRelatedProjectMembers()
     {
@@ -679,10 +683,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the relatedProjectMembers
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Person> $relatedProjectMembers
+     * @param ObjectStorage<Person> $relatedProjectMembers
      * @return void
      */
-    public function setRelatedProjectMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedProjectMembers)
+    public function setRelatedProjectMembers(ObjectStorage $relatedProjectMembers)
     {
         $this->relatedProjectMembers = $relatedProjectMembers;
     }
@@ -690,7 +694,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the researchArea
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $researchArea
+     * @return ObjectStorage $researchArea
      */
     public function getResearchArea()
     {
@@ -700,10 +704,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the researchArea
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $researchArea
+     * @param ObjectStorage $researchArea
      * @return void
      */
-    public function setResearchArea(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $researchArea)
+    public function setResearchArea(ObjectStorage $researchArea)
     {
         $this->researchArea = $researchArea;
     }
@@ -711,10 +715,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Organization
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $institution
+     * @param Organization $institution
      * @return void
      */
-    public function addInstitution(\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $institution)
+    public function addInstitution(Organization $institution)
     {
         $this->institutions->attach($institution);
     }
@@ -722,10 +726,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Organization
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $institutionToRemove The Organization to be removed
+     * @param Organization $institutionToRemove The Organization to be removed
      * @return void
      */
-    public function removeInstitution(\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization $institutionToRemove)
+    public function removeInstitution(Organization $institutionToRemove)
     {
         $this->institutions->detach($institutionToRemove);
     }
@@ -733,7 +737,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the institutions
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization> $institutions
+     * @return ObjectStorage<Organization> $institutions
      */
     public function getInstitutions()
     {
@@ -743,10 +747,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the institutions
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization> $institutions
+     * @param ObjectStorage<Organization> $institutions
      * @return void
      */
-    public function setInstitutions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $institutions)
+    public function setInstitutions(ObjectStorage $institutions)
     {
         $this->institutions = $institutions;
     }
@@ -754,7 +758,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the funder
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization> $funder
+     * @return ObjectStorage<Organization> $funder
      */
     public function getFunder()
     {
@@ -764,10 +768,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the funder
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Organization> $funder
+     * @param ObjectStorage<Organization> $funder
      * @return void
      */
-    public function setFunder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $funder)
+    public function setFunder(ObjectStorage $funder)
     {
         $this->funder = $funder;
     }
@@ -775,7 +779,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns a parent project
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject> $parentProject
+     * @return ObjectStorage<Project> $parentProject
      */
     public function getParentProject()
     {
@@ -785,10 +789,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the parent project
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject> $parentProject
+     * @param ObjectStorage<Project> $parentProject
      * @return void
      */
-    public function setParentProject(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $funder)
+    public function setParentProject(ObjectStorage $parentProject)
     {
         $this->parentProject = $parentProject;
     }
@@ -796,7 +800,7 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns a child project
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject> $childProject
+     * @return ObjectStorage<Project> $childProject
      */
     public function getChildProject()
     {
@@ -806,10 +810,10 @@ class Project extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the child project
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\JointProject> $childProject
+     * @param ObjectStorage<Project> $childProject
      * @return void
      */
-    public function setChildProject(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $funder)
+    public function setChildProject(ObjectStorage $childProject): void
     {
         $this->childProject = $childProject;
     }

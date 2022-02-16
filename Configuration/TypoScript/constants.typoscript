@@ -1,6 +1,3 @@
-page.config.contentObjectExceptionHandler = 0
-page.config.no_cache = 1
-
 plugin.tx_rcgprojectdb {
     settings {
         # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default project detail PID
