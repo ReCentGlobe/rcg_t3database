@@ -71,12 +71,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <f:for each="{projects}" as="project">
             <tr>
                 <td>
-                    <f:link.action action="show" arguments="{project : project}">
+                    <f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">
                         <f:image image="{project.image}" width="200"></f:image>
                     </f:link.action>
                 </td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
+                <td><f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">{project.title}</f:link.action></td>
+                <td><f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
                 <td>
                     <f:if condition="{project.researchArea}">
                         <f:then>

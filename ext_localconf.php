@@ -16,13 +16,20 @@ defined('TYPO3_MODE') || die();
         'Rcgprojectdb',
         'Projectlist',
         [
-            ProjectController::class => 'list, show',
+            ProjectController::class => 'list',
         ],
         // non-cacheable actions
+        []
+    );
+
+    ExtensionUtility::configurePlugin(
+        'Rcgprojectdb',
+        'Projectdetail',
         [
-            ProjectController::class => 'list, show',
-            PersonController::class => ''
-        ]
+            ProjectController::class => 'show',
+        ],
+        // non-cacheable actions
+        []
     );
 
     ExtensionUtility::configurePlugin(
@@ -42,12 +49,19 @@ defined('TYPO3_MODE') || die();
         'Rcgprojectdb',
         'Personlist',
         [
-            PersonController::class => 'list, show'
+            PersonController::class => 'list'
         ],
         // non-cacheable actions
+        []
+    );
+    ExtensionUtility::configurePlugin(
+        'Rcgprojectdb',
+        'Persondetail',
         [
-            PersonController::class => 'list, show'
-        ]
+            PersonController::class => 'show'
+        ],
+        // non-cacheable actions
+        []
     );
 
     // wizards
@@ -62,6 +76,15 @@ defined('TYPO3_MODE') || die();
                         tt_content_defValues {
                             CType = list
                             list_type = rcgprojectdb_projectlist
+                        }
+                    }
+                    projectdetail {
+                        iconIdentifier = rcgprojectdb-plugin-projectdetail
+                        title = LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_projectdetail.name
+                        description = LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_projectdetail.description
+                        tt_content_defValues {
+                            CType = list
+                            list_type = rcgprojectdb_projectdetail
                         }
                     }
                     personlist {
@@ -89,5 +112,10 @@ defined('TYPO3_MODE') || die();
         'rcgprojectdb-plugin-personlist',
         SvgIconProvider::class,
         ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_personlist.svg']
+    );
+    $iconRegistry->registerIcon(
+        'rcgprojectdb-plugin-projectdetail',
+        SvgIconProvider::class,
+        ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_projectdetail.svg']
     );
 })();

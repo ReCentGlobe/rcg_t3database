@@ -9,6 +9,12 @@ defined('TYPO3_MODE') || die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Rcgprojectdb',
+    'Projectdetail',
+    'Show RCG Projects'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Rcgprojectdb',
     'Personlist',
     'List RCG Persons'
 );

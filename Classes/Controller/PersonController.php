@@ -27,15 +27,7 @@ class PersonController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected $personRepository = null;
 
-    /**
-     * action index
-     *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Person
-     * @return string|object|null|void
-     */
-    public function indexAction()
-    {
-    }
+    // TODO List Action um Filter erweitern
 
     /**
      * action list
