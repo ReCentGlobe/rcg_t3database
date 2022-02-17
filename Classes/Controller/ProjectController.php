@@ -57,18 +57,26 @@ class ProjectController extends ActionController
 
         $context = GeneralUtility::makeInstance(Context::class);
         $langId = $context->getPropertyFromAspect('language', 'id');
-        DebuggerUtility::var_dump(array_values($this->settings['categories']));
+        //DebuggerUtility::var_dump(array_values($this->settings['categories']));
 
         $catfilter = array_values($this->settings['categories']);
         foreach ($catfilter as $k => $v) {
             $categoryList = $this->categoryRepository->findChildren($v);
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categoryList);
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categoryList);
             $this->view->assign('cat-' . $v, $categoryList);
         }
 
         $projects = $this->projectRepository->findAll();
-        $this->view->assign('projects', $projects);
-        $this->view->assign('sysLanguageUid', $langId);
+        $resultCount = $this->projectRepository->countAll();
+        DebuggerUtility::var_dump($resultCount);
+
+        $assignValues = [
+            'projects' => $projects,
+            'resultCount' => $resultCount,
+            'sysLanguageUid' => $langId
+        ];
+
+        $this->view->assignMultiple($assignValues);
     }
 
     /**

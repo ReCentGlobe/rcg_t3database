@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace ReCentGlobe\Rcgprojectdb\UserFunc;
 
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
 /**
  * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
  *
@@ -22,8 +24,8 @@ class Tca
 
     public function formatPersonLabel(&$parameters)
     {
-        $record = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
-        $newTitle = $record['firstname'].' '.$record['lastname'];
+        $record = BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
+        $newTitle = $record['firstname'] . ' ' . $record['lastname'];
         $parameters['title'] = $newTitle;
     }
 

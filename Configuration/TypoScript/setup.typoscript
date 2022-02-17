@@ -15,6 +15,7 @@ plugin.tx_rcgprojectdb {
             projectDiscipline = {$plugin.tx_rcgprojectdb.settings.categories.projectDiscipline}
             projectEra = {$plugin.tx_rcgprojectdb.settings.categories.projectEra}
             researchAreas = {$plugin.tx_rcgprojectdb.settings.categories.researchAreas}
+            position = {$plugin.tx_rcgprojectdb.settings.categories.position}
         }
 
         # default items per page for asynchronous requests
