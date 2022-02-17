@@ -1,14 +1,15 @@
-CREATE TABLE tx_rcgprojectdb_domain_model_project (
-	image int(11) unsigned NOT NULL DEFAULT '0',
-	title varchar(255) NOT NULL DEFAULT '',
-	short_title varchar(255) NOT NULL DEFAULT '',
-	account_number varchar(255) NOT NULL DEFAULT '',
-	short_description text NOT NULL DEFAULT '',
-	description text,
-	contact text,
-    research_area int(11) unsigned DEFAULT '0' NOT NULL,
-	project_discipline int(11) unsigned DEFAULT '0' NOT NULL,
-	project_era int(11) unsigned DEFAULT '0' NOT NULL,
+CREATE TABLE tx_rcgprojectdb_domain_model_project(
+                                                     slug               varchar(2048),
+                                                     image              int(11) unsigned NOT NULL DEFAULT '0',
+                                                     title              varchar(255)     NOT NULL DEFAULT '',
+                                                     short_title        varchar(255)     NOT NULL DEFAULT '',
+                                                     account_number     varchar(255)     NOT NULL DEFAULT '',
+                                                     short_description  text             NOT NULL DEFAULT '',
+                                                     description        text,
+                                                     contact            text,
+                                                     research_area      int(11) unsigned          DEFAULT '0' NOT NULL,
+                                                     project_discipline int(11) unsigned          DEFAULT '0' NOT NULL,
+                                                     project_era        int(11) unsigned          DEFAULT '0' NOT NULL,
     project_regions int(11) unsigned DEFAULT '0' NOT NULL,
 	funding_start int(11) NOT NULL DEFAULT '0',
 	funding_end int(11) NOT NULL DEFAULT '0',
@@ -26,10 +27,20 @@ CREATE TABLE tx_rcgprojectdb_domain_model_project (
     project_tree int(11) DEFAULT '0' NOT NULL
 );
 
-CREATE TABLE tx_rcgprojectdb_domain_model_person (
-	firstname varchar(255) NOT NULL DEFAULT '',
-	lastname varchar(255) NOT NULL DEFAULT '',
-	projects int(11) unsigned NOT NULL DEFAULT '0'
+CREATE TABLE tx_rcgprojectdb_domain_model_person
+(
+    title         varchar(255)     DEFAULT ''  NOT NULL,
+    firstname     varchar(255)                 NOT NULL DEFAULT '',
+    lastname      varchar(255)                 NOT NULL DEFAULT '',
+    name          tinytext,
+    slug          varchar(2048),
+    email         varchar(255)     DEFAULT ''  NOT NULL,
+    phone         varchar(30)      DEFAULT ''  NOT NULL,
+    profile       varchar(255)     DEFAULT ''  NOT NULL,
+    image         tinyblob,
+    research_area int(11) unsigned DEFAULT '0' NOT NULL,
+    position      int(11) unsigned DEFAULT '0' NOT NULL,
+    projects      int(11) unsigned             NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_rcgprojectdb_domain_model_organization (

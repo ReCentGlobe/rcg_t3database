@@ -1,13 +1,15 @@
 <?php
 
+use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 $ll = 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:';
 
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person',
+        'title' => $ll . 'tx_rcgprojectdb_domain_model_person',
         'label' => 'lastname',
-        'label_userFunc' => \ReCentGlobe\Rcgprojectdb\UserFunc\Tca::class . '->formatPersonLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -24,7 +26,7 @@ return [
         'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.png'
     ],
     'types' => [
-        '1' => ['showitem' => 'firstname, lastname, projects, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
+        '1' => ['showitem' => 'image, title, firstname, lastname, slug, email, phone, profile, research_area, position, projects, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -78,10 +80,71 @@ return [
                 ],
             ],
         ],
+        'image' => [
+            'exclude' => true,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.image',
+            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                    ],
+                    'foreign_types' => [
+                        '0' => [
+                            'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette'
+                        ],
+                        File::FILETYPE_TEXT => [
+                            'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette'
+                        ],
+                        File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette'
+                        ],
+                        File::FILETYPE_AUDIO => [
+                            'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette'
+                        ],
+                        File::FILETYPE_VIDEO => [
+                            'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette'
+                        ],
+                        File::FILETYPE_APPLICATION => [
+                            'showitem' => '
+                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                            --palette--;;filePalette'
+                        ]
+                    ],
+                    'foreign_match_fields' => [
+                        'fieldname' => 'image',
+                        'tablenames' => 'tx_rcgprojectdb_domain_model_person',
+                        'table_local' => 'sys_file',
+                    ],
+                    'maxitems' => 1
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
 
+        ],
+        'title' => [
+            'exclude' => true,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.title',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'default' => ''
+            ],
+        ],
         'firstname' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person.firstname',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.firstname',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -91,7 +154,7 @@ return [
         ],
         'lastname' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person.lastname',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.lastname',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -99,9 +162,89 @@ return [
                 'default' => ''
             ],
         ],
+        'slug' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
+            'displayCond' => 'VERSION:IS:false',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['firstname', 'lastname'],
+                    'fieldSeparator' => '-',
+                    'replacements' => [
+                        '/' => '-'
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'unique',
+                'default' => ''
+            ]
+        ],
+        'email' => [
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.email',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'eval' => 'trim,email',
+                'max' => 255,
+                'softref' => 'email',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
+        'phone' => [
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.phone',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+                'size' => 20,
+                'max' => 30,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
+        'profile' => [
+            'exclude' => true,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.profile',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'fieldControl' => [
+                    'linkPopup' => [
+                        'options' => [
+                            'blindLinkOptions' => 'mail,file,spec,folder',
+                        ],
+                    ],
+                ],
+                'eval' => 'trim',
+                'size' => 20,
+                'max' => 255,
+                'softref' => 'typolink,url',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
+        'research_area' => [
+            'exclude' => true,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.research_area',
+            'config' => [
+                'type' => 'category',
+            ],
+        ],
+        'position' => [
+            'exclude' => true,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.position',
+            'config' => [
+                'type' => 'category',
+            ],
+        ],
         'projects' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_person.projects',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projects',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -123,7 +266,6 @@ return [
                     ],
                 ],
             ],
-            
         ],
     
     ],

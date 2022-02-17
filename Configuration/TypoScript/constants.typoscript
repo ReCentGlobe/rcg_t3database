@@ -18,6 +18,8 @@ plugin.tx_rcgprojectdb {
             projectEra =
             # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default researchAreas category UID
             researchAreas =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default people position category UID
+            position =
         }
         # default items per page for asynchronous requests
         itemsPerPage =

@@ -95,7 +95,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <div class="">
         <div class="contentsection backline" data-name="Projekte" id="section-projects">
             <h2 class="h1">
-                <span class="searchResultCountPerType">XYZ</span> Projekte
+                <span class="searchResultCountPerType">{resultCount}</span> Projekte
             </h2>
         </div>
         <div class="tx_rcgprojectdb results searchTile row">
@@ -107,16 +107,15 @@ Otherwise your changes will be overwritten the next time you save the extension 
                                 <h3 class="h2-teaser-lowercase">
                                     {project.title}
                                 </h3>
-                                <p>{project.shortTitle}</p>
-                                <f:if condition="{project.researchArea}">
+                                <p>{project.shortDescription}</p>
+                                <f:if condition="{project.relatedProjectLeads}">
                                     <f:then>
-                                        <f:for each="{project.researchArea}" as="category" iteration="iterator">
-                                            <p>{category.title}</p>
+                                        <f:for each="{project.relatedProjectLeads}" as="lead" iteration="iterator">
+                                            <p>{lead.firstname} {lead.lastname}</p>
                                         </f:for>
                                     </f:then>
                                 </f:if>
                             </div>
-                            <f:image image="{project.image}" width="200"/>
                             <f:for each="{project.parentProject}" as="parentProject">
                                 <p>Belongs to: {parentProject.title}</p>
                             </f:for>

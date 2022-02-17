@@ -16,21 +16,41 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="content">
     <h1>Listing for Person</h1>
 
-    <f:flashMessages />
+    <f:flashMessages/>
 
-    <table class="tx_rcgprojectdb">
-        <tr>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_person.firstname" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_person.lastname" /></th>
-            <th></th>
-            <th></th>
-        </tr>
+    <f:comment><!--
+        TODO: Add  proper translations for all fields (static and dynamic)
+    --></f:comment>
+
+    <div class="tx_rcgprojectdb row contactTeaserWrap multiple">
         <f:for each="{people}" as="person">
-            <tr>
-                <td><f:link.action action="show" arguments="{person : person}">{person.firstname}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{person : person}">{person.lastname}</f:link.action></td>
-            </tr>
+            <div class="col-md-6">
+                <div class="contactTeaser vcard">
+                    <figure class="avatar">
+                        <f:image image="{person.image}" maxWidth="130" width="130" height="130"/>
+                    </figure>
+                    <div class="personaldata">
+                        <div class="upper">
+                            <h2 class="h2-teaser-lowercase n">
+                                <span class="honorific-prefix">{person.title}</span>
+                                <span class="given-name">{person.firstname}</span>
+                                <span class="family-name">{person.lastname}</span>
+                            </h2>
+                        </div>
+                        <div class="inner">
+                            <f:for each="{person.researchArea}" as="area">
+                                <p>{area.title}</p>
+                            </f:for>
+                        </div>
+                        <p class="links">
+                            <a class="email readon" href="{person.email}"> E-Mail Schreiben </a>
+                            <br>
+                            <a class="readon" href="{person.profile}"> Zum Profil </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </f:for>
-    </table>
+    </div>
 </f:section>
 </html>
