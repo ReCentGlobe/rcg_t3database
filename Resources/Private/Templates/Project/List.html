@@ -12,82 +12,140 @@ in /Configuration/ExtensionBuilder/settings.yaml:
           List.html: keep
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-<f:debug>{project}</f:debug>
 <f:section name="content">
     <h1>Listing for Project</h1>
 
-    <f:flashMessages />
-    <f:debug>{cat-7}</f:debug>
+    <f:flashMessages/>
 
-    <f:form class="">
-        <f:form.select
-                class="custom-select"
-                name="cat-{settings.categories.projectType}"
-                options="{cat-{settings.categories.projectType}}"
-                optionValueField="uid"
-                optionLabelField="title"
-                value="{selectedCat-{settings.categories.projectType}}"/>
-        <f:form.select
-                class="custom-select"
-                name="cat-{settings.categories.projectRegion}"
-                options="{cat-{settings.categories.projectRegion}}"
-                optionValueField="uid"
-                optionLabelField="title"
-                value="{selectedCat-{settings.categories.projectRegion}}"  />
-        <f:form.select
-                class="custom-select"
-                name="cat-{settings.categories.projectDiscipline}"
-                options="{cat-{settings.categories.projectDiscipline}}"
-                optionValueField="uid"
-                optionLabelField="title"
-                value="{selectedCat-{settings.categories.projectDiscipline}}"  />
-        <f:form.select
-                class="custom-select"
-                name="cat-{settings.categories.projectEra}"
-                options="{cat-{settings.categories.projectEra}}"
-                optionValueField="uid"
-                optionLabelField="title"
-                value="{selectedCat-{settings.categories.projectEra}}"  />
-        <f:form.select
-                class="custom-select"
-                name="cat-{settings.categories.researchAreas}"
-                options="{cat-{settings.categories.researchAreas}}"
-                optionValueField="uid"
-                optionLabelField="title"
-                value="{selectedCat-{settings.categories.researchAreas}}"  />
+    <f:comment><!--
+        TODO: Add  proper translations for all fields (static and dynamic)
+    --></f:comment>
+    <div class="filterContainer">
+        <f:form method="get">
+            <div class="filterContainer clearfix">
+                <div class="filter">
+                    <div class="col-md-3">
+                        <label class="sr-only" for="tx_rcgprojectdb_projectlist[q]">Suche</label>
+                        <f:form.textfield
+                                id="tx_rcgprojectdb_projectlist[q]"
+                                class="form-control roundedLeft resetMe keepPlaceholder"
+                                placeholder="Suche"
+                                name="q"/>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="col-md-4">
+                            <f:form.select
+                                    name="cat-{settings.categories.projectType}"
+                                    options="{cat-{settings.categories.projectType}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    value="{selectedCat-{settings.categories.projectType}}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <f:form.select
+                                    name="cat-{settings.categories.projectRegion}"
+                                    options="{cat-{settings.categories.projectRegion}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    value="{selectedCat-{settings.categories.projectRegion}}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <f:form.select
+                                    name="cat-{settings.categories.projectDiscipline}"
+                                    options="{cat-{settings.categories.projectDiscipline}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    value="{selectedCat-{settings.categories.projectDiscipline}}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <f:form.select
+                                    name="cat-{settings.categories.projectEra}"
+                                    options="{cat-{settings.categories.projectEra}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    value="{selectedCat-{settings.categories.projectEra}}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <f:form.select
+                                    name="cat-{settings.categories.researchAreas}"
+                                    options="{cat-{settings.categories.researchAreas}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    value="{selectedCat-{settings.categories.researchAreas}}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <f:form.submit
+                                    class="btn-ghost"
+                                    value="Send"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="activeFilters clearfix">
+                    <span class="headerSpan">Ihre Auswahl:</span>
+                    <ul class="list-tags"></ul>
+                    <button class="reset" type="button">Alle Filter zurücksetzen</button>
+                </div>
+            </div>
 
-        <f:form.textfield name="q"/>
-        <f:form.textfield name="q2"/>
-        <f:form.submit value="Send" />
-    </f:form>
+
+        </f:form>
+    </div>
+
+
+    <div class="">
+        <div class="contentsection backline" data-name="Projekte" id="section-projects">
+            <h2 class="h1">
+                <span class="searchResultCountPerType">XYZ</span> Projekte
+            </h2>
+        </div>
+        <div class="tx_rcgprojectdb results searchTile row">
+            <f:for each="{projects}" as="project">
+                <div class="col-sm-12">
+                    <f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">
+                        <div class="searchresult bg-white">
+                            <div class="matchHeight">
+                                <h3 class="h2-teaser-lowercase">
+                                    {project.title}
+                                </h3>
+                                <p>{project.shortTitle}</p>
+                                <f:if condition="{project.researchArea}">
+                                    <f:then>
+                                        <f:for each="{project.researchArea}" as="category" iteration="iterator">
+                                            <p>{category.title}</p>
+                                        </f:for>
+                                    </f:then>
+                                </f:if>
+                            </div>
+                            <f:image image="{project.image}" width="200"/>
+                            <f:for each="{project.parentProject}" as="parentProject">
+                                <p>Belongs to: {parentProject.title}</p>
+                            </f:for>
+                            <span class="readon">Weiterlesen</span>
+                        </div>
+                    </f:link.action>
+                </div>
+            </f:for>
+        </div>
+    </div>
+    <f:debug>{projects}</f:debug>
 
     <table class="tx_rcgprojectdb">
         <tr>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.image" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.title" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.short_title" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></th>
+            <th>
+                <f:translate key="tx_rcgprojectdb_domain_model_project.image"/>
+            </th>
+            <th>Parent</th>
+            <th>
+                <f:translate key="tx_rcgprojectdb_domain_model_project.title"/>
+            </th>
+            <th>
+                <f:translate key="tx_rcgprojectdb_domain_model_project.short_title"/>
+            </th>
+            <th>
+                <f:translate key="tx_rcgprojectdb_domain_model_project.research_area"/>
+            </th>
         </tr>
-        <f:for each="{projects}" as="project">
-            <tr>
-                <td>
-                    <f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">
-                        <f:image image="{project.image}" width="200"></f:image>
-                    </f:link.action>
-                </td>
-                <td><f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">{project.title}</f:link.action></td>
-                <td><f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
-                <td>
-                    <f:if condition="{project.researchArea}">
-                        <f:then>
-                            <f:for each="{project.researchArea}" as="category" iteration="iterator">
-                                {category.title}
-                            </f:for>
-                        </f:then>
-                    </f:if>
-                </td>
-            </tr>
-        </f:for>
+
     </table>
 
     <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'List', controller: 'JsonProject', pluginName: 'projectlist_AJAX', pageType:'{settings.ajax.projectAJAXList}')}">
