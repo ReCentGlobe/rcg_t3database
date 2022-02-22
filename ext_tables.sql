@@ -33,6 +33,7 @@ CREATE TABLE tx_rcgprojectdb_domain_model_person
     title          varchar(255)     DEFAULT ''  NOT NULL,
     firstname      varchar(255)                 NOT NULL DEFAULT '',
     lastname       varchar(255)                 NOT NULL DEFAULT '',
+    description    text,
     name           tinytext,
     slug           varchar(2048),
     email          varchar(255)     DEFAULT ''  NOT NULL,

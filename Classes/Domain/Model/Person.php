@@ -54,6 +54,13 @@ class Person extends AbstractEntity
     protected $lastname = '';
 
     /**
+     * description
+     *
+     * @var string
+     */
+    protected $description = '';
+
+    /**
      * slug
      * @var string
      */
@@ -388,4 +395,22 @@ class Person extends AbstractEntity
     {
         $this->image = $image;
     }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+
 }

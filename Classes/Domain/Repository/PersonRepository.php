@@ -58,7 +58,7 @@ class PersonRepository extends Repository
                 $searchWordConstraints = [];
 
                 // TODO: Implement description field for Person Model
-                //$searchWordConstraints[] = $query->like('description', '%' . $demand->getSearchQuery() . '%');
+                $searchWordConstraints[] = $query->like('description', '%' . $demand->getSearchQuery() . '%');
                 $searchWordConstraints[] = $query->like('firstname', '%' . $demand->getSearchQuery() . '%');
                 $searchWordConstraints[] = $query->like('lastname', '%' . $demand->getSearchQuery() . '%');
                 $searchWordConstraints[] = $query->like('projectMember.title', '%' . $demand->getSearchQuery() . '%');
