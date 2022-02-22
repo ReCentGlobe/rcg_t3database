@@ -22,10 +22,10 @@ plugin.tx_rcgprojectdb {
             position =
         }
         # default items per page for asynchronous requests
-        itemsPerPage =
+        itemsPerPage = 5
         # ajax page types
         ajax {
-            projectAJAXList =
+            projectAJAXList = 808
         }
     }
 }
@@ -52,10 +52,6 @@ plugin.tx_rcgprojectdb_projectAjax {
         partialRootPath = EXT:rcgprojectdb/Resources/Private/Partials/
         # cat=plugin.tx_rcgprojectdb_projectlist/file; type=string; label=Path to template layouts (FE)
         layoutRootPath = EXT:rcgprojectdb/Resources/Private/Layouts/
-    }
-    persistence {
-        # cat=plugin.tx_rcgprojectdb_projectlist//a; type=string; label=Default storage PID
-        storagePid =
     }
 }
 plugin.tx_rcgprojectdb_personlist {

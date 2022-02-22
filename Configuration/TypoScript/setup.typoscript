@@ -58,7 +58,7 @@ tx_rcgprojectdb_projectlist_AJAX {
         pluginName = Projectajax
         vendorName = ReCentGlobe
         extensionName = Rcgprojectdb
-        controller = JsonProjectController
+        controller = ProjectController
     }
 
     10 < tt_content.list.20.rcgprojectdb_projectajax
@@ -91,7 +91,8 @@ plugin.tx_rcgprojectdb_projectlist {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
-plugin.tx_rcgprojectdb_projectAjax {
+
+plugin.tx_rcgprojectdb_projectajax {
     persistence {
         storagePid = {$plugin.tx_rcgprojectdb_projectlist.persistence.storagePid}
         #recursive = 1

@@ -149,24 +149,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
     </div>
     <f:debug>{projects}</f:debug>
 
-    <table class="tx_rcgprojectdb">
-        <tr>
-            <th>
-                <f:translate key="tx_rcgprojectdb_domain_model_project.image"/>
-            </th>
-            <th>Parent</th>
-            <th>
-                <f:translate key="tx_rcgprojectdb_domain_model_project.title"/>
-            </th>
-            <th>
-                <f:translate key="tx_rcgprojectdb_domain_model_project.short_title"/>
-            </th>
-            <th>
-                <f:translate key="tx_rcgprojectdb_domain_model_project.research_area"/>
-            </th>
-        </tr>
-
-    </table>
 
     <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'List', controller: 'JsonProject', pluginName: 'projectlist_AJAX', pageType:'{settings.ajax.projectAJAXList}')}">
         mehr laden
@@ -175,11 +157,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'show', controller: 'JsonProject', pluginName: 'projectajax', pageType:'{settings.ajax.projectAJAXList}', arguments:'{currentPage: 1, perPage: 1}')}">
         show #1
     </a>
-    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'show', controller: 'JsonProject', pluginName: 'projectajax', pageType:'{settings.ajax.projectAJAXList}', noCacheHash: 1, arguments:'{project: 2}')}">
+    <a class="button load-more-items" data-page="{page}"
+       href="{f:uri.action(action: 'ajaxShow', controller: 'Project', pluginName: 'Projectajax', pageType:'{settings.ajax.projectAJAXList}', noCacheHash: 1, arguments:'{project: 5}')}">
         show #2
     </a>
 
-    <a class="button load-more-items" data-page="{page}" href="{f:uri.action(action: 'list', controller: 'JsonProject', pluginName: 'projectajax', pageType:'{settings.ajax.projectAJAXList}', noCacheHash: 1, arguments:'{}')}">
+    <a class="button load-more-items" data-page="{page}"
+       href="{f:uri.action(action: 'ajaxlist', controller: 'Project', pluginName: 'Projectajax', pageType:'{settings.ajax.projectAJAXList}', noCacheHash: 1, arguments:'{}')}">
         show all
     </a>
 </f:section>

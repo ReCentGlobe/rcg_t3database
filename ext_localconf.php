@@ -38,12 +38,11 @@ defined('TYPO3_MODE') || die();
         'Rcgprojectdb',
         'Projectajax',
         [
-            JsonProjectController::class => 'list, show, search',
+            ProjectController::class => 'ajaxlist, ajaxshow',
         ],
         // non-cacheable actions
         [
-            JsonProjectController::class => 'list, show, search',
-            PersonController::class => ''
+            ProjectController::class => 'ajaxlist, ajaxshow',
         ]
     );
 
