@@ -19,7 +19,9 @@ defined('TYPO3_MODE') || die();
             ProjectController::class => 'list',
         ],
         // non-cacheable actions
-        []
+        [
+            ProjectController::class => 'list',
+        ]
     );
 
     ExtensionUtility::configurePlugin(

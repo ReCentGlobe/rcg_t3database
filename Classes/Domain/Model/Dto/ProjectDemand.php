@@ -2,7 +2,6 @@
 
 namespace ReCentGlobe\Rcgprojectdb\Domain\Model\Dto;
 
-use ReCentGlobe\Rcgprojectdb\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -16,7 +15,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 
 /**
- * Demand
+ * Project Demand
  */
 class ProjectDemand extends AbstractEntity
 {

@@ -21,21 +21,24 @@ Otherwise your changes will be overwritten the next time you save the extension 
         TODO: Add  proper translations for all fields (static and dynamic)
     --></f:comment>
     <div class="filterContainer">
-        <f:form method="get">
+        <f:form method="post" object="{filter}" name="filter">
             <div class="filterContainer clearfix">
                 <div class="filter">
                     <div class="col-md-3">
-                        <label class="sr-only" for="tx_rcgprojectdb_projectlist[q]">Suche</label>
+                        <label class="sr-only" for="searchQuery">Suche</label>
                         <f:form.textfield
-                                id="tx_rcgprojectdb_projectlist[q]"
+                                id="searchQuery"
+                                property="searchQuery"
                                 class="form-control roundedLeft resetMe keepPlaceholder"
                                 placeholder="Suche"
-                                name="q"/>
+                        />
                     </div>
                     <div class="col-md-9">
                         <div class="col-md-4">
                             <f:form.select
-                                    name="cat-{settings.categories.projectType}"
+                                    id="projectType"
+                                    property="projectType"
+                                    multiple="1"
                                     options="{cat-{settings.categories.projectType}}"
                                     optionValueField="uid"
                                     optionLabelField="title"
@@ -43,7 +46,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
                         </div>
                         <div class="col-md-4">
                             <f:form.select
-                                    name="cat-{settings.categories.projectRegion}"
+                                    id="projectRegion"
+                                    property="projectRegion"
+                                    multiple="1"
                                     options="{cat-{settings.categories.projectRegion}}"
                                     optionValueField="uid"
                                     optionLabelField="title"
@@ -51,7 +56,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
                         </div>
                         <div class="col-md-4">
                             <f:form.select
-                                    name="cat-{settings.categories.projectDiscipline}"
+                                    id="projectDiscipline"
+                                    property="projectDiscipline"
+                                    multiple="1"
                                     options="{cat-{settings.categories.projectDiscipline}}"
                                     optionValueField="uid"
                                     optionLabelField="title"
@@ -59,7 +66,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
                         </div>
                         <div class="col-md-4">
                             <f:form.select
-                                    name="cat-{settings.categories.projectEra}"
+                                    id="projectEra"
+                                    property="projectEra"
+                                    multiple="1"
                                     options="{cat-{settings.categories.projectEra}}"
                                     optionValueField="uid"
                                     optionLabelField="title"
@@ -67,7 +76,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
                         </div>
                         <div class="col-md-4">
                             <f:form.select
-                                    name="cat-{settings.categories.researchAreas}"
+                                    id="researchArea"
+                                    property="researchArea"
+                                    multiple="1"
                                     options="{cat-{settings.categories.researchAreas}}"
                                     optionValueField="uid"
                                     optionLabelField="title"
@@ -98,33 +109,43 @@ Otherwise your changes will be overwritten the next time you save the extension 
                 <span class="searchResultCountPerType">{resultCount}</span> Projekte
             </h2>
         </div>
-        <div class="tx_rcgprojectdb results searchTile row">
-            <f:for each="{projects}" as="project">
-                <div class="col-sm-12">
-                    <f:link.action action="show" pageUid="{settings.detailPidProjects}" arguments="{project : project}">
-                        <div class="searchresult bg-white">
-                            <div class="matchHeight">
-                                <h3 class="h2-teaser-lowercase">
-                                    {project.title}
-                                </h3>
-                                <p>{project.shortDescription}</p>
-                                <f:if condition="{project.relatedProjectLeads}">
-                                    <f:then>
-                                        <f:for each="{project.relatedProjectLeads}" as="lead" iteration="iterator">
-                                            <p>{lead.firstname} {lead.lastname}</p>
-                                        </f:for>
-                                    </f:then>
-                                </f:if>
-                            </div>
-                            <f:for each="{project.parentProject}" as="parentProject">
-                                <p>Belongs to: {parentProject.title}</p>
-                            </f:for>
-                            <span class="readon">Weiterlesen</span>
+        <f:if condition="{projects}">
+            <f:then>
+                <div class="tx_rcgprojectdb results searchTile row">
+                    <f:for each="{projects}" as="project">
+                        <div class="col-sm-12">
+                            <f:link.action action="show" pageUid="{settings.detailPidProjects}"
+                                           arguments="{project : project}">
+                                <div class="searchresult bg-white">
+                                    <div class="matchHeight">
+                                        <h3 class="h2-teaser-lowercase">
+                                            {project.title}
+                                        </h3>
+                                        <p>{project.shortDescription}</p>
+                                        <f:if condition="{project.relatedProjectLeads}">
+                                            <f:then>
+                                                <f:for each="{project.relatedProjectLeads}" as="lead"
+                                                       iteration="iterator">
+                                                    <p>{lead.firstname} {lead.lastname}</p>
+                                                </f:for>
+                                            </f:then>
+                                        </f:if>
+                                    </div>
+                                    <f:for each="{project.parentProject}" as="parentProject">
+                                        <p>Belongs to: {parentProject.title}</p>
+                                    </f:for>
+                                    <span class="readon">Weiterlesen</span>
+                                </div>
+                            </f:link.action>
                         </div>
-                    </f:link.action>
+                    </f:for>
                 </div>
-            </f:for>
-        </div>
+            </f:then>
+            <f:else>
+                <h2>Keine Projekte gefunden</h2>
+            </f:else>
+        </f:if>
+
     </div>
     <f:debug>{projects}</f:debug>
 

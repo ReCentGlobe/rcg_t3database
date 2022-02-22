@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ReCentGlobe\Rcgprojectdb\Controller;
 
 
+use ReCentGlobe\Rcgprojectdb\Domain\Model\Dto\ProjectDemand;
 use ReCentGlobe\Rcgprojectdb\Domain\Model\Project;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -45,22 +46,24 @@ class JsonProjectController extends ProjectController
     /**
      * action list
      *
-     * @param Project
+     * @param ProjectDemand|null $filterDemand
+     * @param int $currentPage
      * @return string|object|null|void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function listAction(int $currentPage = 1)
-    {
-        $this->view->setVariablesToRender(['projects','settings']);
-        $projects = $this->projectRepository->findAll();
+    /*    public function listAction(ProjectDemand $filterDemand = null, int $currentPage = 1)
+        {
+            $this->view->setVariablesToRender(['projects','settings']);
+            $projects = $this->projectRepository->findAll();
 
-        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : $currentPage;
-        $perPage = $this->request->hasArgument('perPage') ? (int)$this->request->getArgument('perPage') : (int)$this->settings['itemsPerPage'];
-        
-        $paginator = new QueryResultPaginator($projects, $currentPage, $perPage);
+            $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : $currentPage;
+            $perPage = $this->request->hasArgument('perPage') ? (int)$this->request->getArgument('perPage') : (int)$this->settings['itemsPerPage'];
 
-        $this->view->assign('projects', $paginator->getPaginatedItems());
-        $this->view->assign('settings', $paginator);
-    }
+            $paginator = new QueryResultPaginator($projects, $currentPage, $perPage);
+
+            $this->view->assign('projects', $paginator->getPaginatedItems());
+            $this->view->assign('settings', $paginator);
+        }*/
 
     /**
      * action search

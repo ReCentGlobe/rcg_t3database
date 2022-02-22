@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ReCentGlobe\Rcgprojectdb\Controller;
 
+use ReCentGlobe\Rcgprojectdb\Domain\Model\Dto\ProjectDemand;
 use ReCentGlobe\Rcgprojectdb\Domain\Model\Project;
 use ReCentGlobe\Rcgprojectdb\Domain\Repository\CategoryRepository;
 use ReCentGlobe\Rcgprojectdb\Domain\Repository\ProjectRepository;
@@ -11,6 +12,7 @@ use ReCentGlobe\Rcgprojectdb\Utility\CategoryUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -43,35 +45,34 @@ class ProjectController extends ActionController
     protected $categoryRepository = null;
 
 
-    // TODO: Cleanup List Action
-
     /**
      * action list
      *
-     * @param Project
-     * @return string|object|null|void
+     * @param ProjectDemand $filter
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction()
+    public function listAction(ProjectDemand $filter = null)
     {
-        $data = GeneralUtility::_GP('tx_fgzdatabase_showpeople');
-
         $context = GeneralUtility::makeInstance(Context::class);
         $langId = $context->getPropertyFromAspect('language', 'id');
-        //DebuggerUtility::var_dump(array_values($this->settings['categories']));
 
         $catfilter = array_values($this->settings['categories']);
         foreach ($catfilter as $k => $v) {
             $categoryList = $this->categoryRepository->findChildren($v);
-            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($categoryList);
             $this->view->assign('cat-' . $v, $categoryList);
         }
 
-        $projects = $this->projectRepository->findAll();
+        $projects = $this->projectRepository->findDemanded(
+            $filter
+        );
+
+        // TODO: Implement CountByDemanded
         $resultCount = $this->projectRepository->countAll();
-        DebuggerUtility::var_dump($resultCount);
 
         $assignValues = [
             'projects' => $projects,
+            'filter' => $filter,
             'resultCount' => $resultCount,
             'sysLanguageUid' => $langId
         ];

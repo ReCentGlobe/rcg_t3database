@@ -1,12 +1,16 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:debug>{project}</f:debug>
 <table class="tx-rcgprojectdb">
-	<tr>
-		<td><f:translate key="tx_rcgprojectdb_domain_model_project.image" /></td>
-		<td>
-				<f:image src="{project.image.originalResource.publicUrl}" width="200"/>
-		</td>
-	</tr>
+    <f:if condition="{project.image}">
+        <tr>
+            <td>
+                <f:translate key="tx_rcgprojectdb_domain_model_project.image"/>
+            </td>
+            <td>
+                <f:image src="{project.image.originalResource.publicUrl}" width="200"/>
+            </td>
+        </tr>
+    </f:if>
 	<tr>
 		<td><f:translate key="tx_rcgprojectdb_domain_model_project.title" /></td>
 		<td>{project.title}</td>
@@ -39,57 +43,62 @@
 	</tr>
 	<tr>
 		<td><f:translate key="tx_rcgprojectdb_domain_model_project.contact" /></td>
-		<td>{project.contact -> f:sanitize.html()}</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></td>
-		<td>
-			<f:then>
-				<f:for each="{project.researchArea}" as="category" iteration="iterator">
-					{category.title}
-				</f:for>
-			</f:then>
-		</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_rcgprojectdb_domain_model_project.institutions" /></td>
-		<td>
-			<f:then>
-				<f:for each="{project.institutions}" as="institution" iteration="iterator">
-					<f:image src="{institution.logo.originalResource.publicUrl}" width="200"/>
-					{institution.title}
-				</f:for>
-			</f:then>
-		</td>
-	</tr>
-	<tr>
-		<td><f:translate key="tx_rcgprojectdb_domain_model_project.project_discipline" /></td>
-		<td>
-			<f:then>
-				<f:for each="{project.projectDiscipline}" as="category" iteration="iterator">
-					{category.title}
-				</f:for>
-			</f:then>
-		</td>
+        <td>{project.contact -> f:sanitize.html()}</td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rcgprojectdb_domain_model_project.research_area"/>
+        </td>
+        <td>
+            <f:for each="{project.researchArea}" as="category" iteration="iterator">
+                {category.title}
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rcgprojectdb_domain_model_project.related_project_leads"/>
+        </td>
+        <td>
+            <f:for each="{project.relatedProjectLeads}" as="lead" iteration="iterator">
+                {lead.title} {lead.firstname} {lead.lastname}
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rcgprojectdb_domain_model_project.related_project_members"/>
+        </td>
+        <td>
+            <f:for each="{project.relatedProjectMembers}" as="member" iteration="iterator">
+                {lead.title} {member.firstname} {lead.lastname}
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rcgprojectdb_domain_model_project.project_discipline"/>
+        </td>
+        <td>
+            <f:for each="{project.projectDiscipline}" as="category" iteration="iterator">
+                {category.title}
+            </f:for>
+        </td>
 	</tr>
 	<tr>
 		<td><f:translate key="tx_rcgprojectdb_domain_model_project.project_regions" /></td>
 		<td>
-			<f:then>
 				<f:for each="{project.projectRegions}" as="category" iteration="iterator">
 					{category.title}
 				</f:for>
-			</f:then>
 		</td>
 	</tr>
 	<tr>
 		<td><f:translate key="tx_rcgprojectdb_domain_model_project.project_era" /></td>
 		<td>
-			<f:then>
 				<f:for each="{project.projectEra}" as="category" iteration="iterator">
 					{category.title}
 				</f:for>
-			</f:then>
 		</td>
 	</tr>
 	<tr>

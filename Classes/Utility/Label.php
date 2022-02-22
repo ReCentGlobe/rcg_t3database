@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ReCentGlobe\Rcgprojectdb\Hooks\Tca;
+namespace ReCentGlobe\Rcgprojectdb\Utility;
 
 /**
  * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
@@ -14,6 +14,7 @@ namespace ReCentGlobe\Rcgprojectdb\Hooks\Tca;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Dynamic label of the address record based on tsconfig
@@ -24,6 +25,17 @@ class Label
         ['lastname', 'firstname'],
         ['email'],
     ];
+
+    public function getObjectLabel(&$params, &$pObj)
+    {
+        if ($params['table'] !== 'tx_rcgprojectdb_domain_model_person') {
+            return '';
+        }
+        // Get complete record
+        $rec = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord($params['table'], $params['row']['uid']);
+        // Write to the label
+        $params['title'] = $rec['firstname'] . ' ' . $rec['lastname'];
+    }
 
     public function getAddressLabel(array &$params): void
     {
@@ -41,7 +53,7 @@ class Label
             $label = [];
             foreach ($fieldList as $field) {
                 if (isset($row[$field]) && !empty($row[$field])) {
-                    $label[] = BackendUtility::getProcessedValue('tt_address', $field, $row[$field], 0, false, 0, $row['uid']);
+                    $label[] = BackendUtility::getProcessedValue('tx_rcgprojectdb_project_person', $field, $row[$field], 0, false, 0, $row['uid']);
                 }
             }
             if (!empty($label)) {
@@ -53,7 +65,7 @@ class Label
 
     protected function getConfiguration(int $pid): array
     {
-        $labelConfiguration = BackendUtility::getPagesTSconfig($pid)['tt_address.']['label'] ?? '';
+        $labelConfiguration = BackendUtility::getPagesTSconfig($pid)['tx_rcgprojectdb_project_person.']['label'] ?? '';
         if (!$labelConfiguration) {
             return self::FALLBACK;
         }
