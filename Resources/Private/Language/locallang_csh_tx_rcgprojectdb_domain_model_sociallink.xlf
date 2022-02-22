@@ -10,7 +10,7 @@
 				<source>type</source>
 			</trans-unit>
 			<trans-unit id="url.description" resname="url.description">
-				<source>url</source>
+				<source>URL</source>
 			</trans-unit>
 		</body>
 	</file>

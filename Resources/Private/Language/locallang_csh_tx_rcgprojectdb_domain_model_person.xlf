@@ -3,14 +3,42 @@
 	<file source-language="en" datatype="plaintext" original="EXT:rcgprojectdb/Resources/Private/Language/locallang_csh_tx_rcgprojectdb_domain_model_person.xlf" date="2022-02-08T16:25:04Z" product-name="rcgprojectdb">
 		<header/>
 		<body>
+			<trans-unit id="image.description" resname="image.description">
+				<source>image</source>
+			</trans-unit>
 			<trans-unit id="firstname.description" resname="firstname.description">
 				<source>firstname</source>
 			</trans-unit>
 			<trans-unit id="lastname.description" resname="lastname.description">
 				<source>lastname</source>
 			</trans-unit>
-			<trans-unit id="projects.description" resname="projects.description">
-				<source>projects</source>
+
+			<trans-unit id="title.description" resname="title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="description.description" resname="description.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="email.description" resname="email.description">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="phone.description" resname="phone.description">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="profile.description" resname="profile.description">
+				<source>Profile link</source>
+			</trans-unit>
+			<trans-unit id="research_area.description" resname="research_area.description">
+				<source>Research area</source>
+			</trans-unit>
+			<trans-unit id="position.description" resname="position.description">
+				<source>Position</source>
+			</trans-unit>
+			<trans-unit id="project_lead.description" resname="project_lead.description">
+				<source>Project lead</source>
+			</trans-unit>
+			<trans-unit id="project_member.description" resname="project_member.description">
+				<source>Project member</source>
 			</trans-unit>
 		</body>
 	</file>
