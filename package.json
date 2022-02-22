@@ -1,6 +1,6 @@
 {
   "name": "rcgprojectdb",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "main": "index.js",
   "author": "Florian Förster <florian.foerster@uni-leipzig.de>",
   "license": "MIT",
