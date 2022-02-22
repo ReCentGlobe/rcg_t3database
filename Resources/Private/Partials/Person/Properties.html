@@ -11,7 +11,8 @@
 	<tr>
 		<td><f:translate key="tx_rcgprojectdb_domain_model_person.projects" /></td>
 		<td>
-			<f:for each="{person.projects}" as="project">
+
+        <f:for each="{person.projects}" as="project">
 				<f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action>
 			</f:for>
 		</td>

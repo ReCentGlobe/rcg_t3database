@@ -6,6 +6,7 @@ namespace ReCentGlobe\Rcgprojectdb\Domain\Model;
 
 
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -20,7 +21,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Person
  */
-class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Person extends AbstractEntity
 {
 
     /**
@@ -93,11 +94,18 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $position = null;
 
     /**
-     * projects
+     * projectLead
      *
      * @var ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project>
      */
-    protected $projects = null;
+    protected $projectLead = null;
+
+    /**
+     * projectMember
+     *
+     * @var ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project>
+     */
+    protected $projectMember = null;
 
     /**
      * __construct
@@ -119,7 +127,8 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function initializeObject()
     {
-        $this->projects = $this->projects ?: new ObjectStorage();
+        $this->projectLead = $this->projectLead ?: new ObjectStorage();
+        $this->projectMember = $this->projectMember ?: new ObjectStorage();
         $this->researchArea = $this->researchArea ?: new ObjectStorage();
         $this->position = $this->position ?: new ObjectStorage();
     }
@@ -279,46 +288,89 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds a Project
+     * Adds a projectLead
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $project
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectLead
      * @return void
      */
-    public function addProject(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $project)
+    public function addProjectLead(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectLead)
     {
-        $this->projects->attach($project);
+        $this->projectLead->attach($projectLead);
     }
 
     /**
-     * Removes a Project
+     * Removes a projectLead
      *
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectToRemove The Project to be removed
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectLeadToRemove The Project to be removed
      * @return void
      */
-    public function removeProject(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectToRemove)
+    public function removeProjectLead(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectLeadToRemove)
     {
-        $this->projects->detach($projectToRemove);
+        $this->projectLead->detach($projectLeadToRemove);
     }
 
     /**
-     * Returns the projects
+     * Returns the projectLead
      *
      * @return ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> projects
      */
-    public function getProjects()
+    public function getProjectLead()
     {
-        return $this->projects;
+        return $this->projectLead;
     }
 
     /**
-     * Sets the projects
+     * Sets the projectLead
      *
-     * @param ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> $projects
+     * @param ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> $projectLead
      * @return void
      */
-    public function setProjects(ObjectStorage $projects)
+    public function setProjectLead(ObjectStorage $projectLead)
     {
-        $this->projects = $projects;
+        $this->projectLead = $projectLead;
+    }
+
+    /**
+     * Adds a projectMember
+     *
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectMember
+     * @return void
+     */
+    public function addProjectMember(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectMember)
+    {
+        $this->projectMember->attach($projectMember);
+    }
+
+    /**
+     * Removes a Projecmember
+     *
+     * @param \ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectMemberToRemove The Project to be removed
+     * @return void
+     */
+    public function removeProjectMember(\ReCentGlobe\Rcgprojectdb\Domain\Model\Project $projectMemberToRemove)
+    {
+        $this->projectMember->detach($projectMemberToRemove);
+    }
+
+    /**
+     * Returns the projectMember
+     *
+     * @return ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> projects
+     */
+    public function getProjectMember()
+    {
+        return $this->projectMember;
+    }
+
+    /**
+     * Sets the projectMember
+     *
+     * @param ObjectStorage<\ReCentGlobe\Rcgprojectdb\Domain\Model\Project> $projectMember
+     * @return void
+     */
+    public function setProjectMember(ObjectStorage $projectMember)
+    {
+        $this->projectMember = $projectMember;
     }
 
     /**
