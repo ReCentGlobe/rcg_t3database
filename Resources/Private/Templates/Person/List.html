@@ -63,64 +63,72 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
         </f:form>
     </div>
-    <f:if condition="{people}">
-        <f:then>
-            <div class="tx_rcgprojectdb row contactTeaserWrap multiple">
-                <f:for each="{people}" as="person">
-                    <div class="col-md-6">
-                        <div class="contactTeaser vcard">
-                            <figure class="avatar">
-                                <f:if condition="{person.image}">
-                                    <f:image image="{person.image}" maxWidth="130" width="130" height="130"/>
-                                </f:if>
-                            </figure>
-                            <div class="personaldata">
-                                <div class="upper">
-                                    <h2 class="h2-teaser-lowercase n">
-                                        <span class="honorific-prefix">{person.title}</span>
-                                        <span class="given-name">{person.firstname}</span>
-                                        <span class="family-name">{person.lastname}</span>
-                                    </h2>
-                                </div>
-                                <div class="inner">
-                                    <f:if condition="{person.projectLead}">
-                                        <p>Project Lead:</p>
-                                        <f:for each="{person.projectLead}" as="lead">
-                                            <f:link.action action="show" controller="Project"
-                                                           pageUid="{settings.detailPidProjects}"
-                                                           arguments="{project : lead}">{lead.title}
-                                            </f:link.action>
-                                        </f:for>
+    <div>
+        <div class="contentsection backline" data-name="Projekte" id="section-projects">
+            <h2 class="h1">
+                <span class="searchResultCountPerType"><f:count>{people}</f:count></span> Personen
+            </h2>
+        </div>
+        <f:if condition="{people}">
+            <f:then>
+                <div class="tx_rcgprojectdb row contactTeaserWrap multiple">
+                    <f:for each="{people}" as="person">
+                        <div class="col-md-6">
+                            <div class="contactTeaser vcard">
+                                <figure class="avatar">
+                                    <f:if condition="{person.image}">
+                                        <f:image image="{person.image}" maxWidth="130" width="130" height="130"/>
                                     </f:if>
-                                    <f:if condition="{person.projectMember}">
-                                        <p>Project Member:</p>
-                                        <f:for each="{person.projectMember}" as="member">
-                                            <f:link.action action="show" controller="Project"
-                                                           pageUid="{settings.detailPidProjects}"
-                                                           arguments="{project : member}">{member.title}
-                                            </f:link.action>
+                                </figure>
+                                <div class="personaldata">
+                                    <div class="upper">
+                                        <h2 class="h2-teaser-lowercase n">
+                                            <span class="honorific-prefix">{person.title}</span>
+                                            <span class="given-name">{person.firstname}</span>
+                                            <span class="family-name">{person.lastname}</span>
+                                        </h2>
+                                    </div>
+                                    <div class="inner">
+                                        <f:if condition="{person.projectLead}">
+                                            <p>Project Lead:</p>
+                                            <f:for each="{person.projectLead}" as="lead">
+                                                <f:link.action action="show" controller="Project"
+                                                               pageUid="{settings.detailPidProjects}"
+                                                               arguments="{project : lead}">{lead.title}
+                                                </f:link.action>
+                                            </f:for>
+                                        </f:if>
+                                        <f:if condition="{person.projectMember}">
+                                            <p>Project Member:</p>
+                                            <f:for each="{person.projectMember}" as="member">
+                                                <f:link.action action="show" controller="Project"
+                                                               pageUid="{settings.detailPidProjects}"
+                                                               arguments="{project : member}">{member.title}
+                                                </f:link.action>
+                                            </f:for>
+                                        </f:if>
+                                        <p>ResearchArea</p>
+                                        <f:for each="{person.researchArea}" as="area">
+                                            <p>{area.title}</p>
                                         </f:for>
-                                    </f:if>
-                                    <p>ResearchArea</p>
-                                    <f:for each="{person.researchArea}" as="area">
-                                        <p>{area.title}</p>
-                                    </f:for>
+                                    </div>
+                                    <p class="links">
+                                        <a class="email readon" href="{person.email}"> E-Mail Schreiben </a>
+                                        <br>
+                                        <a class="readon" href="{person.profile}"> Zum Profil </a>
+                                    </p>
                                 </div>
-                                <p class="links">
-                                    <a class="email readon" href="{person.email}"> E-Mail Schreiben </a>
-                                    <br>
-                                    <a class="readon" href="{person.profile}"> Zum Profil </a>
-                                </p>
                             </div>
                         </div>
-                    </div>
-                </f:for>
-            </div>
-        </f:then>
-        <f:else>
-            <h2>Keine Projekte gefunden</h2>
-        </f:else>
-    </f:if>
+                    </f:for>
+                </div>
+            </f:then>
+            <f:else>
+                <h2>Keine Projekte gefunden</h2>
+            </f:else>
+        </f:if>
+    </div>
+
 
 </f:section>
 </html>

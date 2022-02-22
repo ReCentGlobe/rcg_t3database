@@ -58,13 +58,10 @@ class PersonController extends ActionController
         }
 
         $people = $this->personRepository->findDemanded($filter);
-        // TODO: Implement CountByDemanded
-        $resultCount = $this->personRepository->countAll();
 
         $assignValues = [
             'people' => $people,
             'filter' => $filter,
-            'resultCount' => $resultCount,
         ];
 
         $this->view->assignMultiple($assignValues);

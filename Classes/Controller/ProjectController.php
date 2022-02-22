@@ -67,13 +67,9 @@ class ProjectController extends ActionController
             $filter
         );
 
-        // TODO: Implement CountByDemanded
-        $resultCount = $this->projectRepository->countAll();
-
         $assignValues = [
             'projects' => $projects,
             'filter' => $filter,
-            'resultCount' => $resultCount,
             'sysLanguageUid' => $langId
         ];
 
