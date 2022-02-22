@@ -1,8 +1,11 @@
 <?php
+
+$ll = 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:';
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project',
-        'label' => 'image',
+        'label' => 'short_title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -17,11 +20,18 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,short_title,account_number,short_description,description,contact,funding_amount',
-        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_project.gif'
+        'searchFields' => 'title,short_title,account_number,short_description,description,contact,funding_amount,funding_format',
+        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_project.png'
     ],
     'types' => [
-        '1' => ['showitem' => 'image, title, short_title, account_number, short_description, description, contact, project_discipline, project_regions, project_era, research_area, funder, funding_start, funding_end, funding_amount, funding_format, related_links, persons, tags, partners, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => [
+            'showitem' => 'project_tree, type, --palette--;;general, short_description, description,related_links,contact, 
+                        --div--;ProjectCat, child_project, parent_project, project_discipline, project_regions, project_era, 
+                        --div--;People, related_project_leads, related_project_members, 
+                        --div--;InOut, 
+                        --div--;Related, research_area, institutions, 
+                        --div--;Funding, --palette--;;funding,  
+                        --div--;Cooperation, cooperation_partners, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -104,9 +114,27 @@ return [
                 ]
             ],
         ],
-
-        'image' => [
+        'slug' => [
             'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
+            'displayCond' => 'VERSION:IS:false',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['short_title'],
+                    'fieldSeparator' => '-',
+                    'replacements' => [
+                        '/' => '-'
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'unique',
+                'default' => ''
+            ]
+        ],
+        'image' => [
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'image',
@@ -158,7 +186,7 @@ return [
             
         ],
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.title',
             'config' => [
                 'type' => 'input',
@@ -168,7 +196,7 @@ return [
             ],
         ],
         'short_title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.short_title',
             'config' => [
                 'type' => 'input',
@@ -178,7 +206,7 @@ return [
             ],
         ],
         'account_number' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.account_number',
             'config' => [
                 'type' => 'input',
@@ -188,7 +216,7 @@ return [
             ],
         ],
         'short_description' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.short_description',
             'config' => [
                 'type' => 'text',
@@ -199,7 +227,7 @@ return [
             ]
         ],
         'description' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.description',
             'config' => [
                 'type' => 'text',
@@ -217,7 +245,7 @@ return [
             
         ],
         'contact' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.contact',
             'config' => [
                 'type' => 'text',
@@ -235,42 +263,28 @@ return [
             
         ],
         'project_discipline' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_discipline',
             'config' => [
-                'type' => 'none',
+                'type' => 'category',
             ]
         ],
         'project_regions' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_regions',
             'config' => [
-                'type' => 'none',
+                'type' => 'category',
             ]
         ],
         'project_era' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.project_era',
             'config' => [
-                'type' => 'none',
-            ]
-        ],
-        'research_area' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.research_area',
-            'config' => [
-                'type' => 'none',
-            ]
-        ],
-        'funder' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funder',
-            'config' => [
-                'type' => 'none',
+                'type' => 'category',
             ]
         ],
         'funding_start' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funding_start',
             'config' => [
                 'type' => 'input',
@@ -281,7 +295,7 @@ return [
             ],
         ],
         'funding_end' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funding_end',
             'config' => [
                 'type' => 'input',
@@ -292,7 +306,7 @@ return [
             ],
         ],
         'funding_amount' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funding_amount',
             'config' => [
                 'type' => 'input',
@@ -302,14 +316,17 @@ return [
             ],
         ],
         'funding_format' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funding_format',
             'config' => [
-                'type' => 'none',
-            ]
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'default' => ''
+            ],
         ],
         'related_links' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.related_links',
             'config' => [
                 'type' => 'inline',
@@ -326,14 +343,15 @@ return [
             ],
 
         ],
-        'persons' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.persons',
+        'related_project_leads' => [
+            'exclude' => false,
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.related_project_leads',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_person',
-                'MM' => 'tx_rcgprojectdb_project_person_mm',
+                'MM' => 'tx_rcgprojectdb_project_relatedprojectleads_person_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
@@ -352,14 +370,15 @@ return [
             ],
             
         ],
-        'tags' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.tags',
+        'related_project_members' => [
+            'exclude' => false,
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.related_project_members',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rcgprojectdb_domain_model_tag',
-                'MM' => 'tx_rcgprojectdb_project_tag_mm',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_person',
+                'MM' => 'tx_rcgprojectdb_project_relatedprojectmembers_person_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
@@ -378,24 +397,143 @@ return [
             ],
             
         ],
-        'partners' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.partners',
+        'research_area' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.research_area',
             'config' => [
-                'type' => 'inline',
+                'type' => 'category',
+            ],
+
+        ],
+        'institutions' => [
+            'exclude' => false,
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.institutions',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_organization',
-                'foreign_field' => 'project',
+                'size' => 10,
+                'autoSizeMax' => 30,
                 'maxitems' => 9999,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
                 ],
             ],
 
         ],
-    
+        'funder' => [
+            'exclude' => false,
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.funder',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_organization',
+                'maxitems' => 9999,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
+            ],
+
+        ],
+        'cooperation_partners' => [
+            'exclude' => false,
+            'l10n_mode' => 'exclude',
+            'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_project.cooperation_partners',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_organization',
+                'maxitems' => 9999,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
+            ],
+
+        ],
+        'type' => [
+            'exclude' => false,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_project.type',
+            'config' => [
+                'type' => 'category',
+                'relationship' => 'oneToOne',
+            ],
+        ],
+        'child_project' => [
+            'exclude' => true,
+            'label' => $ll.'tx_rcgprojectdb_domain_model_project.child_project',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_rcgprojectdb_domain_model_project',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'MM_opposite_field' => 'parent_project',
+                'size' => 5,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'readOnly' => 1,
+                'MM' => 'tx_rcgprojectdb_domain_model_project_related_mm',
+                'suggestOptions' => [
+                    'default' => [
+                        'suggestOptions' => true,
+                        'addWhere' => ' AND tx_rcgprojectdb_domain_model_project.uid != ###THIS_UID###'
+                    ]
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
+        'parent_project' => [
+            'exclude' => false,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_project.parent_project',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'allowed' => 'tx_rcgprojectdb_domain_model_project',
+                'size' => 5,
+                'maxitems' => 1,
+                'MM' => 'tx_rcgprojectdb_domain_model_project_related_mm',
+                'readOnly' => 0,
+            ]
+        ],
     ],
+    'palettes' => [
+        'general' => [
+            'label' => 'General Stuff',
+            'description' => 'palette description',
+            'showitem' => 'title,--linebreak--, short_title, account_number, --linebreak--, image',
+        ],
+        'funding' => [
+            'label' => 'Funding',
+            'description' => 'palette description',
+            'showitem' => 'funder, --linebreak--, funding_start, funding_end,--linebreak--, funding_amount, funding_format',
+        ],
+    ]
 ];

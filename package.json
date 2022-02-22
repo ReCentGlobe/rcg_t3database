@@ -1,0 +1,15 @@
+{
+  "name": "rcgprojectdb",
+  "version": "0.5.0",
+  "main": "index.js",
+  "author": "Florian Förster <florian.foerster@uni-leipzig.de>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "laravel-mix": "^6.0.42",
+    "vue-loader": "^16.2.0"
+  },
+  "dependencies": {
+    "vue": "^3.2.31"
+  }
+}

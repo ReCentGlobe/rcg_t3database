@@ -30,8 +30,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.project_discipline" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.project_regions" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.project_era" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_project.funder" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_start" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_end" /></th>
             <th><f:translate key="tx_rcgprojectdb_domain_model_project.funding_amount" /></th>
@@ -51,8 +49,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
                 <td><f:link.action action="show" arguments="{project : project}">{project.projectDiscipline}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.projectRegions}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.projectEra}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.researchArea}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{project : project}">{project.funder}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.fundingStart -> f:format.date()}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.fundingEnd -> f:format.date()}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{project : project}">{project.fundingAmount}</f:link.action></td>

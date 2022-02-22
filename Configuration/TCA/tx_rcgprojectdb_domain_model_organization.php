@@ -1,4 +1,7 @@
 <?php
+
+$ll = 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:';
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_organization',
@@ -17,7 +20,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,url',
-        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_organization.gif'
+        'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_organization.png'
     ],
     'types' => [
         '1' => ['showitem' => 'title, logo, url, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
@@ -175,6 +178,11 @@ return [
             ]
         ],
     
+        'project5' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'project' => [
             'config' => [
                 'type' => 'passthrough',

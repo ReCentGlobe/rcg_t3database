@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace ReCentGlobe\Rcgprojectdb\Controller;
 
 
+use ReCentGlobe\Rcgprojectdb\Domain\Model\Dto\PersonDemand;
+use ReCentGlobe\Rcgprojectdb\Domain\Model\Person;
+use ReCentGlobe\Rcgprojectdb\Domain\Repository\CategoryRepository;
+use ReCentGlobe\Rcgprojectdb\Domain\Repository\PersonRepository;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
 /**
  * This file is part of the "ReCentGlobe Database" Extension for TYPO3 CMS.
  *
@@ -17,54 +25,74 @@ namespace ReCentGlobe\Rcgprojectdb\Controller;
 /**
  * PersonController
  */
-class PersonController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class PersonController extends ActionController
 {
 
     /**
      * personRepository
      *
-     * @var \ReCentGlobe\Rcgprojectdb\Domain\Repository\PersonRepository
+     * @var PersonRepository
      */
     protected $personRepository = null;
 
     /**
-     * action index
+     * categoryRepository
      *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Person
-     * @return string|object|null|void
+     * @var CategoryRepository
      */
-    public function indexAction()
-    {
-    }
+    protected $categoryRepository = null;
+
 
     /**
      * action list
-     *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Person
+     * @param PersonDemand|null $filter
      * @return string|object|null|void
+     * @throws InvalidQueryException
      */
-    public function listAction()
+    public function listAction(PersonDemand $filter = null)
     {
-        $people = $this->personRepository->findAll();
-        $this->view->assign('people', $people);
+        $catfilter = array_values($this->settings['categories']);
+        foreach ($catfilter as $k => $v) {
+            $categoryList = $this->categoryRepository->findChildren($v);
+            $this->view->assign('cat-' . $v, $categoryList);
+        }
+
+        $people = $this->personRepository->findDemanded($filter);
+
+        $assignValues = [
+            'people' => $people,
+            'filter' => $filter,
+        ];
+
+        $this->view->assignMultiple($assignValues);
     }
 
     /**
      * action show
      *
-     * @param ReCentGlobe\Rcgprojectdb\Domain\Model\Person
+     * @param Person $person
      * @return string|object|null|void
      */
-    public function showAction(\ReCentGlobe\Rcgprojectdb\Domain\Model\Person $person)
+    public function showAction(Person $person)
     {
         $this->view->assign('person', $person);
     }
 
     /**
-     * @param \ReCentGlobe\Rcgprojectdb\Domain\Repository\PersonRepository $PersonRepository
+     * @param PersonRepository $PersonRepository
      */
-    public function injectPersonRepository(\ReCentGlobe\Rcgprojectdb\Domain\Repository\PersonRepository $personRepository)
+    public function injectPersonRepository(PersonRepository $personRepository)
     {
         $this->personRepository = $personRepository;
+    }
+
+    /**
+     * Inject categoryRepository
+     *
+     * @param CategoryRepository $categoryRepository
+     */
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
+    {
+        $this->categoryRepository = $categoryRepository;
     }
 }

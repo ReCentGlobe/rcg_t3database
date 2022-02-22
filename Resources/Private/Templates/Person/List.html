@@ -16,25 +16,119 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="content">
     <h1>Listing for Person</h1>
 
-    <f:flashMessages />
+    <f:flashMessages/>
 
-    <table class="tx_rcgprojectdb">
-        <tr>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_person.firstname" /></th>
-            <th><f:translate key="tx_rcgprojectdb_domain_model_person.lastname" /></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <f:for each="{people}" as="person">
-            <tr>
-                <td><f:link.action action="show" arguments="{person : person}">{person.firstname}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{person : person}">{person.lastname}</f:link.action></td>
-                <td><f:link.action action="edit" arguments="{person : person}">Edit</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{person : person}">Delete</f:link.action></td>
-            </tr>
-        </f:for>
-    </table>
+    <f:comment><!--
+        TODO: Add  proper translations for all fields (static and dynamic)
+    --></f:comment>
 
-    <f:link.action action="new">New Person</f:link.action>
+    <div class="filterContainer">
+        <f:form method="post" object="{filter}" name="filter">
+            <div class="filterContainer clearfix">
+                <div class="filter">
+                    <div class="col-md-3">
+                        <label class="sr-only" for="searchQuery">Suche</label>
+                        <f:form.textfield
+                                id="searchQuery"
+                                property="searchQuery"
+                                class="form-control roundedLeft resetMe keepPlaceholder"
+                                placeholder="Suche"
+                        />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="col-md-4">
+                            <f:form.select
+                                    id="researchArea"
+                                    property="researchArea"
+                                    multiple="1"
+                                    options="{cat-{settings.categories.researchAreas}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    value="{selectedCat-{settings.categories.researchAreas}}"/>
+                        </div>
+                        <div class="col-md-4">
+                            <f:form.submit
+                                    class="btn-ghost"
+                                    value="Send"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="activeFilters clearfix">
+                    <span class="headerSpan">Ihre Auswahl:</span>
+                    <ul class="list-tags"></ul>
+                    <button class="reset" type="button">Alle Filter zurücksetzen</button>
+                </div>
+            </div>
+
+
+        </f:form>
+    </div>
+    <div>
+        <div class="contentsection backline" data-name="Projekte" id="section-projects">
+            <h2 class="h1">
+                <span class="searchResultCountPerType"><f:count>{people}</f:count></span> Personen
+            </h2>
+        </div>
+        <f:if condition="{people}">
+            <f:then>
+                <div class="tx_rcgprojectdb row contactTeaserWrap multiple">
+                    <f:for each="{people}" as="person">
+                        <div class="col-md-6">
+                            <div class="contactTeaser vcard">
+                                <figure class="avatar">
+                                    <f:if condition="{person.image}">
+                                        <f:image image="{person.image}" maxWidth="130" width="130" height="130"/>
+                                    </f:if>
+                                </figure>
+                                <div class="personaldata">
+                                    <div class="upper">
+                                        <h2 class="h2-teaser-lowercase n">
+                                            <span class="honorific-prefix">{person.title}</span>
+                                            <span class="given-name">{person.firstname}</span>
+                                            <span class="family-name">{person.lastname}</span>
+                                        </h2>
+                                    </div>
+                                    <div class="inner">
+                                        <f:if condition="{person.projectLead}">
+                                            <p>Project Lead:</p>
+                                            <f:for each="{person.projectLead}" as="lead">
+                                                <f:link.action action="show" controller="Project"
+                                                               pageUid="{settings.detailPidProjects}"
+                                                               arguments="{project : lead}">{lead.title}
+                                                </f:link.action>
+                                            </f:for>
+                                        </f:if>
+                                        <f:if condition="{person.projectMember}">
+                                            <p>Project Member:</p>
+                                            <f:for each="{person.projectMember}" as="member">
+                                                <f:link.action action="show" controller="Project"
+                                                               pageUid="{settings.detailPidProjects}"
+                                                               arguments="{project : member}">{member.title}
+                                                </f:link.action>
+                                            </f:for>
+                                        </f:if>
+                                        <p>ResearchArea</p>
+                                        <f:for each="{person.researchArea}" as="area">
+                                            <p>{area.title}</p>
+                                        </f:for>
+                                    </div>
+                                    <p class="links">
+                                        <a class="email readon" href="{person.email}"> E-Mail Schreiben </a>
+                                        <br>
+                                        <a class="readon" href="{person.profile}"> Zum Profil </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+            </f:then>
+            <f:else>
+                <h2>Keine Projekte gefunden</h2>
+            </f:else>
+        </f:if>
+    </div>
+
+
 </f:section>
 </html>

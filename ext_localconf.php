@@ -1,35 +1,72 @@
 <?php
+
+use ReCentGlobe\Rcgprojectdb\Controller\JsonProjectController;
+use ReCentGlobe\Rcgprojectdb\Controller\PersonController;
+use ReCentGlobe\Rcgprojectdb\Controller\ProjectController;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3_MODE') || die();
 
 (static function() {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Rcgprojectdb',
         'Projectlist',
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => 'list, show'
+            ProjectController::class => 'list',
         ],
         // non-cacheable actions
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => '',
-            \ReCentGlobe\Rcgprojectdb\Controller\PersonController::class => ''
+            ProjectController::class => 'list',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
+        'Rcgprojectdb',
+        'Projectdetail',
+        [
+            ProjectController::class => 'show',
+        ],
+        // non-cacheable actions
+        []
+    );
+
+    ExtensionUtility::configurePlugin(
+        'Rcgprojectdb',
+        'Projectajax',
+        [
+            ProjectController::class => 'ajaxlist, ajaxshow',
+        ],
+        // non-cacheable actions
+        [
+            ProjectController::class => 'ajaxlist, ajaxshow',
+        ]
+    );
+
+    ExtensionUtility::configurePlugin(
         'Rcgprojectdb',
         'Personlist',
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\PersonController::class => 'list, show'
+            PersonController::class => 'list'
         ],
         // non-cacheable actions
+        []
+    );
+    ExtensionUtility::configurePlugin(
+        'Rcgprojectdb',
+        'Persondetail',
         [
-            \ReCentGlobe\Rcgprojectdb\Controller\ProjectController::class => '',
-            \ReCentGlobe\Rcgprojectdb\Controller\PersonController::class => ''
-        ]
+            PersonController::class => 'show'
+        ],
+        // non-cacheable actions
+        []
     );
 
     // wizards
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    ExtensionManagementUtility::addPageTSConfig(
         'mod {
             wizards.newContentElement.wizardItems.plugins {
                 elements {
@@ -40,6 +77,15 @@ defined('TYPO3_MODE') || die();
                         tt_content_defValues {
                             CType = list
                             list_type = rcgprojectdb_projectlist
+                        }
+                    }
+                    projectdetail {
+                        iconIdentifier = rcgprojectdb-plugin-projectdetail
+                        title = LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_projectdetail.name
+                        description = LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_projectdetail.description
+                        tt_content_defValues {
+                            CType = list
+                            list_type = rcgprojectdb_projectdetail
                         }
                     }
                     personlist {
@@ -57,15 +103,21 @@ defined('TYPO3_MODE') || die();
        }'
     );
 
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+    $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon(
         'rcgprojectdb-plugin-projectlist',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_projectlist.svg']
     );
     $iconRegistry->registerIcon(
         'rcgprojectdb-plugin-personlist',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_personlist.svg']
     );
+    $iconRegistry->registerIcon(
+        'rcgprojectdb-plugin-projectdetail',
+        SvgIconProvider::class,
+        ['source' => 'EXT:rcgprojectdb/Resources/Public/Icons/user_plugin_projectdetail.svg']
+    );
+
 })();

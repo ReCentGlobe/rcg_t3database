@@ -1,0 +1,41 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="content">
+    <h1>SEARCH Project</h1>
+
+    <f:flashMessages />
+
+    <f:debug>{projects}</f:debug>
+
+
+    <table class="tx_rcgprojectdb">
+        <tr>
+            <th><f:translate key="tx_rcgprojectdb_domain_model_project.image" /></th>
+            <th><f:translate key="tx_rcgprojectdb_domain_model_project.title" /></th>
+            <th><f:translate key="tx_rcgprojectdb_domain_model_project.short_title" /></th>
+            <th><f:translate key="tx_rcgprojectdb_domain_model_project.research_area" /></th>
+        </tr>
+        <f:for each="{projects}" as="project">
+            <tr>
+                <td>
+                    <f:link.action action="show" arguments="{project : project}">
+                        <f:image image="{project.image}" width="200"></f:image>
+                    </f:link.action>
+                </td>
+                <td><f:link.action action="show" arguments="{project : project}">{project.title}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{project : project}">{project.shortTitle}</f:link.action></td>
+                <td>
+                    <f:if condition="{project.researchArea}">
+                        <f:then>
+                            <f:for each="{project.researchArea}" as="category" iteration="iterator">
+                                {category.title}
+                            </f:for>
+                        </f:then>
+                    </f:if>
+                </td>
+            </tr>
+        </f:for>
+    </table>
+
+</f:section>
+</html>

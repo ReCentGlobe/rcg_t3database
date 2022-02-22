@@ -1,5 +1,13 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-	<div class="tx-rcgprojectdb">
-		<f:render section="content" />
-	</div>
+<f:comment><!--
+        TODO: Remove temporary assets
+    --></f:comment>
+<f:asset.script identifier="temporaryJS" src="https://typo3.stacks.run/fileadmin/tempJS.js"/>
+<f:asset.script identifier="rcgAppJS" src="EXT:rcgprojectdb/Resources/Public/Javascript/app.js"/>
+<f:asset.css identifier="temporaryCSS" href="https://typo3.stacks.run/fileadmin/tempCSS.css"/>
+<div class="container">
+    <div class="tx-rcgprojectdb">
+        <f:render section="content"/>
+    </div>
+</div>
 </html>

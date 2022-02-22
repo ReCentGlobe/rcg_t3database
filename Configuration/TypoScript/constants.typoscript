@@ -1,3 +1,35 @@
+plugin.tx_rcgprojectdb {
+    settings {
+        # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default project detail PID
+        detailPidProjects =
+        # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default project list PID
+        listPidProjects =
+        # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default persons list PID
+        listPidPersons =
+
+        categories {
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectType category UID
+            projectType =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectRegion category UID
+            projectRegion =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectDiscipline category UID
+            projectDiscipline =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default projectEra category UID
+            projectEra =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default researchAreas category UID
+            researchAreas =
+            # cat=plugin.tx_rcgprojectdb//a; type=string; label=Default people position category UID
+            position =
+        }
+        # default items per page for asynchronous requests
+        itemsPerPage = 5
+        # ajax page types
+        ajax {
+            projectAJAXList = 808
+        }
+    }
+}
+
 plugin.tx_rcgprojectdb_projectlist {
     view {
         # cat=plugin.tx_rcgprojectdb_projectlist/file; type=string; label=Path to template root (FE)
@@ -10,6 +42,16 @@ plugin.tx_rcgprojectdb_projectlist {
     persistence {
         # cat=plugin.tx_rcgprojectdb_projectlist//a; type=string; label=Default storage PID
         storagePid =
+    }
+}
+plugin.tx_rcgprojectdb_projectAjax {
+    view {
+        # cat=plugin.tx_rcgprojectdb_projectlist/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:rcgprojectdb/Resources/Private/Templates/
+        # cat=plugin.tx_rcgprojectdb_projectlist/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:rcgprojectdb/Resources/Private/Partials/
+        # cat=plugin.tx_rcgprojectdb_projectlist/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:rcgprojectdb/Resources/Private/Layouts/
     }
 }
 plugin.tx_rcgprojectdb_personlist {
