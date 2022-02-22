@@ -10,6 +10,7 @@ return [
     'ctrl' => [
         'title' => $ll . 'tx_rcgprojectdb_domain_model_person',
         'label' => 'lastname',
+        'label_userFunc' => \ReCentGlobe\Rcgprojectdb\Utility\Label::class . '->getObjectLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -26,7 +27,7 @@ return [
         'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.png'
     ],
     'types' => [
-        '1' => ['showitem' => 'image, title, firstname, lastname, slug, email, phone, profile, research_area, position, projects, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
+        '1' => ['showitem' => 'image, title, firstname, lastname, slug, email, phone, profile, research_area, position, project_lead, project_member, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -81,7 +82,7 @@ return [
             ],
         ],
         'image' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.image',
             'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'image',
@@ -133,7 +134,7 @@ return [
 
         ],
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.title',
             'config' => [
                 'type' => 'input',
@@ -143,7 +144,7 @@ return [
             ],
         ],
         'firstname' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.firstname',
             'config' => [
                 'type' => 'input',
@@ -153,7 +154,7 @@ return [
             ],
         ],
         'lastname' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.lastname',
             'config' => [
                 'type' => 'input',
@@ -182,6 +183,7 @@ return [
             ]
         ],
         'email' => [
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.email',
             'config' => [
                 'type' => 'input',
@@ -195,6 +197,7 @@ return [
             ]
         ],
         'phone' => [
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.phone',
             'config' => [
                 'type' => 'input',
@@ -207,7 +210,7 @@ return [
             ]
         ],
         'profile' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.profile',
             'config' => [
                 'type' => 'input',
@@ -229,44 +232,53 @@ return [
             ],
         ],
         'research_area' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.research_area',
             'config' => [
                 'type' => 'category',
             ],
         ],
         'position' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.position',
             'config' => [
                 'type' => 'category',
             ],
         ],
-        'projects' => [
+        'project_lead' => [
             'exclude' => true,
-            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projects',
+            'l10n_mode' => 'exclude',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projectlead',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_rcgprojectdb_domain_model_project',
                 'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
-                'MM' => 'tx_rcgprojectdb_project_person_mm',
-                'size' => 10,
-                'autoSizeMax' => 30,
-                'maxitems' => 9999,
-                'multiple' => 0,
-                'fieldControl' => [
-                    'editPopup' => [
-                        'disabled' => false,
-                    ],
-                    'addRecord' => [
-                        'disabled' => false,
-                    ],
-                    'listModule' => [
-                        'disabled' => true,
-                    ],
-                ],
+                'MM_opposite_field' => 'related_project_leads',
+                'size' => 5,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'readOnly' => 1,
+                'MM' => 'tx_rcgprojectdb_project_relatedprojectleads_person_mm',
             ],
         ],
-    
+        'project_member' => [
+            'exclude' => true,
+            'l10n_mode' => 'exclude',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projectmember',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_rcgprojectdb_domain_model_project',
+                'foreign_table' => 'tx_rcgprojectdb_domain_model_project',
+                'MM_opposite_field' => 'related_project_members',
+                'size' => 5,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'readOnly' => 1,
+                'MM' => 'tx_rcgprojectdb_project_relatedprojectmembers_person_mm',
+            ],
+        ],
+
     ],
 ];

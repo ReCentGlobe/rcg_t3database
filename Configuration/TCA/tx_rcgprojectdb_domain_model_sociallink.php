@@ -110,7 +110,7 @@ return [
         ],
 
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_sociallink.title',
             'config' => [
                 'type' => 'input',
@@ -120,7 +120,7 @@ return [
             ],
         ],
         'type' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_sociallink.type',
             'config' => [
                 'type' => 'select',
@@ -136,7 +136,7 @@ return [
             ],
         ],
         'url' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'LLL:EXT:rcgprojectdb/Resources/Private/Language/locallang_db.xlf:tx_rcgprojectdb_domain_model_sociallink.url',
             'config' => [
                 'type' => 'input',
