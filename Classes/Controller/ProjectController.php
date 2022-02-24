@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace ReCentGlobe\Rcgprojectdb\Controller;
 
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamFactoryInterface;
 use ReCentGlobe\Rcgprojectdb\Domain\Model\Dto\ProjectDemand;
 use ReCentGlobe\Rcgprojectdb\Domain\Model\Project;
 use ReCentGlobe\Rcgprojectdb\Domain\Repository\CategoryRepository;
@@ -19,8 +15,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Core\Pagination\SimplePagination;
 
 
 /**
@@ -37,13 +31,6 @@ use TYPO3\CMS\Core\Pagination\SimplePagination;
  */
 class ProjectController extends ActionController
 {
-    /** @var ResponseFactoryInterface */
-    private $responseFactory;
-
-    /**
-     * @var StreamFactoryInterface
-     */
-    protected $streamFactory;
 
     /**
      * projectRepository
@@ -58,16 +45,6 @@ class ProjectController extends ActionController
      * @var CategoryRepository
      */
     protected $categoryRepository = null;
-
-    /**
-     * @param ResponseFactoryInterface $responseFactory
-     * @param StreamFactoryInterface $streamFactory
-     */
-    public function __construct(ResponseFactoryInterface $responseFactory, StreamFactoryInterface $streamFactory)
-    {
-        $this->responseFactory = $responseFactory;
-        $this->streamFactory = $streamFactory;
-    }
 
     /**
      * action list
@@ -113,23 +90,23 @@ class ProjectController extends ActionController
 
 
     /**
-     * initialize v Action
+     * initialize Jsonlist Action
      * @return void
      */
-    public function initializeAjaxlistAction(): void
+    public function initializeJsonlistAction(): void
     {
         $this->defaultViewObjectName = JsonView::class;
     }
 
     /**
-     * action ajaxList
+     * action jsonlist
      * @param ProjectDemand|null $filter
      * @param int $currentPage
      * @return void
      * @throws NoSuchArgumentException
      * @throws InvalidQueryException
      */
-    public function ajaxlistAction(ProjectDemand $filter = null, int $currentPage = 1): void
+    public function jsonlistAction(ProjectDemand $filter = null, int $currentPage = 1): void
     {
         $this->view->setVariablesToRender(['projects', 'settings']);
         $projects = $this->projectRepository->findDemanded(
@@ -150,12 +127,51 @@ class ProjectController extends ActionController
     }
 
     /**
-     * initialize ajaxShow Action
+     * initialize jsonshow Action
      * @return void
      */
-    public function initializeAjaxshowAction(): void
+    public function initializeJsonshowAction(): void
     {
         $this->defaultViewObjectName = JsonView::class;
+    }
+
+    /**
+     * action jsonshow
+     *
+     * @param Project
+     * @return string|object|null|void
+     */
+    public function jsonshowAction(Project $project)
+    {
+        $this->view->setVariablesToRender(['project']);
+        $this->view->assign('project', $project);
+    }
+
+    /**
+     * action ajaxList
+     * @param ProjectDemand|null $filter
+     * @param int $currentPage
+     * @return void
+     * @throws NoSuchArgumentException
+     * @throws InvalidQueryException
+     */
+    public function ajaxlistAction(ProjectDemand $filter = null, int $currentPage = 1): void
+    {
+        $projects = $this->projectRepository->findDemanded(
+            $filter
+        );
+        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : $currentPage;
+        $perPage = $this->request->hasArgument('perPage') ? (int)$this->request->getArgument('perPage') : (int)$this->settings['itemsPerPage'];
+
+        $paginator = new QueryResultPaginator($projects, $currentPage, $perPage);
+
+        $assignValues = [
+            'projects' => $paginator->getPaginatedItems(),
+            'filter' => $filter,
+            'settings' => $paginator
+        ];
+
+        $this->view->assignMultiple($assignValues);
     }
 
     /**
@@ -166,7 +182,6 @@ class ProjectController extends ActionController
      */
     public function ajaxshowAction(Project $project)
     {
-        $this->view->setVariablesToRender(['project']);
         $this->view->assign('project', $project);
     }
 

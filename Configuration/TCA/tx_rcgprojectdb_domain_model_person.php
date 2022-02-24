@@ -266,7 +266,7 @@ return [
         'project_lead' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projectlead',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.project_lead',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -283,7 +283,7 @@ return [
         'project_member' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projectmember',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.project_member',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',

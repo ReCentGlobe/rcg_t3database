@@ -23,6 +23,7 @@ plugin.tx_rcgprojectdb {
         # ajax page types
         ajax {
             projectAJAXList = {$plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList}
+            projectJSONList = {$plugin.tx_rcgprojectdb.settings.ajax.projectJSONList}
         }
     }
 
@@ -34,12 +35,11 @@ plugin.tx_rcgprojectdb {
     }
 }
 
-tx_rcgprojectdb_projectlist_AJAX = PAGE
-tx_rcgprojectdb_projectlist_AJAX {
-    typeNum < plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList
+tx_rcgprojectdb_projectlist_JSON = PAGE
+tx_rcgprojectdb_projectlist_JSON {
+    typeNum < plugin.tx_rcgprojectdb.settings.ajax.projectJSONList
     config {
         additionalHeaders = Content-Type: application/json
-        additionalHeaders.10.header = Content-Type: application/json
         disableAllHeaderCode = 1
         disablePrefixComment = 1
         xhtml_cleaning = 0
@@ -50,6 +50,25 @@ tx_rcgprojectdb_projectlist_AJAX {
 
     features {
         requireCHashArgumentForActionArguments = 0
+    }
+
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        pluginName = Projectjson
+        vendorName = ReCentGlobe
+        extensionName = Rcgprojectdb
+        controller = ProjectController
+    }
+
+    10 < tt_content.list.20.rcgprojectdb_projectajax
+}
+
+tx_rcgprojectdb_projectlist_AJAX < tx_rcgprojectdb_projectlist_JSON
+tx_rcgprojectdb_projectlist_AJAX {
+    typeNum < plugin.tx_rcgprojectdb.settings.ajax.projectAJAXList
+    config {
+        additionalHeaders = Content-type:text/html
     }
 
     10 = USER_INT

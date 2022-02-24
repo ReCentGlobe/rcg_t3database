@@ -1,6 +1,5 @@
 <?php
 
-use ReCentGlobe\Rcgprojectdb\Controller\JsonProjectController;
 use ReCentGlobe\Rcgprojectdb\Controller\PersonController;
 use ReCentGlobe\Rcgprojectdb\Controller\ProjectController;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
@@ -38,11 +37,11 @@ defined('TYPO3_MODE') || die();
         'Rcgprojectdb',
         'Projectajax',
         [
-            ProjectController::class => 'ajaxlist, ajaxshow',
+            ProjectController::class => 'jsonlist, jsonshow, ajaxlist, ajaxshow',
         ],
         // non-cacheable actions
         [
-            ProjectController::class => 'ajaxlist, ajaxshow',
+            ProjectController::class => 'jsonlist, jsonshow, ajaxlist, ajaxshow',
         ]
     );
 
