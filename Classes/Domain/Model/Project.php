@@ -122,7 +122,7 @@ class Project extends AbstractEntity
      *
      * @var string
      */
-    protected $fundingFormat = 0;
+    protected $fundingFormat = '';
 
     /**
      * Related Social Links (e.g. Facebook, Twitter, Homepage)
@@ -554,10 +554,10 @@ class Project extends AbstractEntity
     /**
      * Sets the fundingFormat
      *
-     * @param int $fundingFormat
+     * @param string $fundingFormat
      * @return void
      */
-    public function setFundingFormat(int $fundingFormat)
+    public function setFundingFormat(string $fundingFormat)
     {
         $this->fundingFormat = $fundingFormat;
     }
