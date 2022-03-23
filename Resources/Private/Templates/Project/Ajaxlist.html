@@ -1,0 +1,46 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Empty"/>
+<f:section name="content">
+    <div class="contentsection backline" data-name="Projekte" id="section-projects">
+        <h2 class="h1">
+            <span class="searchResultCountPerType"><f:count>{projects}</f:count></span> Projekte
+        </h2>
+    </div>
+    <f:if condition="{projects}">
+        <f:then>
+            <div class="searchTile row">
+                <f:for each="{projects}" as="project">
+                    <div class="col-sm-12">
+                        <f:link.action action="show" pageUid="{settings.detailPidProjects}"
+                                       arguments="{project : project}">
+                            <div class="searchresult bg-white">
+                                <div class="matchHeight">
+                                    <h3 class="h2-teaser-lowercase">
+                                        {project.title}
+                                    </h3>
+                                    <p>{project.shortDescription}</p>
+                                    <f:if condition="{project.relatedProjectLeads}">
+                                        <f:then>
+                                            <f:for each="{project.relatedProjectLeads}" as="lead"
+                                                   iteration="iterator">
+                                                <p>{lead.firstname} {lead.lastname}</p>
+                                            </f:for>
+                                        </f:then>
+                                    </f:if>
+                                </div>
+                                <f:for each="{project.parentProject}" as="parentProject">
+                                    <p>Belongs to: {parentProject.title}</p>
+                                </f:for>
+                                <span class="readon">Weiterlesen</span>
+                            </div>
+                        </f:link.action>
+                    </div>
+                </f:for>
+            </div>
+        </f:then>
+        <f:else>
+            <h2>Keine Projekte gefunden</h2>
+        </f:else>
+    </f:if>
+</f:section>
+</html>

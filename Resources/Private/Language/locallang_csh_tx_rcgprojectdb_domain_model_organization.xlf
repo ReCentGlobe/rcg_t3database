@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="title.description" resname="title.description">
-				<source>title</source>
+				<source>Name of the Organization</source>
 			</trans-unit>
 			<trans-unit id="logo.description" resname="logo.description">
 				<source>logo</source>

@@ -4,7 +4,7 @@
     "description": "",
     "authors": [
         {
-            "name": "Florian F\u00f6rster",
+            "name": "Florian Foerster",
             "role": "Developer"
         }
     ],
@@ -13,7 +13,8 @@
         "typo3/cms-core": "^10.4"
     },
     "require-dev": {
-        "typo3/testing-framework": "^6.8"
+        "typo3/testing-framework": "^6.8",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
@@ -30,7 +31,11 @@
     },
     "config": {
         "vendor-dir": ".Build/vendor",
-        "bin-dir": ".Build/bin"
+        "bin-dir": ".Build/bin",
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
     },
     "scripts": {
         "post-autoload-dump": [

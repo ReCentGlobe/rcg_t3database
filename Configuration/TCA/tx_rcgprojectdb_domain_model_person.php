@@ -27,7 +27,7 @@ return [
         'iconfile' => 'EXT:rcgprojectdb/Resources/Public/Icons/tx_rcgprojectdb_domain_model_person.png'
     ],
     'types' => [
-        '1' => ['showitem' => 'image, title, firstname, lastname, slug, email, phone, profile, research_area, position, project_lead, project_member, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
+        '1' => ['showitem' => 'image, title, firstname, lastname, slug, description, email, phone, profile, research_area, position, project_lead, project_member, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, '],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -182,6 +182,24 @@ return [
                 'default' => ''
             ]
         ],
+        'description' => [
+            'exclude' => false,
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.description',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default',
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'cols' => 10,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
+
+        ],
         'email' => [
             'exclude' => false,
             'label' => $ll . 'tx_rcgprojectdb_domain_model_person.email',
@@ -248,7 +266,7 @@ return [
         'project_lead' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projectlead',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.project_lead',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -265,7 +283,7 @@ return [
         'project_member' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.projectmember',
+            'label' => $ll . 'tx_rcgprojectdb_domain_model_person.project_member',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',

@@ -26,6 +26,7 @@ plugin.tx_rcgprojectdb {
         # ajax page types
         ajax {
             projectAJAXList = 808
+            projectJSONList = 909
         }
     }
 }
