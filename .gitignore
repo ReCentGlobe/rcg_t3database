@@ -106,7 +106,6 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-.cache
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -145,4 +144,4 @@ nbproject
 /public/typo3conf/*
 !/public/typo3conf/LocalConfiguration.php
 !/public/typo3conf/AdditionalConfiguration.php
-
+Build/testing-docker/.env
