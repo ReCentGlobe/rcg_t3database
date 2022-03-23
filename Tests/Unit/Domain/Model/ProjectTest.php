@@ -491,28 +491,6 @@ class ProjectTest extends UnitTestCase
     /**
      * @test
      */
-    public function getResearchAreaReturnsInitialValueForResearchArea(): void
-    {
-        self::assertEquals(
-            null,
-            $this->subject->getResearchArea()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setResearchAreaForResearchAreaSetsResearchArea(): void
-    {
-        $researchAreaFixture = new \ReCentGlobe\Rcgprojectdb\Domain\Model\ResearchArea();
-        $this->subject->setResearchArea($researchAreaFixture);
-
-        self::assertEquals($researchAreaFixture, $this->subject->_get('researchArea'));
-    }
-
-    /**
-     * @test
-     */
     public function getInstitutionsReturnsInitialValueForOrganization(): void
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -597,40 +575,6 @@ class ProjectTest extends UnitTestCase
     /**
      * @test
      */
-    public function addFunderToObjectStorageHoldingFunder(): void
-    {
-        $funder = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
-        $funderObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
-            ->onlyMethods(['attach'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $funderObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($funder));
-        $this->subject->_set('funder', $funderObjectStorageMock);
-
-        $this->subject->addFunder($funder);
-    }
-
-    /**
-     * @test
-     */
-    public function removeFunderFromObjectStorageHoldingFunder(): void
-    {
-        $funder = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Organization();
-        $funderObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
-            ->onlyMethods(['detach'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $funderObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($funder));
-        $this->subject->_set('funder', $funderObjectStorageMock);
-
-        $this->subject->removeFunder($funder);
-    }
-
-    /**
-     * @test
-     */
     public function getCooperationPartnersReturnsInitialValueForOrganization(): void
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -685,64 +629,5 @@ class ProjectTest extends UnitTestCase
         $this->subject->_set('cooperationPartners', $cooperationPartnersObjectStorageMock);
 
         $this->subject->removeCooperationPartner($cooperationPartner);
-    }
-
-    /**
-     * @test
-     */
-    public function getTagsReturnsInitialValueForTag(): void
-    {
-        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        self::assertEquals(
-            $newObjectStorage,
-            $this->subject->getTags()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setTagsForObjectStorageContainingTagSetsTags(): void
-    {
-        $tag = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Tag();
-        $objectStorageHoldingExactlyOneTags = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $objectStorageHoldingExactlyOneTags->attach($tag);
-        $this->subject->setTags($objectStorageHoldingExactlyOneTags);
-
-        self::assertEquals($objectStorageHoldingExactlyOneTags, $this->subject->_get('tags'));
-    }
-
-    /**
-     * @test
-     */
-    public function addTagToObjectStorageHoldingTags(): void
-    {
-        $tag = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Tag();
-        $tagsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
-            ->onlyMethods(['attach'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagsObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($tag));
-        $this->subject->_set('tags', $tagsObjectStorageMock);
-
-        $this->subject->addTag($tag);
-    }
-
-    /**
-     * @test
-     */
-    public function removeTagFromObjectStorageHoldingTags(): void
-    {
-        $tag = new \ReCentGlobe\Rcgprojectdb\Domain\Model\Tag();
-        $tagsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
-            ->onlyMethods(['detach'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagsObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($tag));
-        $this->subject->_set('tags', $tagsObjectStorageMock);
-
-        $this->subject->removeTag($tag);
     }
 }
